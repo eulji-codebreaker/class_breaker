@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .topbar {
+            width: 1600px;
+            height: 80px;
+            background: #EAD8FA;
+            border: 1px solid #8B5FBF;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            margin-bottom: 20px;
+        }
+
+        .topbar div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            font-weight: 700;
+
+        }
+
+        .content {
+            box-sizing: border-box;
+            width: 1600px;
+            height: 757px;
+            right: 23px;
+            top: 283px;
+
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            border-radius: 10px;
+            gap: 200px;
+        }
+
+        .selected {
+            background-color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="check" id="check">조회</div>
+        <div class="basket" id="basket">수강바구니</div>
+        <div class="application" id="application">수강신청</div>
+        <div class="timetable" id="timetable">신청한 시간표</div>
+    </div>
+
+    <div class="content">
+        <p>■ 유의사항</p>
+        <p>[매크로 프로그램 방지]</p>
+        <p>매크로프로그램 사용을 방지하기 위하여 저장을 관리자가 지정한 횟수이상 시도하면 화면에 나타나는 문자열을 입력하고 계속 사용</p>
+        <p>문자열 입력시 5회 이상 틀리면 자동 로그아웃</p><br>
+        <p>[멀티로그인시 처리기능 방지]</p>
+        <p>동일한 학번으로 동시에 두 군데 이상의 PC에서 로그인을 했을 경우 조회 기능은 가능하나 수강신청 저장을 시도하면 마지막으로 로그인 한 사용자만 저장 가능하고 나머지는 로그아웃 처리</p><br>
+        <p>[팝업차단 해제]</p>
+        <p>팝업차단 설정이 해제 되지 않았을 경우 팝업차단을 해제</p>
+        <p>팝업차단 해제 방법으로 브라우저에서 “도구/인터넷옵션/팝업차단설정/” 현재 사이트의 팝업을 항상 “허용”</p><br>
+        <p>[모니터 해상도]</p>
+        <p>수강신청시스템은 1280*800 해상도에 최적화 되어 있으며 그 이상의 해상도로 화면 설정</p><br>
+        <p>[브라우저]</p>
+        <p>크롬, 파이어폭스 브라우저에 최적화 되있습니다</p>
+        <p>인터넷 익스플로러 10 이하 버전을 사용하시는 분들은 정상적으로 동작하지 않을수 있으며, 보안상의 이유로도 10 버전이상으로 업그레이드 하시기를 권장합니다.</p>
+    </div>
+
+</body>
+
+</html>
