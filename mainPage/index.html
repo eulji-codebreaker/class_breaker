@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        article {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-auto-rows: 50px;
+
+            gap: 10px;
+            padding: 20px;
+        }
+
+        /*공지사항 배경 박스*/
+        .notice {
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            grid-column: 1/4;
+            grid-row: 1/9;
+        }
+
+        /* 수강신청 기간 박스 */
+        .register {
+            margin-top: 20px;
+            box-sizing: border-box;
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+
+            position: relative;
+            grid-row: 9/15;
+            grid-column: 1/4;
+        }
+
+        .myPage {
+            margin-left: 20px;
+            box-sizing: border-box;
+
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+
+            position: relative;
+            grid-column: 4/6;
+            grid-row: 1/7;
+        }
+
+        /* 강의실 */
+        .lecture {
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+
+            margin-top: 20px;
+            margin-left: 20px;
+            position: relative;
+
+            grid-column: 4/6;
+            grid-row: 7/15;
+        }
+
+        /* 박스 안 큰 제목 */
+        .titleText {
+            margin-top: 20px;
+            margin-left: 30px;
+            margin-bottom: 40px;
+            font-weight: 700;
+            font-size: 40px;
+        }
+
+        /*수강신청 날짜*/
+        .date {
+            font-weight: 700;
+            font-size: 70px;
+            display: flex;
+            line-height: 50px;
+            padding-left: 30px;
+        }
+
+        .plus {
+            /* 더보기> */
+            margin-right: 50px;
+            margin-top: -80px;
+            display: flex;
+            justify-content: right;
+            font-weight: 400;
+            font-size: 20px;
+            color: #000000;
+        }
+
+        .notice>ul>li {
+            list-style: none;
+            margin-top: 20px;
+            margin-left: -10px;
+            margin-right: 20px;
+            line-height: 50px;
+            padding-left: 10px;
+
+            font-size: 24px;
+
+            background: #F5F5F5;
+            border: 1px solid #ABABAB;
+            border-radius: 10px;
+        }
+
+
+        .lecture>ul>li {
+            list-style: none;
+            margin-left: -20px;
+            margin-right: 20px;
+            margin-top: 20px;
+            
+
+            background: #F5F5F5;
+            border: 1px solid #ABABAB;
+            border-radius: 10px;
+
+            font-size: 32px;
+            font-weight: 400;
+            padding-left: 10px;
+            line-height: 50px;
+        }
+
+        .myPage>ul>li {
+            list-style: none;
+            margin: 3px;
+            margin-left: -20px;
+            font-weight: 400;
+            font-size: 36px;
+
+            position: relative;
+        }
+
+        .mainRegbtn {
+            font-weight: 400;
+            font-size: 40px;
+
+            position: absolute;
+            top: 50%;
+            /* 수직 중앙 */
+            right: 30px;
+            /* 오른쪽에서 30px 띄움 */
+            transform: translateY(-50%);
+        }
+
+        .mainLecbtn {
+            font-weight: 400;
+            font-size: 25px;
+            margin: 4px;
+            position: absolute;
+            right: 30px;
+        }
+
+        .mainMybtn {
+            font-weight: 400;
+            font-size: 30px;
+            margin: 10px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+    </style>
+</head>
+
+<body>
+        <article>
+            <div class="main notice">
+                <p class="titleText">공지사항</p>
+                <p class="plus">더보기 ></p>
+                <ul>
+                    <li>2026-1학기 등록금 납부 및 분할 납부 신청 안내</li>
+                    <li>2026학년도 신한카드 학생증 신청 안내</li>
+                    <li>2026학년도 1학기 수업 운영 안내</li>
+                    <li>2026학년도 1학기 추가학기 관련 안내</li>
+                    <li>2026년도 1학기 수강신청 및 시간표 안내</li>
+                </ul>
+            </div>
+
+            <div class="main register">
+                <p class="titleText">수강신청 기간</p>
+                <p class="date">26.02.25 ~ 26.02.28</p>
+                <button class="mainRegbtn">수강신청</button>
+            </div>
+
+            <div class="main myPage">
+                <p class="titleText">내 정보</p>
+                <button class="mainMybtn">마이페이지</button>
+                <ul>
+                    <li>이름: </li>
+                    <li>학번: </li>
+                    <li>학과: </li>
+                    <li>학년: </li>
+                </ul>
+            </div>
+
+            <div class="main lecture">
+                <p class="titleText">내 강의</p>
+                <ul>
+                    <li>웹프로그래밍실무 <button class="mainLecbtn">강의실 가기</button></li>
+                    <li>운영체제 <button class="mainLecbtn">강의실 가기</button></li>
+                    <li>사회와마케팅 <button class="mainLecbtn">강의실 가기</button></li>
+                    <li>인공지능캡스톤 <button class="mainLecbtn">강의실 가기</button></li>
+                </ul>
+            </div>
+
+        </article>
+</body>
+
+</html>
