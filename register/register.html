@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .topbar {
+            width: 1600px;
+            height: 80px;
+            background: #EAD8FA;
+            border: 2px solid #8B5FBF;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            margin-bottom: 20px;
+        }
+
+        .topbar div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .active {
+            box-sizing: border-box;
+            width: 400px;
+            height: 80px;
+            background: #FFFFFF;
+            border-radius: 10px;
+            border-left: 2px solid #8B5FBF;
+            border-right: 2px solid #8B5FBF;
+        }
+
+        .Check {
+            width: 1600px;
+            height: 760px;
+            border: 1px solid black;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .subjectHeader {
+            background-color: #F7EDFF;
+            
+            height: 51px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+
+        }
+
+        .basketHeader {
+            background-color: #F7EDFF;
+            
+            height: 51px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px; 
+            margin-left: 15px;
+
+        }
+
+
+        .majorSelect {
+            display: flex;
+            flex: 1;
+            height: 650px;
+        }
+
+        .option {
+            width: 250px;
+            border-right: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 0px;
+        }
+
+        .option select {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: grid;
+            grid-template-rows: 3fr 1fr;
+
+
+        }
+
+        .lectureList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #000000;
+            margin-top: -20px;
+            margin-bottom: 30px;
+            margin-left: -20px;
+        }
+
+        .subjectInfo {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .dot {
+            color: #ccc;
+        }
+
+        .groupRadio span {
+            margin-right: 200px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <div>조회</div>
+        <div>수강바구니</div>
+        <div class="active">수강신청</div>
+        <div>신청한 시간표</div>
+    </div>
+
+    <div class="Check">
+        <div class="subjectHeader">
+            <div class="groupRadio">
+                <span>강의 조회</span>
+                <input type="radio" name="subject" id="major"><label for="major">전공</label>
+                <input type="radio" name="subject" id="culture"><label for="culture">교양</label>
+            </div>
+        </div>
+
+        <div class="majorSelect">
+            <div class="option">
+                <select>
+                    <option>학과를 선택해주세요</option>
+                    <option>의료it학과</option>
+                    <option>빅데이터학과</option>
+                    <option>첨단학부</option>
+                    <option>간호학과</option>
+                    <option>응급구조학과</option>
+                    <option>임상병리학과</option>
+                    <option>방사선학과</option>
+                    <option>물리치료학과</option>
+                    <option>치위생학과</option>
+                    <option>안경광학학과</option>
+                </select>
+            </div>
+
+
+            <!-- 코드 리팩토링 해야할듯 -->
+            <main class="content">
+                <ul class="lectureList">
+                    <li>
+                        <span class="subjectName">000000 과목</span>
+                        <div class="subjectInfo">
+                            <span>이00</span> <span class="dot">·</span>
+                            <span>전공</span> <span class="dot">·</span>
+                            <span>3학점</span>
+                            <span><button>신청하기</button></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="subjectName">000000 과목</span>
+                        <div class="subjectInfo">
+                            <span>이00</span> <span class="dot">·</span>
+                            <span>전공</span> <span class="dot">·</span>
+                            <span>3학점</span>
+                            <span><button>신청하기</button></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="subjectName">000000 과목</span>
+                        <div class="subjectInfo">
+                            <span>이00</span> <span class="dot">·</span>
+                            <span>전공</span> <span class="dot">·</span>
+                            <span>3학점</span>
+                            <span><button>신청하기</button></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="subjectName">000000 과목</span>
+                        <div class="subjectInfo">
+                            <span>이00</span> <span class="dot">·</span>
+                            <span>전공</span> <span class="dot">·</span>
+                            <span>3학점</span>
+                            <span><button>신청하기</button></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="subjectName">000000 과목</span>
+                        <div class="subjectInfo">
+                            <span>이00</span> <span class="dot">·</span>
+                            <span>전공</span> <span class="dot">·</span>
+                            <span>3학점</span>
+                            <span><button>신청하기</button></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="subjectName">000000 과목</span>
+                        <div class="subjectInfo">
+                            <span>이00</span> <span class="dot">·</span>
+                            <span>전공</span> <span class="dot">·</span>
+                            <span>3학점</span>
+                            <span><button>신청하기</button></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="subjectName">000000 과목</span>
+                        <div class="subjectInfo">
+                            <span>이00</span> <span class="dot">·</span>
+                            <span>전공</span> <span class="dot">·</span>
+                            <span>3학점</span>
+                            <span><button>신청하기</button></span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="subjectBasket">
+                    <div class="basketHeader">
+                        <span>수강신청 목록</span>
+                    </div>
+                    <div>
+                        <ul class="lectureList">
+                            <li>
+                                <span class="subjectName">000000 과목</span>
+                                <div class="subjectInfo">
+                                    <span>이00</span> <span class="dot">·</span>
+                                    <span>전공</span> <span class="dot">·</span>
+                                    <span>3학점</span>
+                                    <span><button>신청 취소</button></span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="subjectName">000000 과목</span>
+                                <div class="subjectInfo">
+                                    <span>이00</span> <span class="dot">·</span>
+                                    <span>전공</span> <span class="dot">·</span>
+                                    <span>3학점</span>
+                                    <span><button>신청 취소</button></span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="subjectName">000000 과목</span>
+                                <div class="subjectInfo">
+                                    <span>이00</span> <span class="dot">·</span>
+                                    <span>전공</span> <span class="dot">·</span>
+                                    <span>3학점</span>
+                                    <span><button>신청 취소</button></span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="subjectName">000000 과목</span>
+                                <div class="subjectInfo">
+                                    <span>이00</span> <span class="dot">·</span>
+                                    <span>전공</span> <span class="dot">·</span>
+                                    <span>3학점</span>
+                                    <span><button>신청 취소</button></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+            </main>
+        </div>
+
+    </div>
+    </div>
+</body>
+
+</html>
