@@ -1,49 +1,53 @@
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #222;
-  color: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'normalFont';
 }
 
-.header-content {
+@font-face {
+  font-family: 'normalFont';
+  src: url('/src/font/SCDream4.otf') format('opentype');
+}
+
+h1 {
+  font-family: 'MyFont', sans-serif;
+}
+
+header {
+  width: "1vw";
+  height: 90px;
+  background-color: #CFA9F4;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid black;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+#headerLogo {
+  margin-left: 30px;
+  padding: 5px;
+  height: 90px;
 }
 
-.nav-menu {
+#dday {
   display: flex;
-  list-style: none;
-  gap: 2rem;
+  flex-direction: row;
+  gap: 5px;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 100%;
+  margin-right: 30px;
 }
 
-.nav-menu a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease;
+button {
+  width: 65px; height: 44px;
+  background-color: #CFA9F4;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
 }
 
-.nav-menu a:hover {
-  color: #fbbf24;
-}
-
-@media (max-width: 480px) {
-  .header-content {
-    flex-direction: column;
-  }
-
-  .nav-menu {
-    flex-direction: column;
-    margin-top: 1rem;
-  }
+button:hover {
+  cursor: pointer;
 }
