@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .adminOpeningList {
+            box-sizing: border-box;
+
+            width: 1600px;
+            height: 850px;
+            overflow: hidden;
+            display: grid;
+            border: 1px solid #000000;
+            background: #ffffff;
+            border-radius: 10px;
+        }
+
+        .title {
+            box-sizing: border-box;
+
+            width: 100%;
+            height: 80px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <article>
+        <div class="adminOpeningList">
+            <div class="title">
+                <div class="textArea">
+                    <div class="text">개설된 모든 과목</div>
+                </div>
+                <div class="formBox">
+                    <form action="/search" method="get"></form>
+                </div>
+                <div class="btn">
+                    <button>추가</button>
+                    <button>삭제</button>
+                </div>
+
+
+            </div>
+        </div>
+    </article>
+</body>
+
+</html>
