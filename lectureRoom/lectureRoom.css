@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!--1601*208 308 279--> <!--gap=26-->
-    <style>
-        /* Rectangle 4 */
         * {
             margin: 0;
             box-sizing: border-box;
@@ -26,7 +17,6 @@
             border-radius: 10px;
         }
 
-        /* Rectangle 4 */
         .students {
             box-sizing: border-box;
             width: 1601px;
@@ -86,7 +76,7 @@
             border-left: 1px solid black;
         }
 
-        ul {
+        .attendanceStatus {
             display: flex;
             list-style: none;
             gap: 30px;
@@ -94,7 +84,7 @@
             padding: 0px;
         }
 
-        li {
+        .attendanceStatus>li {
             width: 52px;
             height: 52px;
             background-color: #d9d9d9;
@@ -131,6 +121,10 @@
             background-color: #FFE08A;
         }
 
+        #attendanceYet{
+            background-color: #d9d9d9;
+        }
+
         .firstAttendanceTopRight {
             display: flex;
             margin-top: 10px;
@@ -157,15 +151,14 @@
             width: 20px;
             height: 20px;
             background: #CFA9F4;
-            transform: matrix(0, 1, 1, 0, 0, 0);
+            clip-path: polygon(100% 0, 100% 100%, 0 50%);
         }
 
         #triangleRight {
-
             width: 20px;
             height: 20px;
             background: #CFA9F4;
-            transform: matrix(0, 1, 1, 0, 0, 0);
+            clip-path: polygon(0 0, 0 100%, 100% 50%);
         }
 
         .high {
@@ -187,7 +180,7 @@
         }
 
         .low {
-            margin-left: 20px;
+            /* margin-left: 20px; */
             display: flex;
             flex-direction: column;
             gap: 21px;
@@ -215,76 +208,26 @@
             gap: 20px;
             line-height: 100%;
         }
-    </style>
-</head>
-
-<body>
-    <!--header-->
-    <main>
-        <div class="lectureRoom students">
-            <div id="attendance">
-                <div class="firstAttendance">
-                    <p>학생 출결 현황</p>
-                    <div class="firstAttendanceTopRight">
-                        <button>수정</button>
-                        <div id="attendanceYes"></div>
-                        <p>전체 완료</p>
-                        <div id="attendanceNow"></div>
-                        <p>진행 중</p>
-                        <div></div>
-                        <p>미완료</p>
-                    </div>
-                </div>
-                <ul>
-                    <li id="attendanceYes"></li>
-                    <li id="attendanceNow"></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-            <div id="task">
-                <p>과제 제출 현황</p>
-                <div id="people"><span>24</span>
-                    <p>/45</p>
-                </div>
-            </div>
-        </div>
-        <div class="lectureRoom notice">
-            <div class="high">
-                <p>공지사항</p>
-                <div>
-                    <button>작성</button>
-                    <button>수정</button>
-                    <div id="triangleLeft"></div>
-                    <span>1</span>
-                    <p>/ 5</p>
-                    <div id="triangleRight"></div>
-                </div>
-            </div>
-            <ul class="low">
-                <li id="firstLectureNotice"><div><p>007</p>이번주 강의는 휴강입니다.<p></p></div><div><p>강민수</p><p>2026.03.08</p></div></li>
-                <li id="firstLectureNotice"><div><p>006</p>강의 시간 변경 공지<p></p></div><div><p>강민수</p><p>2026.03.08</p></div></li>
-                <li id="firstLectureNotice"><div><p>005</p>자바스크립트 및 HTML 1주차 과제 안내<p></p></div><div><p>강민수</p><p>2026.03.08</p></div></li>
-                <li id="firstLectureNotice"><div><p>004</p>자바스크립트 및 HTML 1주차 강의 자료<p></p></div><div><p>강민수</p><p>2026.03.08</p></div></li>
-            </ul>
-        </div>
-        <div class="lectureRoom docs">
-            <div></div>
-            <div></div>
-        </div>
-    </main>
-    <!--footer-->
-</body>
-
-</html>
+        .docs{
+            display: grid;
+            grid-template-rows: 70px 1fr 20px;
+        }
+        .docstop{
+            margin-top: 18px;
+            margin-left: 18px;
+            font-size: 36px;
+        }
+        .docsmain{
+            display: flex;
+            flex-direction: column;
+            gap:21px;
+            list-style: none;
+        }
+        .docsbot{
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: end;
+            justify-content: end;
+            margin-bottom: 18px;
+            margin-right: 18px;
+        }
