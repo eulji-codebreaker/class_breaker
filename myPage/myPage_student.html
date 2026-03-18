@@ -5,7 +5,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="myPage_student.css">
+    <style>
+        .topbar {
+            box-sizing: border-box;
+
+            width: 1600px;
+            height: 80px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid #8B5FBF;
+            background: #EAD8FA;
+            border-radius: 10px;
+        }
+
+        .topbar>div {
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 80px;
+            text-align: center;
+            color: #000000;
+            padding: 0;
+            margin: 0;
+        }
+
+        .active {
+            box-sizing: border-box;
+
+            width: 400px;
+            height: 80px;
+
+            background: #FFFFFF;
+            border-radius: 10px;
+        }
+
+        .studentTimeTable1 {
+            width: 1600px;
+            height: 760px;
+            margin-top: 20px;
+            overflow: auto;
+        }
+
+        .studentTimeTable1 table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+
+        }
+
+        .studentTimeTable1 th,
+        .studentTimeTable1 td {
+            width: auto;
+            border: 1px solid #000000;
+            height: 70px;
+            text-align: center;
+        }
+
+        .studenTimeTable2 {
+            width: 1600px;
+            height: 750px;
+            margin-top: 20px;
+            overflow: auto;
+        }
+
+        .studenTimeTable2 table {
+            width: 100%;
+            border-collapse: collapse;
+
+        }
+
+        .studenTimeTable2 th,
+        .studenTimeTable2 td {
+            width: auto;
+            border: 1px solid #000000;
+            height: 70px;
+            text-align: center;
+        }
+
+        .studenTimeTable2 td:first-of-type {
+            width: 200px;
+        }
+
+        .studenTimeTable2 td:nth-of-type(3) {
+            width: 300px;
+        }
+
+        .studenTimeTable2 td:nth-of-type(4) {
+            width: 300px;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,26 +106,110 @@
         </div>
 
         <div class="studentTimeTable1">
-            <div class="tableHeader">시간/요일</div>
-            <div class="tableHeader">월요일</div>
-            <div class="tableHeader">화요일</div>
-            <div class="tableHeader">수요일</div>
-            <div class="tableHeader">목요일</div>
-            <div class="tableHeader">금요일</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="time1">시간/요일</th>
+                        <th>월요일</th>
+                        <th>화요일</th>
+                        <th>수요일</th>
+                        <th>목요일</th>
+                        <th>금요일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="time1">08:00 ~ 08:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">09:00 ~ 09:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">10:00 ~ 10:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">11:00 ~ 11:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">12:00 ~ 12:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">13:00 ~ 13:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">14:00 ~ 14:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">15:00 ~ 15:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">16:00 ~ 16:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">17:00 ~ 17:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time1">18:00 ~ 18:50</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
 
-            <div class="tableTime">08:00 ~ 08:50</div>
-            <div class="tableTime">09:00 ~ 09:50</div>
-            <div class="tableTime">10:00 ~ 10:50</div>
-            <div class="tableTime">11:00 ~ 11:50</div>
-            <div class="tableTime">12:00 ~ 12:50</div>
-            <div class="tableTime">13:00 ~ 13:50</div>
-            <div class="tableTime">14:00 ~ 14:50</div>
-            <div class="tableTime">15:00 ~ 15:50</div>
-            <div class="tableTime">16:00 ~ 16:50</div>
-            <div class="tableTime">17:00 ~ 17:50</div>
-            <div class="tableTime">18:00 ~ 18:50</div>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
         <div class="studenTimeTable2">
             <table>
                 <thead>
@@ -119,20 +291,19 @@
                 </tbody>
     </article>
     <script>
-        fetch("../layout/header.html")
-            .then((response) => response.text())
+        fetch("../layout/header.html") //웹문서 요청
+            .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
+                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            });
-
-
-        fetch("../layout/footer.html")
-            .then((response) => response.text())
+            })
+        fetch("../layout/footer.html") //웹문서 요청
+            .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
+                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            });
+            })
     </script>
 </body>
-
 
 </html>
