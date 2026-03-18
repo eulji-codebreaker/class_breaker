@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         /* 로그인 화면 박스 */
-        .logBox {
+        main {
             box-sizing: border-box;
 
             position: absolute;
@@ -17,21 +17,22 @@
             background: #FFFFFF;
             border: 1px solid #ABABAB;
             border-radius: 10px;
+
+            display: flex;
         }
 
-        p {
-            
-        }
+        p {}
     </style>
 </head>
 
 <body>
-    <div>
-        <div class="logBox">
-            <p>로그인</p>
+    <main>
+        <div>
+            <div class="logBox">
+                <p>로그인</p>
+            </div>
         </div>
-    </div>
-
+    </main>
     <script>
         fetch("/layout/header.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
