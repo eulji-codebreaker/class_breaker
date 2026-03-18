@@ -33,13 +33,13 @@
         <p>인터넷 익스플로러 10 이하 버전을 사용하시는 분들은 정상적으로 동작하지 않을수 있으며, 보안상의 이유로도 10 버전이상으로 업그레이드 하시기를 권장합니다.</p>
     </div>
     <script>
-        fetch("/layout/header.html") //웹문서 요청
+        fetch("../layout/header.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
             })
-        fetch("/layout/footer.html") //웹문서 요청
+        fetch("../layout/footer.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
                 // console.log(responseText);
