@@ -1,0 +1,39 @@
+.important {
+    max-width: 1600px;
+    min-height: 295px;
+    max-height: 850px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+}
+
+.general {
+    max-width: 1600px;
+    min-height: 545px;
+    max-height: 850px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.text {
+    font-weight: bold;
+    font-size: 36px;
+    white-space: nowrap;
+    padding: 30px;
+}
+
+.notice {
+    padding: 25px;
+    margin: 15px 30px;
+    border: 1px solid #ababab;
+    border-radius: 10px;
+    align-items: center;
+    background-color: #F5F5F5;
+}

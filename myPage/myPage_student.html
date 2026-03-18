@@ -5,95 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .topbar {
-            box-sizing: border-box;
-
-            width: 1600px;
-            height: 80px;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            border: 1px solid #8B5FBF;
-            background: #EAD8FA;
-            border-radius: 10px;
-        }
-
-        .topbar>div {
-            font-weight: 700;
-            font-size: 36px;
-            line-height: 80px;
-            text-align: center;
-            color: #000000;
-            padding: 0;
-            margin: 0;
-        }
-
-        .active {
-            box-sizing: border-box;
-
-            width: 400px;
-            height: 80px;
-
-            background: #FFFFFF;
-            border-radius: 10px;
-        }
-
-        .studentTimeTable1 {
-            width: 1600px;
-            height: 760px;
-            margin-top: 20px;
-            overflow: auto;
-        }
-
-        .studentTimeTable1 table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-
-        }
-
-        .studentTimeTable1 th,
-        .studentTimeTable1 td {
-            width: auto;
-            border: 1px solid #000000;
-            height: 70px;
-            text-align: center;
-        }
-
-        .studenTimeTable2 {
-            width: 1600px;
-            height: 750px;
-            margin-top: 20px;
-            overflow: auto;
-        }
-
-        .studenTimeTable2 table {
-            width: 100%;
-            border-collapse: collapse;
-
-        }
-
-        .studenTimeTable2 th,
-        .studenTimeTable2 td {
-            width: auto;
-            border: 1px solid #000000;
-            height: 70px;
-            text-align: center;
-        }
-
-        .studenTimeTable2 td:first-of-type {
-            width: 200px;
-        }
-
-        .studenTimeTable2 td:nth-of-type(3) {
-            width: 300px;
-        }
-
-        .studenTimeTable2 td:nth-of-type(4) {
-            width: 300px;
-        }
-    </style>
+    <link rel="stylesheet" href="myPage_student.css">
 </head>
 
 <body>
@@ -106,9 +18,93 @@
         </div>
 
         <div class="studentTimeTable1">
-            
+            <div class="timetableCol nothing">
+                <div class="fixedTime">요일,교시</div>
+                <div class="fixedTime">08:00~08:50</div>
+                <div class="fixedTime">09:00~09:50</div>
+                <div class="fixedTime">10:00~10:50</div>
+                <div class="fixedTime">11:00~11:50</div>
+                <div class="fixedTime">12:00~12:50</div>
+                <div class="fixedTime">13:00~13:50</div>
+                <div class="fixedTime">14:00~14:50</div>
+                <div class="fixedTime">15:00~15:50</div>
+                <div class="fixedTime">16:00~16:50</div>
+                <div class="fixedTime">17:00~17:50</div>
+                <div class="fixedTime lastTime">18:00~18:50</div>
+            </div>
+            <div class="timetableCol mon">
+                <div class="fixedTime">월요일</div>
+                <div class="mon time0">1</div>
+                <div class="mon time1">1</div>
+                <div class="mon time2">1</div>
+                <div class="mon time3">1</div>
+                <div class="mon time4">1</div>
+                <div class="mon time5">1</div>
+                <div class="mon time6">1</div>
+                <div class="mon time7">1</div>
+                <div class="mon time8">1</div>
+                <div class="mon time9">1</div>
+                <div class="mon time10">1</div>
+            </div>
+            <div class="timetableCol tue">
+                <div class="fixedTime">화요일</div>
+                <div class="tue time0">1</div>
+                <div class="tue time1">1</div>
+                <div class="tue time2">1</div>
+                <div class="tue time3">1</div>
+                <div class="tue time4">1</div>
+                <div class="tue time5">1</div>
+                <div class="tue time6">1</div>
+                <div class="tue time7">1</div>
+                <div class="tue time8">1</div>
+                <div class="tue time9">1</div>
+                <div class="tue time10">1</div>
+            </div>
+            <div class="timetableCol wed">
+                <div class="fixedTime">수요일</div>
+                <div class="wed time0">1</div>
+                <div class="wed time1">1</div>
+                <div class="wed time2">1</div>
+                <div class="wed time3">1</div>
+                <div class="wed time4">1</div>
+                <div class="wed time5">1</div>
+                <div class="wed time6">1</div>
+                <div class="wed time7">1</div>
+                <div class="wed time8">1</div>
+                <div class="wed time9">1</div>
+                <div class="wed time10">1</div>
+            </div>
+            <div class="timetableCol thr">
+                <div class="fixedTime">목요일</div>
+                <div class="thr time0">1</div>
+                <div class="thr time1">1</div>
+                <div class="thr time2">1</div>
+                <div class="thr time3">1</div>
+                <div class="thr time4">1</div>
+                <div class="thr time5">1</div>
+                <div class="thr time6">1</div>
+                <div class="thr time7">1</div>
+                <div class="thr time8">1</div>
+                <div class="thr time9">1</div>
+                <div class="thr time10">1</div>
+            </div>
+            <div class="timetableCol fri">
+                <div class="fixedTime">금요일</div>
+                <div class="fri time0">1</div>
+                <div class="fri time1">1</div>
+                <div class="fri time2">1</div>
+                <div class="fri time3">1</div>
+                <div class="fri time4">1</div>
+                <div class="fri time5">1</div>
+                <div class="fri time6">1</div>
+                <div class="fri time7">1</div>
+                <div class="fri time8">1</div>
+                <div class="fri time9">1</div>
+                <div class="fri time10">1</div>
+            </div>
         </div>
-        <div class="studenTimeTable2">
+
+        <div class="studentTimeTable2">
             <table>
                 <thead>
                     <tr>
