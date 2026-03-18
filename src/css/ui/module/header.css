@@ -6,22 +6,29 @@
 
 @font-face {
   font-family: 'normalFont';
-  src: url('../src/font/SCDream4.otf') format('opentype');
+  src: url('/../class_breaker/src/font/SCDream4.otf') format('opentype');
 }
 
-h1 {
-  font-family: 'MyFont', sans-serif;
+body {
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 90px 1fr 60px;
+  min-height: 100vh;
 }
 
 header {
-  width: "1vw";
-  height: 90px;
   background-color: #EFDFFF;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid black;
+}
+
+main {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #headerLogo {
@@ -40,63 +47,86 @@ header {
   margin-right: 30px;
 }
 
-/*버튼 스타일*/
-button {
-  width: 65px;
-  height: 44px;
-  background-color: #CFA9F4;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-}
+/*버튼        */
+/*      스타일*/
+
 /*메인페이지 버튼들*/
 .mainRegbtn {
   background-color: #e0c1ff;
   font-weight: 400;
   font-size: 40px;
+
+  position: absolute;
+  /* 오른쪽에서 30px 띄움 */
+  right: 30px;
+  transform: translateY(20%);
+
+  margin-top: auto;
+
+  box-sizing: border-box;
+  width: 330px;
+  height: 75px;
 }
 
 .mainRegbtn:hover {
   background-color: #cc97ff;
 }
 
-.mainRoombtn{
+.mainRoombtn {
   background-color: #efdfff;
+  font-weight: 400;
+  font-size: 30px;
+  margin: 10px;
+  position: absolute;
+  top: 20px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: 208px;
+  height: 48px;
+
 }
 
-.mainRoombtn:hover{
+.mainRoombtn:hover {
   background-color: #d6adff;
 }
 
 /*관리자버튼(수정,작성,삭제)*/
-.adminbtn{
- background-color: #e0c1ff;
+.adminbtn {
+  background-color: #e0c1ff;
+  width: 65px;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 20px;
 }
 
-.adminbtn:hover{
+.adminbtn:hover {
   background-color: #cc97ff;
 }
 
 /*로그인페이지*/
-.loginbtn{
+.loginbtn {
   background-color: #e0c1ff;
 }
 
 /*모달창*/
-.modalbtn{
+.modalbtn {
   background-color: #dadada;
 }
 
-.modalbtn:hover{
+.modalbtn:hover {
   background-color: #b4b4b4;
 }
 
 /*수강신청페이지*/
-.regbtn{
+.regbtn {
   background-color: #e3c6ff;
 }
 
-.regbtn{
+.regbtn {
   background-color: #cfa9f4;
 }
 
