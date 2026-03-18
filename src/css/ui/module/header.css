@@ -10,7 +10,7 @@
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-rows: 90px 1fr 60px;
   min-height: 100vh;
@@ -52,6 +52,13 @@ main {
   background-color: #e0c1ff;
   font-size: 40px;
 
+  position: absolute;
+  /* 오른쪽에서 30px 띄움 */
+  right: 30px;
+  transform: translateY(20%);
+
+  margin-top: auto;
+
   box-sizing: border-box;
   width: 330px;
   height: 75px;
@@ -63,7 +70,12 @@ main {
 
 .mainRoombtn {
   background-color: #efdfff;
+  font-weight: 400;
   font-size: 30px;
+  margin: 10px;
+  position: absolute;
+  top: 20px;
+  right: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,6 +93,8 @@ main {
 /*관리자버튼(수정,작성,삭제)*/
 .adminbtn {
   background-color: #e0c1ff;
+  width: 65px;
+  height: 44px;
   border-radius: 10px;
   font-size: 20px;
 }
