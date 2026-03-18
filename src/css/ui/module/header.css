@@ -10,7 +10,7 @@
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-rows: 90px 1fr 60px;
   min-height: 100vh;
@@ -53,7 +53,6 @@ main {
 /*메인페이지 버튼들*/
 .mainRegbtn {
   background-color: #e0c1ff;
-  font-weight: 400;
   font-size: 40px;
 
   position: absolute;
