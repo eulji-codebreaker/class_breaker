@@ -1,0 +1,167 @@
+        .topbar {
+            width: 1600px;
+            height: 80px;
+            background: #EAD8FA;
+            border: 2px solid #8B5FBF;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .topbar div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .active {
+            box-sizing: border-box;
+            width: 400px;
+            height: 80px;
+            background: #FFFFFF;
+            border-radius: 10px;
+            border-right: 2px solid #8B5FBF;
+        }
+
+        .Check {
+            width: 1600px;
+            height: 760px;
+            border: 1px solid black;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .subjectHeader {
+            background-color: #F7EDFF;
+            height: 51px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            border-bottom: 1px solid black;
+        }
+
+        .majorSelect {
+            display: flex;
+            flex: 1;
+        }
+
+        .option {
+            width: 250px;
+            border-right: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .option select {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+
+        }
+
+        .lecture-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            border-bottom: 1px solid #000000;
+            margin-top: -20px;
+            margin-bottom: 30px;
+            margin-left: -20px;
+        }
+
+        .subjectInfo {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+
+        .dot {
+            color: #ccc;
+        }
+
+        .btn {
+            background-color: #EAD8FA;
+            border: 1px solid #8B5FBF;
+            border-radius: 15px;
+            padding: 5px 15px;
+        }
+
+        .groupRadio span {
+            margin-right: 200px;
+            margin-left: 30px;
+        }
+
+        form {
+            border: 1px solid black;
+            width: 600px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .lecturePlan {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+
+        }
+
+        .boxGroup {
+            width: 230px;
+            height: 25px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 25px;
+            margin-left: 30px;
+        }
+
+        .box {
+            width: 120px;
+            height: 25px;
+
+            background: #F5F5F5;
+
+        }
+
+        .boxLine {
+            margin-top: 20px;
+            background: #F5F5F5;
+            width: 550px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            margin-left: 30px;
+
+        }
+
+        .closebtn {
+            width: 45px;
+            height: 29px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-size: 12px;
+            line-height: 29px;
+            text-align: center;
+            color: #000000;
+            border: 1px solid #000000;
+
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+
+        }
