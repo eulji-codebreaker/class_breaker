@@ -1,0 +1,98 @@
+.openingList {
+    width: 1600px;
+    height: 850px;
+    border: 1px solid black;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.title {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.text {
+    font-weight: bold;
+    font-size: 36px;
+    flex: 1;
+}
+
+.option {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.option select {
+    width: 200px;
+    padding: 5px;
+    background-color: #F8F3FD;
+}
+
+.header-btns {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow: auto;
+}
+
+.lecture-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lecture-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.subjectName {
+    font-weight: 500;
+}
+
+.subjectInfo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dot {
+    color: #ccc;
+}
+
+.adminbtn {
+    background: #e0c1ff;
+}
+
+.adminbtn :hover {
+    background: #cc97ff;
+}
+
+.mainRoombtn {
+    background: #e0c1ff;
+}
+
+.adminbtn :hover {
+    background: #cc97ff;
+}
