@@ -5,116 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-   <link rel="stylesheet" href="basket.css">
+    <link rel="stylesheet" href="basket.css">
 </head>
 
 <body>
-    <div class="topbar">
-        <div>조회</div>
-        <div class="active">수강바구니</div>
-        <div>수강신청</div>
-        <div>신청한 시간표</div>
-    </div>
-
-    <div class="Check">
-        <div class="subjectHeader">
-            <div class="groupRadio">
-                <span>강의 조회</span>
-                <input type="radio" name="subject" id="major"><label for="major">전공</label>
-                <input type="radio" name="subject" id="culture"><label for="culture">교양</label>
-            </div>
-        </div>
-
-        <div class="majorSelect">
-            <div class="option">
-                <select>
-                    <option>학과를 선택해주세요</option>
-                    <option>의료it학과</option>
-                    <option>빅데이터학과</option>
-                    <option>첨단학부</option>
-                    <option>간호학과</option>
-                    <option>응급구조학과</option>
-                    <option>임상병리학과</option>
-                    <option>방사선학과</option>
-                    <option>물리치료학과</option>
-                    <option>치위생학과</option>
-                    <option>안경광학학과</option>
-                </select>
+    <main>
+        <article>
+            <div class="topbar">
+                <div>조회</div>
+                <div class="active">수강바구니</div>
+                <div>수강신청</div>
+                <div>신청한 시간표</div>
             </div>
 
-
-            <!-- 코드 리팩토링 해야할듯 -->
-            <main class="content">
-                <ul class="lectureList">
-                    <li>
-                        <span class="subjectName">000000 과목</span>
-                        <div class="subjectInfo">
-                            <span>이00</span> <span class="dot">·</span>
-                            <span>전공</span> <span class="dot">·</span>
-                            <span>3학점</span>
-                            <span><button class="regbtn"></button>바구니 담기</button></span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="subjectName">000000 과목</span>
-                        <div class="subjectInfo">
-                            <span>이00</span> <span class="dot">·</span>
-                            <span>전공</span> <span class="dot">·</span>
-                            <span>3학점</span>
-                            <span><button class="regbtn">바구니 담기</button></span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="subjectName">000000 과목</span>
-                        <div class="subjectInfo">
-                            <span>이00</span> <span class="dot">·</span>
-                            <span>전공</span> <span class="dot">·</span>
-                            <span>3학점</span>
-                            <span><button class="regbtn">바구니 담기</button></span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="subjectName">000000 과목</span>
-                        <div class="subjectInfo">
-                            <span>이00</span> <span class="dot">·</span>
-                            <span>전공</span> <span class="dot">·</span>
-                            <span>3학점</span>
-                            <span><button class="regbtn">바구니 담기</button></span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="subjectName">000000 과목</span>
-                        <div class="subjectInfo">
-                            <span>이00</span> <span class="dot">·</span>
-                            <span>전공</span> <span class="dot">·</span>
-                            <span>3학점</span>
-                            <span><button class="regbtn">바구니 담기</button></span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="subjectName">000000 과목</span>
-                        <div class="subjectInfo">
-                            <span>이00</span> <span class="dot">·</span>
-                            <span>전공</span> <span class="dot">·</span>
-                            <span>3학점</span>
-                            <span><button class="regbtn">바구니 담기</button></span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="subjectName">000000 과목</span>
-                        <div class="subjectInfo">
-                            <span>이00</span> <span class="dot">·</span>
-                            <span>전공</span> <span class="dot">·</span>
-                            <span>3학점</span>
-                            <span><button class="regbtn">바구니 담기</button></span>
-                        </div>
-                    </li>
-                </ul>
-                <div class="subjectBasket">
-                    <div class="basketHeader">
-                        <span>수강바구니 목록</span>
+            <div class="Check">
+                <div class="subjectHeader">
+                    <div class="groupRadio">
+                        <span>강의 조회</span>
+                        <input type="radio" name="subject" id="major"><label for="major">전공</label>
+                        <input type="radio" name="subject" id="culture"><label for="culture">교양</label>
                     </div>
-                    <div>
+                </div>
+
+                <div class="majorSelect">
+                    <div class="option">
+                        <select>
+                            <option>학과를 선택해주세요</option>
+                            <option>의료it학과</option>
+                            <option>빅데이터학과</option>
+                            <option>첨단학부</option>
+                            <option>간호학과</option>
+                            <option>응급구조학과</option>
+                            <option>임상병리학과</option>
+                            <option>방사선학과</option>
+                            <option>물리치료학과</option>
+                            <option>치위생학과</option>
+                            <option>안경광학학과</option>
+                        </select>
+                    </div>
+
+
+                    <!-- 코드 리팩토링 해야할듯 -->
+                    <div class="content">
                         <ul class="lectureList">
                             <li>
                                 <span class="subjectName">000000 과목</span>
@@ -122,7 +54,7 @@
                                     <span>이00</span> <span class="dot">·</span>
                                     <span>전공</span> <span class="dot">·</span>
                                     <span>3학점</span>
-                                    <span><button class="regbtn">바구니 빼기</button></span>
+                                    <span><button class="regbtn">바구니 담기</button></span>
                                 </div>
                             </li>
                             <li>
@@ -131,7 +63,7 @@
                                     <span>이00</span> <span class="dot">·</span>
                                     <span>전공</span> <span class="dot">·</span>
                                     <span>3학점</span>
-                                    <span><button class="regbtn">바구니 빼기</button></span>
+                                    <span><button class="regbtn">바구니 담기</button></span>
                                 </div>
                             </li>
                             <li>
@@ -140,7 +72,7 @@
                                     <span>이00</span> <span class="dot">·</span>
                                     <span>전공</span> <span class="dot">·</span>
                                     <span>3학점</span>
-                                    <span><button class="regbtn">바구니 빼기</button></span>
+                                    <span><button class="regbtn">바구니 담기</button></span>
                                 </div>
                             </li>
                             <li>
@@ -149,28 +81,104 @@
                                     <span>이00</span> <span class="dot">·</span>
                                     <span>전공</span> <span class="dot">·</span>
                                     <span>3학점</span>
-                                    <span><button class="regbtn">바구니 빼기</button></span>
+                                    <span><button class="regbtn">바구니 담기</button></span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="subjectName">000000 과목</span>
+                                <div class="subjectInfo">
+                                    <span>이00</span> <span class="dot">·</span>
+                                    <span>전공</span> <span class="dot">·</span>
+                                    <span>3학점</span>
+                                    <span><button class="regbtn">바구니 담기</button></span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="subjectName">000000 과목</span>
+                                <div class="subjectInfo">
+                                    <span>이00</span> <span class="dot">·</span>
+                                    <span>전공</span> <span class="dot">·</span>
+                                    <span>3학점</span>
+                                    <span><button class="regbtn">바구니 담기</button></span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="subjectName">000000 과목</span>
+                                <div class="subjectInfo">
+                                    <span>이00</span> <span class="dot">·</span>
+                                    <span>전공</span> <span class="dot">·</span>
+                                    <span>3학점</span>
+                                    <span><button class="regbtn">바구니 담기</button></span>
                                 </div>
                             </li>
                         </ul>
+                        <div class="subjectBasket">
+                            <div class="basketHeader">
+                                <span>수강바구니 목록</span>
+                            </div>
+                            <div>
+                                <ul class="lectureList">
+                                    <li>
+                                        <span class="subjectName">000000 과목</span>
+                                        <div class="subjectInfo">
+                                            <span>이00</span> <span class="dot">·</span>
+                                            <span>전공</span> <span class="dot">·</span>
+                                            <span>3학점</span>
+                                            <span><button class="regbtn">바구니 빼기</button></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="subjectName">000000 과목</span>
+                                        <div class="subjectInfo">
+                                            <span>이00</span> <span class="dot">·</span>
+                                            <span>전공</span> <span class="dot">·</span>
+                                            <span>3학점</span>
+                                            <span><button class="regbtn">바구니 빼기</button></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="subjectName">000000 과목</span>
+                                        <div class="subjectInfo">
+                                            <span>이00</span> <span class="dot">·</span>
+                                            <span>전공</span> <span class="dot">·</span>
+                                            <span>3학점</span>
+                                            <span><button class="regbtn">바구니 빼기</button></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="subjectName">000000 과목</span>
+                                        <div class="subjectInfo">
+                                            <span>이00</span> <span class="dot">·</span>
+                                            <span>전공</span> <span class="dot">·</span>
+                                            <span>3학점</span>
+                                            <span><button class="regbtn">바구니 빼기</button></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-            </main>
-        </div>
 
-    </div>
-    </div>
+                </div>
+            </div>
+        </article>
+    </main>
     <script>
-        fetch("../layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
+        fetch("../layout/header.html") //header불러오기
+            .then((response) => response.text())
             .then((responseText) => {
-                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
             })
-        fetch("../layout/footer.html") //웹문서 요청
+        fetch("../layout/footer.html") //footer불러오기
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
-                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
+            })
+
+        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
             })
     </script>
 </body>

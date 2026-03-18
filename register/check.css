@@ -1,3 +1,9 @@
+        
+        main {
+            display: flex;
+            align-items: flex-start;
+        }
+        
         .topbar {
             width: 1600px;
             height: 80px;
@@ -21,10 +27,10 @@
         .active {
             box-sizing: border-box;
             width: 400px;
-            height: 80px;
+            height: 75px;
             background: #FFFFFF;
             border-radius: 10px;
-            border-right: 2px solid #8B5FBF;
+            border-right: 1px solid #8B5FBF;
         }
 
         .Check {
@@ -75,7 +81,7 @@
             align-items: center;
             flex-direction: row;
             border-bottom: 1px solid #000000;
-            margin-top: -20px;
+            
             margin-bottom: 30px;
             margin-left: -20px;
         }
