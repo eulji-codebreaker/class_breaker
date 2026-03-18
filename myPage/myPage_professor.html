@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-         .topbar {
+        .topbar {
             box-sizing: border-box;
 
             width: 1600px;
@@ -98,6 +98,25 @@
         .professorTimeTable2 td:nth-of-type(5) {
             width: 200px;
         }
+
+        .adminbtn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .adminbtn button {
+            background: #e0c1ff;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .adminbtn button:hover {
+            background: #cc97ff;
+        }
     </style>
 </head>
 
@@ -107,7 +126,7 @@
             <div class="myTimeTable active">나의 시간표</div>
             <div class="learningList">필수과목 이수여부</div>
             <div class="empty-slot"></div>
-            <div class="button">
+            <div class="adminbtn">
                 <button>추가</button>
                 <button>삭제</button>
             </div>
@@ -310,6 +329,20 @@
 
                 </tbody>
     </article>
+    <script>
+        fetch("../layout/header.html")
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
+            });
+
+
+        fetch("../layout/footer.html")
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
+            });
+    </script>
 
 </body>
 
