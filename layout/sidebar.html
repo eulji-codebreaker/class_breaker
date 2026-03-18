@@ -1,19 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .sidebar{
-            width:275px;
+        aside {
+            width: 275px;
             height: 850px;
+            background: #EAD8FA;
+            border: 1px solid #8B5FBf;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 25px;
+            margin-right: 15px;
+  
         }
+
+        .menu {
+            width: 275px;
+            height: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu:hover{
+            cursor: pointer;
+            background-color: #cc97ff;
+        }
+
+        /* js로 클릭했을 때 하얀색되게 */
+        .menuActive {
+            background: #ffffff;
+            border: 1px solid #8B5FBF;
+        }
+
+        .menu:first-child{
+            margin-top: 100px;
+        }
+        
+        .dontHover{
+            cursor: default;
+            background: #EAD8FA;
+        }
+
     </style>
 </head>
+
 <body>
     <aside>
-        
+        <div class="menu 1 dontHover">
+            <select>
+                <option disabled selected hidden>강의실 선택</option>
+                <option>운영체제</option>
+                <option>사회와 마케팅</option>
+                <option>웹프로그래밍</option>
+                <option>인공지능캡스톤</option>
+            </select>
+        </div>
+        <div class="menu 2">마이페이지</div>
+        <div class="menu 3">강의실</div>
+        <div class="menu 4">수강신청</div>
+        <div class="menu 5">수강신청</div>
+        <div class="menu 6">공지사항</div>
     </aside>
 </body>
 </html>
