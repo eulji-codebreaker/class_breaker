@@ -19,7 +19,7 @@
                     <div class="firstAttendance">
                         <p>학생 출결 현황</p>
                         <div class="firstAttendanceTopRight">
-                            <button>수정</button>
+                            <button class="adminbtn">수정</button>
                             <div id="attendanceYes"></div>
                             <p>전체 완료</p>
                             <div id="attendanceNow"></div>
@@ -57,8 +57,8 @@
                 <div class="high">
                     <p>공지사항</p>
                     <div>
-                        <button>작성</button>
-                        <button>수정</button>
+                        <button class="adminbtn">작성</button>
+                        <button class="adminbtn">수정</button>
                         <div id="triangleLeft"></div>
                         <span>1</span>
                         <p>/ 5</p>
@@ -120,13 +120,13 @@
     </main>
     <!--footer-->
     <script>
-        fetch("/layout/header.html") //웹문서 요청
+        fetch("../layout/header.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
             })
-        fetch("/layout/footer.html") //웹문서 요청
+        fetch("../layout/footer.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
                 // console.log(responseText);

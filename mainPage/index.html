@@ -9,60 +9,71 @@
 </head>
 
 <body>
-    <article>
-        <div class="main notice">
-            <p class="titleText">공지사항</p>
-            <p class="plus">더보기 ></p>
-            <ul>
-                <li>2026-1학기 등록금 납부 및 분할 납부 신청 안내</li>
-                <li>2026학년도 신한카드 학생증 신청 안내</li>
-                <li>2026학년도 1학기 수업 운영 안내</li>
-                <li>2026학년도 1학기 추가학기 관련 안내</li>
-                <li>2026년도 1학기 수강신청 및 시간표 안내</li>
-            </ul>
-        </div>
-
-        <div class="main register">
-            <p class="titleText">수강신청 기간</p>
-            <p class="date">26.02.25 ~ 26.02.28</p>
-            <button class="mainRegbtn">수강신청</button>
-        </div>
-
-        <div class="main myPage">
-            <p class="titleText">내 정보</p>
-            <button class="mainRoombtn">마이페이지</button>
-            <ul>
-                <li>이름: </li>
-                <li>학번: </li>
-                <li>학과: </li>
-                <li>학년: </li>
-            </ul>
-        </div>
-
-        <div class="main lecture">
-            <p class="titleText">내 강의</p>
-            <ul>
-                <li>웹프로그래밍실무 <button class="mainRoombtn">강의실 가기</button></li>
-                <li>운영체제 <button class="mainRoombtn">강의실 가기</button></li>
-                <li>사회와마케팅 <button class="mainRoombtn">강의실 가기</button></li>
-                <li>인공지능캡스톤 <button class="mainRoombtn">강의실 가기</button></li>
-            </ul>
-        </div>
-    </article>
+    <main>
+        <article>
+            <div class="artLeft">
+                <div class="main notice">
+                    <p class="titleText">공지사항</p>
+                    <p class="plus">더보기 ></p>
+                    <ul>
+                        <li>2026-1학기 등록금 납부 및 분할 납부 신청 안내</li>
+                        <li>2026학년도 신한카드 학생증 신청 안내</li>
+                        <li>2026학년도 1학기 수업 운영 안내</li>
+                        <li>2026학년도 1학기 추가학기 관련 안내</li>
+                        <li>2026년도 1학기 수강신청 및 시간표 안내</li>
+                    </ul>
+                </div>
+                <div class="main register">
+                    <p class="titleText">수강신청 기간</p>
+                    <div class="horiz">
+                        <p class="date">26.02.25 ~ 26.02.28</p>
+                        <button class="mainRegbtn">수강신청</button>
+                    </div>
+                </div>
+            </div>
+            <div class="artRight">
+                <div class="main myPage">
+                    <div class="myPageTop">
+                        <p class="titleText">내 정보</p>
+                        <button class="mainRoombtn">마이페이지</button>
+                    </div>
+                    <ul>
+                        <li>이름: </li>
+                        <li>학번: </li>
+                        <li>학과: </li>
+                        <li>학년: </li>
+                    </ul>
+                </div>
+                <div class="main lecture">
+                    <p class="titleText">내 강의</p>
+                    <ul>
+                        <li>웹프로그래밍실무 <button class="mainRoombtn">강의실 가기</button></li>
+                        <li>운영체제 <button class="mainRoombtn">강의실 가기</button></li>
+                        <li>사회와마케팅 <button class="mainRoombtn">강의실 가기</button></li>
+                        <li>인공지능캡스톤 <button class="mainRoombtn">강의실 가기</button></li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    </main>
 
     <script>
-        fetch("/layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
+        fetch("../layout/header.html") //header불러오기
+            .then((response) => response.text())
             .then((responseText) => {
-                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
             })
-        fetch("/layout/footer.html") //웹문서 요청
+        fetch("../layout/footer.html") //footer불러오기
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
-                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
             })
+
+        /*fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+            })*/
     </script>
 </body>
 
