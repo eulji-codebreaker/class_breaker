@@ -40,13 +40,13 @@ header {
   margin-right: 30px;
 }
 
-button {
+/* button {
   width: 65px; height: 44px;
   background-color: #CFA9F4;
   border: none;
   border-radius: 10px;
   font-size: 20px;
-}
+} */
 
 button:hover {
   cursor: pointer;
