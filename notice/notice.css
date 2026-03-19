@@ -1,3 +1,4 @@
+main {
 article{
     display: flex;
     flex-direction: column;
@@ -8,7 +9,42 @@ article{
     border: 1px solid #000000;
     border-radius: 10px;
     display: flex;
+    width: 100%;
+    max-width: 1920px;
+}
+
+article {
     flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+    flex: 1;
+}
+
+.noticeMain,
+.importantNoticeList {
+    width: 100%;
+}
+
+.important1 {
+    width: 100%;
+    height: 318px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #000;
+}
+
+.general1 {
+    width: 100%;
+    height: 517px;
+    border-radius: 10px;
+    border: 1px solid #000;
+}
+
+.important2 {
+    width: 100%;
+    height: 850px;
+    border-radius: 10px;
+    border: 1px solid #000;
     overflow: hidden;
     margin-bottom: 10px;
     padding-bottom: 10px;
@@ -34,13 +70,28 @@ article{
     padding: 30px;
 }
 
-.notice {
+.notice1,
+.notice2 {
     padding: 25px;
     margin: 15px 30px;
     border: 1px solid #ababab;
     border-radius: 10px;
     align-items: center;
     background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.notice-header1,
+.notice-header2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.plus {
+    font-size: 18px;
+    cursor: pointer;
 }
 
 ul {

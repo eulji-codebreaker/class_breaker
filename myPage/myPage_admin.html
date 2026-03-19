@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>강의 목록</title>
+    <title>myPage_admin</title>
     <link rel="stylesheet" href="myPage_admin.css">
 </head>
 
@@ -29,11 +29,13 @@
                             <option>안경광학학과</option>
                         </select>
                     </div>
-                    <button class="adminbtn">수정</button>
-                    <button class="adminbtn">삭제</button>
+                    <div class="button-group">
+                        <button class="adminbtn">수정</button>
+                        <button class="adminbtn">삭제</button>
+                    </div>
                 </div>
 
-                <main class="content">
+                <div class="content">
                     <ul class="lecture-list">
                         <li>
                             <span class="subjectName">인공지능캡스톤</span>
@@ -161,9 +163,26 @@
                                 <button class="regbtn">강의계획서</button>
                             </div>
                         </li>
-
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
                     </ul>
-                </main>
+                </div>
             </div>
         </article>
     </main>
@@ -183,7 +202,11 @@
             // console.log(responseText);
             document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
         })
-    
+    fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+        .then((response) => response.text())
+        .then((responseText) => {
+            document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+        })
 </script>
 </body>
 

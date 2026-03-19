@@ -30,8 +30,6 @@ main {
   width: 98.97vw;
   margin-top: 10px;
   margin-bottom: 10px;
-  display: grid;
-  grid-template-columns: 275px 1fr;
   min-width: 0;
 }
 
@@ -95,7 +93,6 @@ article {
   background-color: #e0c1ff;
   border-radius: 10px;
   font-size: 20px;
-  border: none;
 }
 
 .adminbtn:hover {
@@ -119,8 +116,6 @@ article {
 /*수강신청페이지*/
 .regbtn {
   background-color: #e3c6ff;
-  border-radius: 10px;
-  border: none;
 }
 
 .regbtn {
