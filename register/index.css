@@ -4,7 +4,6 @@
         }
         
         .topbar {
-            width: 1600px;
             height: 80px;
             background: #EAD8FA;
             border: 1px solid #8B5FBF;
@@ -26,7 +25,7 @@
 
         .content {
             box-sizing: border-box;
-            width: 1600px;
+
             height: 757px;
             right: 23px;
             top: 283px;

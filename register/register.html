@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="majorSelect">
-                    <div class="option">
+                    <div class="choiceMajor">
                         <select>
                             <option>학과를 선택해주세요</option>
                             <option>의료it학과</option>
@@ -44,9 +44,8 @@
                         </select>
                     </div>
 
-
                     <!-- 코드 리팩토링 해야할듯 -->
-                    <main class="content">
+                    <div class="content">
                         <ul class="lectureList">
                             <li>
                                 <span class="subjectName">000000 과목</span>
@@ -139,7 +138,7 @@
                                     </li>
                                 </ul>
                             </div>
-                    </main>
+                        </div>
                 </div>
 
             </div>
@@ -164,6 +163,11 @@
             .then((responseText) => {
                 document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
             })
+
+    
+
+
+
     </script>
 </body>
 

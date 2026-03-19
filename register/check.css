@@ -5,7 +5,6 @@
         }
         
         .topbar {
-            width: 1600px;
             height: 80px;
             background: #EAD8FA;
             border: 2px solid #8B5FBF;
@@ -34,7 +33,6 @@
         }
 
         .Check {
-            width: 1600px;
             height: 760px;
             border: 1px solid black;
             border-radius: 8px;
@@ -58,13 +56,14 @@
             flex: 1;
         }
 
-        .option {
+        .choiceMajor {
             width: 250px;
             border-right: 1px solid #ccc;
             padding: 20px;
+            
         }
 
-        .option select {
+        .choiceMajor select {
             width: 100%;
             padding: 10px;
         }
