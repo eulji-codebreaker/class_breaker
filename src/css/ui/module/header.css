@@ -30,7 +30,7 @@ main {
   width: 98.97vw;
   margin-top: 10px;
   margin-bottom: 10px;
-  /* display: grid; */
+  display: grid;
   grid-template-columns: 275px 1fr;
   min-width: 0;
 }
