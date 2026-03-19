@@ -10,14 +10,14 @@
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-rows: 90px 1fr 60px;
   min-height: 100vh;
 }
 
 header {
-  width: 100vw;
+  width: 100%;
   background-color: #EFDFFF;
   display: flex;
   flex-direction: row;
@@ -27,16 +27,18 @@ header {
 }
 
 main {
-  width: 100vw;
+  width: 98.97vw;
   margin-top: 10px;
   margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 275px 1fr;
+  min-width: 0;
 }
 
-article{
+article {
   margin-left: 10px;
   margin-right: 10px;
+  min-width: 0;
 }
 
 #headerLogo {

@@ -4,19 +4,16 @@
         }
 
         article {
-
             position: flex;
             flex-direction: column;
             flex-wrap: wrap;
             gap: 26px;
             margin-right: 10px;
             border-radius: 10px;
+            min-width: 0;
         }
 
         .students {
-            box-sizing: border-box;
-            height: 208px;
-
             background: #FFFFFF;
             border: 1px solid #000000;
             border-radius: 10px;
@@ -25,10 +22,8 @@
         }
 
         .notice {
-            box-sizing: border-box;
+            
             height: 308px;
-            left: 291px;
-            top: 193px;
             margin-top: 26px;
 
             background: #FFFFFF;
@@ -37,10 +32,8 @@
         }
 
         .docs {
-            box-sizing: border-box;
+            
             height: 279px;
-            left: 291px;
-            top: 193px;
             margin-top: 26px;
 
             background: #FFFFFF;
@@ -52,6 +45,8 @@
             display: flex;
             flex-direction: column;
             gap: 40px;
+            
+            padding-bottom: 10px;
         }
 
         #task {
@@ -66,9 +61,10 @@
 
         .attendanceStatus {
             display: flex;
+            flex-wrap: wrap;
             list-style: none;
             gap: 10px;
-            justify-content: center;
+            justify-content: start;
             padding: 0px;
         }
 
@@ -111,16 +107,16 @@
             background-color: #FFE08A;
         }
 
-        #attendanceYet{
+        #attendanceYet {
             background-color: #d9d9d9;
         }
 
         .firstAttendanceTopRight {
             display: flex;
-            margin-top: 10px;
-            margin-right: 10px;
+            padding: 3px;
             border-bottom: 1px solid black;
-            padding-bottom: 3px;
+            border-left: 1px solid black;
+            align-items: center;
         }
 
         #task {
@@ -190,31 +186,36 @@
             line-height: 38px;
             margin-right: 10px;
         }
-        .low>li>div{
+
+        .low>li>div {
             margin-left: 10px;
             margin-right: 10px;
             display: flex;
             flex-direction: row;
-            justify-content:space-between;
+            justify-content: space-between;
             gap: 20px;
             line-height: 100%;
         }
-        .docs{
+
+        .docs {
             display: grid;
             grid-template-rows: 70px 1fr 20px;
         }
-        .docstop{
+
+        .docstop {
             margin-top: 18px;
             margin-left: 18px;
             font-size: 36px;
         }
-        .docsmain{
+
+        .docsmain {
             display: flex;
             flex-direction: column;
-            gap:21px;
+            gap: 21px;
             list-style: none;
         }
-        .docsbot{
+
+        .docsbot {
             display: flex;
             flex-direction: column-reverse;
             align-items: end;
