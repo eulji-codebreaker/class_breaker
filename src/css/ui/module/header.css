@@ -10,7 +10,7 @@
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-rows: 90px 1fr 60px;
   min-height: 100vh;
@@ -29,6 +29,15 @@ main {
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
+  display: grid; 
+  grid-template-columns: 275px 1fr;
+  min-width: 0;
+}
+
+article {
+  margin-left: 10px;
+  margin-right: 10px;
+  min-width: 0;
 }
 
 #headerLogo {
@@ -54,14 +63,6 @@ main {
 .mainRegbtn {
   background-color: #e0c1ff;
   font-size: 40px;
-
-  position: absolute;
-  /* 오른쪽에서 30px 띄움 */
-  right: 30px;
-  transform: translateY(20%);
-
-  margin-top: auto;
-
   box-sizing: border-box;
   width: 330px;
   height: 75px;
@@ -74,10 +75,6 @@ main {
 .mainRoombtn {
   background-color: #efdfff;
   font-size: 30px;
-  margin: 10px;
-  position: absolute;
-  top: 20px;
-  right: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,6 +123,7 @@ main {
   background-color: #cfa9f4;
 }
 
-button:hover {
+.regbtn:hover {
   cursor: pointer;
+  background-color: #cc97ff;
 }
