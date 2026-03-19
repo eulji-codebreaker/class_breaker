@@ -99,6 +99,7 @@ article {
   background-color: #e0c1ff;
   border-radius: 10px;
   font-size: 20px;
+  border: none;
 }
 
 .adminbtn:hover {
@@ -122,6 +123,8 @@ article {
 /*수강신청페이지*/
 .regbtn {
   background-color: #e3c6ff;
+  border-radius: 10px;
+  border: none;
 }
 
 .regbtn {
