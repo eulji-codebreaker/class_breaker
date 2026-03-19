@@ -10,7 +10,7 @@
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-rows: 90px 1fr 60px;
   min-height: 100vh;
@@ -30,8 +30,6 @@ main {
   width: 98.97vw;
   margin-top: 10px;
   margin-bottom: 10px;
-  display: grid;
-  grid-template-columns: 275px 1fr;
   min-width: 0;
 }
 
@@ -76,10 +74,6 @@ article {
 .mainRoombtn {
   background-color: #efdfff;
   font-size: 30px;
-  margin: 10px;
-  position: absolute;
-  top: 20px;
-  right: 2px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -51,8 +51,8 @@
     </article>
 
     <script>
-        fetch("../layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
+        fetch("../layout/nosideheader.html") //header불러오기
+            .then((response) => response.text())
             .then((responseText) => {
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
