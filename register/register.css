@@ -4,7 +4,7 @@
                 }
 
                 .topbar {
-                    width: 1600px;
+                    width: 100%;
                     height: 80px;
                     background: #EAD8FA;
                     border: 2px solid #8B5FBF;
@@ -34,7 +34,7 @@
                 }
 
                 .Check {
-                    width: 1600px;
+                    width: 100%;
                     height: 760px;
                     border: 1px solid black;
                     border-radius: 8px;
