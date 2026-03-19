@@ -16,7 +16,6 @@ article {
     height: 850px;
     display: flex;
     flex-direction: column;
-    margin: 20px auto;
     overflow: hidden;
     border: 1px solid #000000;
     border-radius: 10px;
@@ -29,10 +28,9 @@ article {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
-    box-sizing: border-box;
-    border-bottom: 1px solid #ccc;
-    background-color: #f9f9f9;
+    padding: 20PX 20px;
+    background-color: #ffffff;
+    white-space: nowrap;
 }
 
 .text {
@@ -49,18 +47,11 @@ article {
 }
 
 .option select {
-    width: 200px;
-    padding: 5px;
-    background-color: #F8F3FD;
+    width: 500px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10PX;
 }
-
-.header-btns {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
 
 .content {
     flex: 1;
