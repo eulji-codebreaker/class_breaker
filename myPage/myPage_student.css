@@ -52,9 +52,8 @@ article {
     overflow: hidden;
 }
 
-.studentTimeTable1>*>* {
-    padding: 5px;
-}
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 60px 60px;
 
 .timetableCol {
     height: 100%;
