@@ -4,30 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>notice</title>
     <link rel="stylesheet" href="notice.css">
 </head>
 
 <body>
-    <article>
-        <div class="important">
-            <div class="noticeBox">
-                <div class="text">중요 공지사항</div>
-                <div class="notice"></div>
-                <div class="notice"></div>
+    <main>
+        <article>
+            <div class="noticeMain">
+                <div class="important1">
+                    <div class="noticeBox1">
+                        <div class="notice-header1">
+                            <div class="text">중요 공지사항</div>
+                            <p class="plus">더보기 ></p>
+                        </div>
+                        <div class="notice1"></div>
+                        <div class="notice1"></div>
+                    </div>
+                </div>
+                <div class="general1">
+                    <div class="noticeBox1">
+                        <div class="notice-header1">
+                            <div class="text">공지사항</div>
+                            <p class="plus">더보기 ></p>
+                        </div>
+                        <div class="notice1"></div>
+                        <div class="notice1"></div>
+                        <div class="notice1"></div>
+                        <div class="notice1"></div>
+                        <div class="notice1"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="general">
-            <div class="noticeBox">
-                <div class="text">공지사항</div>
-                <div class="notice"></div>
-                <div class="notice"></div>
-                <div class="notice"></div>
-                <div class="notice"></div>
-                <div class="notice"></div>
+            <div class="importantNoticeList">
+                <div class="important2">
+                    <div class="noticeBox2">
+                        <div class="notice-header2">
+                            <div class="text">중요 공지사항</div>
+                        </div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                        <div class="notice2"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </article>
+        </article>
+    </main>
 
     <script>
         fetch("../layout/header.html") //웹문서 요청
@@ -41,6 +70,11 @@
             .then((responseText) => {
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
+            })
+        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
             })
     </script>
 </body>
