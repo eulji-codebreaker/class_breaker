@@ -42,7 +42,6 @@
         }
 
         #attendance {
-            width: 1282px;
             display: flex;
             flex-direction: column;
             gap: 40px;
@@ -52,7 +51,6 @@
 
         #task {
             background-color: #F7EDFF;
-            width: 319px;
             height: 100%;
             margin-right: 0px;
             width: 230px;
@@ -168,14 +166,13 @@
         }
 
         .low {
-            /* margin-left: 20px; */
             display: flex;
             flex-direction: column;
             gap: 21px;
+            padding-left: 10px;
         }
 
         .low>li {
-            width: 1546px;
             height: 38px;
             border-radius: 10px;
             background-color: #f5f5f5;
@@ -185,7 +182,9 @@
             align-items: center;
             justify-content: space-between;
             padding-left: 15px;
+            padding-right: 15px;
             line-height: 38px;
+            margin-right: 10px;
         }
 
         .low>li>div {
