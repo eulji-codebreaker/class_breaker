@@ -4,6 +4,8 @@
 }
 
 footer {
+    width: "1vw";
+    height: 60px;
     border-top: 1px solid black;
     display: flex;
     flex-direction: row;

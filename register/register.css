@@ -1,10 +1,10 @@
- main {
+                main {
                     display: flex;
                     align-items: flex-start;
                 }
 
                 .topbar {
-
+                    width: 100%;
                     height: 80px;
                     background: #EAD8FA;
                     border: 2px solid #8B5FBF;
@@ -34,6 +34,7 @@
                 }
 
                 .Check {
+                    width: 100%;
                     height: 760px;
                     border: 1px solid black;
                     border-radius: 8px;
@@ -72,14 +73,14 @@
                     height: 650px;
                 }
 
-                .choiceMajor {
+                .option {
                     width: 250px;
                     border-right: 1px solid #ccc;
                     padding: 20px;
                     margin-top: 0px;
                 }
 
-                .choiceMajor select {
+                .option select {
                     width: 100%;
                     padding: 10px;
                 }

@@ -2,9 +2,10 @@
     width: 1600px;
     height: 850px;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
+    margin: 20px auto;
     overflow: hidden;
 }
 
@@ -14,15 +15,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20PX 20px;
-    background-color: #ffffff;
-    white-space: nowrap;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
 }
 
 .text {
     font-weight: bold;
     font-size: 36px;
-    white-space: nowrap;
     flex: 1;
 }
 
@@ -33,11 +34,18 @@
 }
 
 .option select {
-    width: 500px;
-    padding: 10px;
-    background-color: #ffffff;
-    border-radius: 10PX;
+    width: 200px;
+    padding: 5px;
+    background-color: #F8F3FD;
 }
+
+.header-btns {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
 
 .content {
     flex: 1;
@@ -70,5 +78,21 @@
 }
 
 .dot {
-    color: #000000;
+    color: #ccc;
+}
+
+.adminbtn {
+    background: #e0c1ff;
+}
+
+.adminbtn :hover {
+    background: #cc97ff;
+}
+
+.mainRoombtn {
+    background: #e0c1ff;
+}
+
+.adminbtn :hover {
+    background: #cc97ff;
 }
