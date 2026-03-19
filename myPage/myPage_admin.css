@@ -1,26 +1,12 @@
-main {
-    display: flex;
-    /* width: 100%; */
-    /* max-width: 1920px; */
-}
-
-article {
-    flex-direction: column;
-    align-items: center;
-    padding-top: 25px;
-    flex: 1;
-}
-
 .openingList {
-    width: 100%;
+    width: 1600px;
     height: 850px;
+    border: 1px solid black;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     margin: 20px auto;
     overflow: hidden;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    background-color: #ffffff;
 }
 
 .title {
@@ -37,8 +23,7 @@ article {
 
 .text {
     font-weight: bold;
-    font-size: 30px;
-    white-space: nowrap;
+    font-size: 36px;
     flex: 1;
 }
 
@@ -65,13 +50,10 @@ article {
 .content {
     flex: 1;
     padding: 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 100%;
+    overflow: auto;
 }
 
 .lecture-list {
-    width: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -96,9 +78,21 @@ article {
 }
 
 .dot {
-    color: #000000;
+    color: #ccc;
 }
 
-.button-group {
-    padding: 10px;
+.adminbtn {
+    background: #e0c1ff;
+}
+
+.adminbtn :hover {
+    background: #cc97ff;
+}
+
+.mainRoombtn {
+    background: #e0c1ff;
+}
+
+.adminbtn :hover {
+    background: #cc97ff;
 }
