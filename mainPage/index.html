@@ -58,8 +58,8 @@
     </main>
 
     <script>
-        fetch("../layout/header.html") //header불러오기
-            .then((response) => response.text())
+        fetch("../layout/header.html") //웹문서 요청
+            .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
             })
