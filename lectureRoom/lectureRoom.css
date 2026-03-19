@@ -3,41 +3,27 @@
             box-sizing: border-box;
         }
 
-        main {
-            box-sizing: border-box;
-
+        article {
             position: flex;
             flex-direction: column;
+            flex-wrap: wrap;
             gap: 26px;
-            width: 1601px;
-            left: 291px;
-            top: 193px;
-
+            margin-right: 10px;
             border-radius: 10px;
-            margin:10px;
+            min-width: 0;
         }
 
         .students {
-            box-sizing: border-box;
-            width: 1601px;
-            height: 208px;
-            left: 291px;
-            top: 193px;
-
             background: #FFFFFF;
             border: 1px solid #000000;
             border-radius: 10px;
-            display: flex;
-            flex-direction: row;
+            display: grid;
+            grid-template-columns: 1fr 230PX;
         }
 
         .notice {
-            box-sizing: border-box;
-
-            width: 1601px;
+            
             height: 308px;
-            left: 291px;
-            top: 193px;
             margin-top: 26px;
 
             background: #FFFFFF;
@@ -46,12 +32,8 @@
         }
 
         .docs {
-            box-sizing: border-box;
-
-            width: 1601px;
+            
             height: 279px;
-            left: 291px;
-            top: 193px;
             margin-top: 26px;
 
             background: #FFFFFF;
@@ -64,6 +46,8 @@
             display: flex;
             flex-direction: column;
             gap: 40px;
+            
+            padding-bottom: 10px;
         }
 
         #task {
@@ -71,6 +55,7 @@
             width: 319px;
             height: 100%;
             margin-right: 0px;
+            width: 230px;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
             border-left: 1px solid black;
@@ -78,16 +63,19 @@
 
         .attendanceStatus {
             display: flex;
+            flex-wrap: wrap;
             list-style: none;
-            gap: 30px;
-            justify-content: center;
+            gap: 10px;
+            justify-content: start;
             padding: 0px;
         }
 
         .attendanceStatus>li {
-            width: 52px;
-            height: 52px;
+            width: 44px;
+            height: 44px;
             background-color: #d9d9d9;
+            margin-left: 15px;
+            margin-right: 15px;
         }
 
         .firstAttendance {
@@ -121,16 +109,16 @@
             background-color: #FFE08A;
         }
 
-        #attendanceYet{
+        #attendanceYet {
             background-color: #d9d9d9;
         }
 
         .firstAttendanceTopRight {
             display: flex;
-            margin-top: 10px;
-            margin-right: 10px;
+            padding: 3px;
             border-bottom: 1px solid black;
-            padding-bottom: 3px;
+            border-left: 1px solid black;
+            align-items: center;
         }
 
         #task {
@@ -199,31 +187,36 @@
             padding-left: 15px;
             line-height: 38px;
         }
-        .low>li>div{
+
+        .low>li>div {
             margin-left: 10px;
             margin-right: 10px;
             display: flex;
             flex-direction: row;
-            justify-content:space-between;
+            justify-content: space-between;
             gap: 20px;
             line-height: 100%;
         }
-        .docs{
+
+        .docs {
             display: grid;
             grid-template-rows: 70px 1fr 20px;
         }
-        .docstop{
+
+        .docstop {
             margin-top: 18px;
             margin-left: 18px;
             font-size: 36px;
         }
-        .docsmain{
+
+        .docsmain {
             display: flex;
             flex-direction: column;
-            gap:21px;
+            gap: 21px;
             list-style: none;
         }
-        .docsbot{
+
+        .docsbot {
             display: flex;
             flex-direction: column-reverse;
             align-items: end;
