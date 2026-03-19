@@ -135,6 +135,7 @@ article {
   background-color: #cfa9f4;
 }
 
-button:hover {
+.regbtn:hover {
   cursor: pointer;
+  background-color: #cc97ff;
 }

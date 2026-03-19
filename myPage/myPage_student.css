@@ -15,6 +15,7 @@ main {
     border: 1px solid #8B5FBF;
     background: #EAD8FA;
     overflow: hidden;
+    cursor: pointer;
 }
 
 article {
@@ -98,6 +99,7 @@ article {
     text-align: center;
     align-items: center;
     overflow: auto;
+    display: none;
 }
 
 .studentTimeTable2 table {

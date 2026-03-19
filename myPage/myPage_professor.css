@@ -15,6 +15,7 @@ main {
     border: 1px solid #8B5FBF;
     background: #EAD8FA;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .topbar .empty-slot {
@@ -106,6 +107,7 @@ article {
     text-align: center;
     align-items: center;
     overflow: auto;
+    display: none;
 }
 
 .professorTimeTable2 table {

@@ -189,6 +189,27 @@
         </article>
     </main>
     <script>
+        const tabTimeTable = document.querySelector('.myTimeTable');
+        const tabLearningList = document.querySelector('.learningList');
+        const table1 = document.querySelector('.studentTimeTable1');
+        const table2 = document.querySelector('.studentTimeTable2');
+
+        tabTimeTable.addEventListener('click', () => {
+            tabTimeTable.classList.add('active');
+            tabLearningList.classList.remove('active');
+
+            table1.style.display = 'grid';
+            table2.style.display = 'none';
+        });
+
+        tabLearningList.addEventListener('click', () => {
+            tabLearningList.classList.add('active');
+            tabTimeTable.classList.remove('active');
+
+            table1.style.display = 'none';
+            table2.style.display = 'block';
+        });
+        
         fetch("../layout/header.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
