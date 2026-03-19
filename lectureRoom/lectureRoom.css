@@ -3,11 +3,13 @@
             box-sizing: border-box;
         }
 
-        article {
+        main {
+            box-sizing: border-box;
 
             position: flex;
             flex-direction: column;
             gap: 26px;
+            width: 1601px;
             left: 291px;
             top: 193px;
 
@@ -17,6 +19,7 @@
 
         .students {
             box-sizing: border-box;
+            width: 1601px;
             height: 208px;
             left: 291px;
             top: 193px;
@@ -24,12 +27,14 @@
             background: #FFFFFF;
             border: 1px solid #000000;
             border-radius: 10px;
-            display: grid;
-            grid-template-columns: 8fr 2fr;
+            display: flex;
+            flex-direction: row;
         }
 
         .notice {
             box-sizing: border-box;
+
+            width: 1601px;
             height: 308px;
             left: 291px;
             top: 193px;
@@ -42,6 +47,8 @@
 
         .docs {
             box-sizing: border-box;
+
+            width: 1601px;
             height: 279px;
             left: 291px;
             top: 193px;
@@ -53,6 +60,7 @@
         }
 
         #attendance {
+            width: 1282px;
             display: flex;
             flex-direction: column;
             gap: 40px;
@@ -60,6 +68,7 @@
 
         #task {
             background-color: #F7EDFF;
+            width: 319px;
             height: 100%;
             margin-right: 0px;
             border-top-right-radius: 10px;
@@ -171,13 +180,14 @@
         }
 
         .low {
+            /* margin-left: 20px; */
             display: flex;
             flex-direction: column;
             gap: 21px;
-            padding-left: 10px;
         }
 
         .low>li {
+            width: 1546px;
             height: 38px;
             border-radius: 10px;
             background-color: #f5f5f5;
@@ -187,9 +197,7 @@
             align-items: center;
             justify-content: space-between;
             padding-left: 15px;
-            padding-right: 15px;
             line-height: 38px;
-            margin-right: 10px;
         }
         .low>li>div{
             margin-left: 10px;
