@@ -132,6 +132,12 @@
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
             })
+
+        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+            })
     </script>
 </body>
 
