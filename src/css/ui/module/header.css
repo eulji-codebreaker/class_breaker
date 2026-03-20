@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'normalFont';
-  src: url('/../class_breaker/src/font/SCDream4.otf') format('opentype');
+  src: url('../../../font/SCDream4.otf') format('opentype');
 }
 
 body {
@@ -64,14 +64,6 @@ article {
 .mainRegbtn {
   background-color: #e0c1ff;
   font-size: 40px;
-
-  
-  /* 오른쪽에서 30px 띄움 */
-  right: 30px;
-  transform: translateY(20%);
-
-  margin-top: auto;
-
   box-sizing: border-box;
   width: 330px;
   height: 75px;

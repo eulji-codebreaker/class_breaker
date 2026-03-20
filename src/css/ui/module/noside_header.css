@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'normalFont';
-  src: url('/../class_breaker/src/font/SCDream4.otf') format('opentype');
+  src: url('../../../font/SCDream4.otf') format('opentype');
 }
 
 body {
