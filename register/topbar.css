@@ -1,0 +1,28 @@
+.topbar {
+    height: 80px;
+    background: #EAD8FA;
+    border: 2px solid #8B5FBF;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.topbar div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.active {
+    box-sizing: border-box;
+    width: 400px;
+    height: 75px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border-left: 2px solid #8B5FBF;
+    border-right: 2px solid #8B5FBF;
+}

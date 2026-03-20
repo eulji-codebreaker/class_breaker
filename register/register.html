@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="basket.css">
+    <link rel="stylesheet" href="/register/topbar.css">
 </head>
 
 <body>
@@ -93,7 +94,15 @@
                                     <span><button class="regbtn">신청하기</button></span>
                                 </div>
                             </li>
-
+                            <li>
+                                <span class="subjectName">000000 과목</span>
+                                <div class="subjectInfo">
+                                    <span>이00</span> <span class="dot">·</span>
+                                    <span>전공</span> <span class="dot">·</span>
+                                    <span>3학점</span>
+                                    <span><button class="regbtn">신청하기</button></span>
+                                </div>
+                            </li>
                             <li>
                                 <span class="subjectName">000000 과목</span>
                                 <div class="subjectInfo">
@@ -106,7 +115,7 @@
                         </ul>
                         <div class="subjectBasket">
                             <div class="basketHeader">
-                                <span>수강신청 목록</span>
+                                <span>수강바구니 목록</span>
                             </div>
                             <div>
                                 <ul class="lectureList">
@@ -116,7 +125,7 @@
                                             <span>이00</span> <span class="dot">·</span>
                                             <span>전공</span> <span class="dot">·</span>
                                             <span>3학점</span>
-                                            <span><button class="regbtn">신청 취소</button></span>
+                                            <span><button class="regbtn-delete">취소하기</button></span>
                                         </div>
                                     </li>
                                     <li>
@@ -125,7 +134,7 @@
                                             <span>이00</span> <span class="dot">·</span>
                                             <span>전공</span> <span class="dot">·</span>
                                             <span>3학점</span>
-                                            <span><button class="regbtn">신청 취소</button></span>
+                                            <span><button class="regbtn-delete">취소하기</button></span>
                                         </div>
                                     </li>
                                     <li>
@@ -134,7 +143,16 @@
                                             <span>이00</span> <span class="dot">·</span>
                                             <span>전공</span> <span class="dot">·</span>
                                             <span>3학점</span>
-                                            <span><button class="regbtn">신청 취소</button></span>
+                                            <span><button class="regbtn-delete">취소하기</button></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="subjectName">000000 과목</span>
+                                        <div class="subjectInfo">
+                                            <span>이00</span> <span class="dot">·</span>
+                                            <span>전공</span> <span class="dot">·</span>
+                                            <span>3학점</span>
+                                            <span><button class="regbtn-delete">취소하기</button></span>
                                         </div>
                                     </li>
                                 </ul>
@@ -146,24 +164,83 @@
             </div>
         </article>
     </main>
+
+    <div class="modal" id="clickresbtn">
+        <div class="modalContent">
+            <p class="modal-header"></p>
+            <p class="delete">신청하시겠습니까?</p>
+            <div class="btnGroup">
+                <button type="submit" class="checkbtn">확인</button>
+                <button type="submit" class="canclebtn">취소</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="clickbtn">
+        <div class="modalContent">
+            <p class="modal-header"></p>
+            <p class="delete">취소하시겠습니까?</p>
+            <div class="btnGroup">
+                <button type="submit" class="checkbtn">확인</button>
+                <button type="submit" class="canclebtn">취소</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/js/register.js"></script>
+
     <script>
-        fetch("../layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                // console.log(responseText);
-                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            })
-        fetch("../layout/footer.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                // console.log(responseText);
-                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            })
-        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-            })
+        let target = null;
+
+        const resModal = document.getElementById('clickresbtn');
+        const delModal = document.getElementById('clickbtn');
+        const basketList = document.querySelector('.subjectBasket .lectureList');
+
+        document.querySelectorAll('.regbtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                target = btn.closest('li');
+                resModal.style.display = 'flex';
+            });
+        });
+
+        resModal.querySelector('.checkbtn').addEventListener('click', () => {
+            if (target) {
+                const clone = target.cloneNode(true);
+                const btn = clone.querySelector('button');
+
+                btn.className = 'regbtn-delete';
+                btn.innerText = '취소하기';
+
+                btn.addEventListener('click', () => {
+                    target = btn.closest('li');
+                    delModal.style.display = 'flex';
+                });
+
+                basketList.appendChild(clone);
+            }
+            resModal.style.display = 'none';
+        });
+
+        resModal.querySelector('.canclebtn').addEventListener('click', () => {
+            resModal.style.display = 'none';
+        });
+
+        // --- [삭제/빼기 기능] ---
+        document.querySelectorAll('.regbtn-delete').forEach(btn => {
+            btn.addEventListener('click', () => {
+                target = btn.closest('li');
+                delModal.style.display = 'flex';
+            });
+        });
+
+        delModal.querySelector('.checkbtn').addEventListener('click', () => {
+            if (target) target.remove();
+            delModal.style.display = 'none';
+        });
+
+        delModal.querySelector('.canclebtn').addEventListener('click', () => {
+            delModal.style.display = 'none';
+        });
     </script>
 </body>
 

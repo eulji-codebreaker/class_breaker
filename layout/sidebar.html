@@ -5,56 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        aside {
-            width: 275px;
-            height: 100%;
-            background: #EAD8FA;
-            border: 1px solid #8B5FBf;
-            border-radius: 8px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-right: 15px;
-  
-        }
-
-        .menu {
-            width: 275px;
-            height: 80px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .menu:hover{
-            cursor: pointer;
-            background-color: #cc97ff;
-        }
-
-        /* js로 클릭했을 때 하얀색되게 */
-        .menuActive {
-            background: #ffffff;
-            border: 1px solid #8B5FBF;
-        }
-
-        .menu:first-child{
-            margin-top: 100px;
-        }
-        
-        .dontHover{
-            cursor: default;
-            background: #EAD8FA;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
 </head>
 
 <body>
     <aside>
-        <div class="menu 1 dontHover">
+        <div class="dontHover">
             <select>
                 <option disabled selected hidden>강의실 선택</option>
                 <option>운영체제</option>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="check.css">
+    <link rel="stylesheet" href="/register/topbar.css">
 </head>
 
 <body>
@@ -116,84 +117,15 @@
             </div>
         </article>
     </main>
-    <form hidden>
-        <h2>강의계획서</h2>
-        <div class="lecturePlan">
-            <div class="boxGroup">
-                <div class="box">
-                    과목명
-                </div>
-                <div>000000</div>
 
-            </div>
 
-            <div class="credit">
-                <div class="boxGroup">
-                    <div class="box">
-                        이수구분 및 학점
-                    </div>
-                    전공/3학점
-                </div>
-            </div>
-            <div class="prof">
-                <div class="boxGroup">
-                    <div class="box">
-                        담당교수
-                    </div>
-                    홍길동
-                </div>
-            </div>
-            <div class="lecture">
-                <div class="boxGroup">
-                    <div class="box">
-                        강의실
-                    </div>
-                    박애관 625
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="boxLine">
-            1주 : 오리엔테이션
-        </div>
-        <div class="boxLine">
-            2주 : OOO의 역사 및 현재 향후 전망
-        </div>
-        <div class="boxLine">
-            3주 : OO의 발생 원리
-        </div>
-        <div class="boxLine">
-            4주 : OOOO의 원리, 구조, 활용법
-        </div>
-        <div class="boxLine">
-            5주 : 중간고사
-        </div>
-        <div class="boxLine">
-            6주 : OO의 필요성 및 대처 방법
-        </div>
-        <div>
-            <button class="closebtn">닫기</button>
-        </div>
-    </form>
     <script>
-        fetch("../layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                // console.log(responseText);
-                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            })
-        fetch("../layout/footer.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                // console.log(responseText);
-                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            })
-        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-            })
+        const regBtn = document.querySelectorAll('regbtn');
+        regBtn.addEventListener('click', () => {
+        })
     </script>
+
+    <script src="/js/register.js"></script>
 </body>
 
 </html>

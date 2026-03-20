@@ -1,31 +1,3 @@
-.topbar {
-    height: 80px;
-    background: #EAD8FA;
-    border: 2px solid #8B5FBF;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin-bottom: 15px;
-}
-
-.topbar div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.active {
-    box-sizing: border-box;
-    width: 400px;
-    height: 75px;
-    background: #FFFFFF;
-    border-radius: 10px;
-    border-left: 2px solid #8B5FBF;
-    border-right: 2px solid #8B5FBF;
-}
-
 .Check {
     height: 760px;
     border: 1px solid black;
@@ -58,6 +30,12 @@
 
 }
 
+.subjectBasket {
+    display: flex;
+    flex-direction: column;
+    height: 500px; 
+    border: 1px solid #ddd; /
+}
 
 .majorSelect {
     display: flex;
@@ -110,3 +88,72 @@
     margin-right: 200px;
     margin-left: 30px;
 }
+
+.modal {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    position: fixed;
+
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+
+.modalContent {
+    background-color: white;
+    width: 40%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+
+.delete {
+    font-weight: 400;
+    font-size: 48px;
+}
+
+
+
+.checkbtn {
+    width: 130px;
+    height: 50px;
+    font-size: 24px;
+}
+
+.canclebtn {
+    width: 130px;
+    height: 50px;
+    font-size: 24px;
+}
+
+.btnGroup {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.regbtn-delete {
+  background-color: #e3c6ff;
+}
+
+.regbtn-delete {
+  background-color: #cfa9f4;
+}
+
+.regbtn-delete:hover {
+  cursor: pointer;
+  background-color: #cc97ff;
+}
+
+
