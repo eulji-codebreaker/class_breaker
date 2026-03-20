@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myPage_admin</title>
-    <link rel="stylesheet" href="myPage_admin.css">
+    <title>mypage_admin</title>
+    <link rel="stylesheet" href="mypage_admin.css">
 </head>
 
 <body>
@@ -17,16 +17,16 @@
                     <div class="option">
                         <select>
                             <option>학과를 선택해주세요</option>
-                            <option>의료it학과</option>
-                            <option>빅데이터학과</option>
-                            <option>첨단학부</option>
-                            <option>간호학과</option>
-                            <option>응급구조학과</option>
-                            <option>임상병리학과</option>
-                            <option>방사선학과</option>
-                            <option>물리치료학과</option>
-                            <option>치위생학과</option>
-                            <option>안경광학학과</option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
                         </select>
                     </div>
                     <div class="button-group">
@@ -37,11 +37,11 @@
                 <div class="content">
                     <ul class="lecture-list">
                         <li>
-                            <span class="subjectName">인공지능캡스톤</span>
+                            <span class="subjectName"></span>
                             <div class="subjectInfo">
-                                <span>김교수</span> <span class="dot">·</span>
-                                <span>전공</span> <span class="dot">·</span>
-                                <span>3학점</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
                                 <button class="regbtn">강의계획서</button>
                             </div>
                         </li>
@@ -189,22 +189,25 @@
 
 </html>
 <script>
-    fetch("../layout/header.html") //웹문서 요청
-        .then((response) => response.text()) //응답을 받고 text로 변환
+    /* header, footer, sidebar */
+    fetch("../layout/header.html")
+        .then((response) => response.text())
         .then((responseText) => {
-            // console.log(responseText);
             document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
         })
-    fetch("../layout/footer.html") //웹문서 요청
-        .then((response) => response.text()) //응답을 받고 text로 변환
+    fetch("../layout/footer.html")
+        .then((response) => response.text())
         .then((responseText) => {
-            // console.log(responseText);
             document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
         })
-    fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+    fetch("../layout/mypage_sidebar.html")
         .then((response) => response.text())
         .then((responseText) => {
             document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+            const courseSection = document.querySelector('.course-section');
+            if (courseSection) {
+                courseSection.style.display = 'none';
+            }
         })
 </script>
 </body>

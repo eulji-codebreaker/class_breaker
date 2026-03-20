@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myPage_student</title>
-    <link rel="stylesheet" href="myPage_student.css">
+    <title>mypage_student</title>
+    <link rel="stylesheet" href="mypage_student.css">
 </head>
 
 <body>
@@ -188,7 +188,9 @@
             </div>
         </article>
     </main>
+
     <script>
+        /* topbar */
         const tabTimeTable = document.querySelector('.myTimeTable');
         const tabLearningList = document.querySelector('.learningList');
         const table1 = document.querySelector('.studentTimeTable1');
@@ -209,24 +211,27 @@
             table1.style.display = 'none';
             table2.style.display = 'block';
         });
-        
-        fetch("../layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
+
+        /* header, footer, sideber */
+        fetch("../layout/header.html")
+            .then((response) => response.text())
             .then((responseText) => {
-                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
             })
-        fetch("../layout/footer.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
+        fetch("../layout/footer.html")
+            .then((response) => response.text())
             .then((responseText) => {
-                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
             })
-        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+        fetch("../layout/mypage_sidebar.html")
             .then((response) => response.text())
             .then((responseText) => {
                 document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
             })
+        window.goToLecture = function () {
+            const targetPath = "../lectureRoom/index.html";
+            location.href = targetPath;
+        };
     </script>
 </body>
 
