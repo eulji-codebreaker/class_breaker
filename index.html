@@ -1,62 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        /* 로그인 화면 박스 */
-        article {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .logBox {
-            box-sizing: border-box;
-
-            width: 1200px;
-            height: 800px;
-
-            background: #FFFFFF;
-            border: 1px solid #ABABAB;
-            border-radius: 10px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="src/css/ui/module/login.css">
 </head>
+
 <body>
     <main>
         <article>
             <div class="logBox">
-
-                <form action="#">
+                <form action="#" class="logForm">
                     <p><b>로그인</b></p>
-                    <label>ID </label>
-                    <input type="text" name="userId" size="40" placeholder="학번/사번을 입력하세요"><br><br>
-                    <label>PWD: </label>
-                    <input type="password" name="userPwd" size="40" placeholder="비밀번호를 입력하세요">
+                    <div class="formInput">
+                        <div class="input-row">
+                            <label class="loginLabel" for="loginUserId">ID: </label>
+                            <input id="loginUserId" type="number" name="loginUserId" size="60"
+                                placeholder="학번/사번을 입력하세요">
+                        </div>
+                        <div class="input-row">
+                            <label class="loginLabel" for="loginUserPwd">PWD: </label>
+                            <input id="loginUserPwd" type="password" name="loginUserPwd" size="60"
+                                placeholder="비밀번호를 입력하세요">
+                        </div>
+                    </div>
+                    <button class="loginbtn">로그인</button>
+                    <p class="loginUserBtn">회원가입</p>
                 </form>
             </div>
         </article>
     </main>
+    <div class="modal" id="completeModal">
+        <div class="modalContent">
+            <div></div>
+            <div>로그인 되었습니다.</div>
+            <div><button id="loginCompletebtn" onclick="location.assign('/mainPage/index.html')">확인</button></div>
+        </div>
+    </div>
+    <div class="modal" id="idReg">
+        <div class="modalContent">
+            <p class="modal-header">회원가입</p>
+            <form action="#" id="idRegRealForm">
+                <div id="idRegForm">
+                    <label for="userPosition">직책</label>
+                    <select name="userPosition" id="userPosition">
+                        <option value="" disabled selected hidden>직책을 선택하세요.</option>
+                        <option value="student">학생</option>
+                        <option value="prof">교수</option>
+                        <option value="admin">관리자</option>
+                    </select>
+                    <label for="userId">ID</label><input id="userId" type="number" name="userId"
+                        placeholder="yyyymmmiii">
+                    <label for="userPwd">PW</label><input id="userPwd" type="password" name="userPwd">
+                    <label for="userPwdConfirm">PW 확인</label><input id="userPwdConfirm" type="password"
+                        name="userPwdConfirm">
+                    <label for="userName">이름</label><input id="userName" type="text" name="userName">
+
+                    <label for="userMajorId">전공명</label>
+                    <select name="userMajorId" id="userMajorId">
+                        <option value="" disabled selected hidden>학과를 선택해주세요.</option>
+                        <option value="162">의료it학과</option>
+                        <option value="158">빅데이터의료융합학과</option>
+                        <option value="160">첨단학부</option>
+                        <option value="123">간호학과</option>
+                        <option value="119">응급구조학과</option>
+                        <option value="238">임상병리학과</option>
+                        <option value="130">방사선학과</option>
+                        <option value="234">물리치료학과</option>
+                        <option value="228">치위생학과</option>
+                        <option value="888">안경광학과</option>
+                        <option value="999">관리자</option>
+                    </select>
+
+
+                    <label for="userGrade">학년</label>
+                    <select name="userGrade" id="userGrade">
+                        <option value="" disabled selected hidden>학년을 선택해주세요</option>
+                        <option value="1">1학년</option>
+                        <option value="2">2학년</option>
+                        <option value="3">3학년</option>
+                        <option value="4">4학년</option>
+                        <option value="9">교수</option>
+                        <option value="0">관리자</option>
+                    </select>
+
+
+                    <label for="userGender">성별</label>
+                    <div>
+                        남성<input type="radio" name="userGender" value="m">
+                        여성<input type="radio" name="userGender" value="f">
+                    </div>
+                </div>
+
+                <button type="submit" class="idregbtn">회원가입</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        fetch("../layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
+        fetch("../layout/nosideheader.html")
+            .then((response) => response.text())
             .then((responseText) => {
-                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            })
-        fetch("../layout/footer.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
+            });
+
+        fetch("../layout/footer.html")
+            .then((response) => response.text())
             .then((responseText) => {
-                // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            })
+            });
+
+        const loginUserBtn = document.querySelector(".loginUserBtn");
+        const loginForm = document.querySelector(".logForm");
+        const loginUserId = document.getElementById("loginUserId");
+        const loginUserPwd = document.getElementById("loginUserPwd");
+
+        const idRegModal = document.getElementById("idReg");
+        const completeModal = document.getElementById("completeModal");
+        const completeText = document.querySelector("#completeModal .modalContent div:nth-child(2)");
+        const completeBtn = document.querySelector("#completeModal button");
+
+        const idRegRealForm = document.getElementById("idRegRealForm");
+        const userPosition = document.getElementById("userPosition");
+        const userId = document.getElementById("userId");
+        const userPwd = document.getElementById("userPwd");
+        const userPwdConfirm = document.getElementById("userPwdConfirm");
+        const userName = document.getElementById("userName");
+        const userMajorId = document.getElementById("userMajorId");
+        const userGrade = document.getElementById("userGrade");
+        const userGenderList = document.querySelectorAll('input[name="userGender"]');
+        var userInfo = { userId: null, userPwd: null, userPosition: null, userName: null, userMajorId: null, userMajor: null, userGrade: null, userLessonList: [] }
+        var userInfoGroup = [{ userId: 111111111, userPwd: 1111, userPosition: 1111, userName: '김교수', userMajorId: 160, userMajor: '첨단학부', userGrade: 9, userLessonList: [] },
+        { userId: 22222222, userPwd: 2222, userPosition: 2222, userName: '관리자', userMajorId: 999, userMajor: '관리자', userGrade: 0, userLessonList: [] }]
+
+        loginUserBtn.addEventListener("click", function () {
+            idRegModal.style.display = "flex";
+        });
+
+        userPosition.addEventListener("change", function () {
+            if (userPosition.value === "student") {
+                userId.placeholder = "yyyymmmiii";
+            } else if (userPosition.value === "prof") {
+                userId.placeholder = "yyyymmmii";
+            } else if (userPosition.value === "admin") {
+                userId.placeholder = "yyyyiii";
+            }
+        });
+
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            if (loginUserId.value.trim() === "") {
+                loginUserId.focus();
+                return;
+            }
+
+            if (loginUserPwd.value.trim() === "") {
+                loginUserPwd.focus();
+                return;
+            }
+
+            for (var i in userInfoGroup) {
+                if (userInfoGroup[i].userId ==loginUserId.value &&userInfoGroup[i].userPwd == loginUserPwd.value) {
+                    completeText.innerText = "로그인 되었습니다.";
+                    completeModal.style.display = "flex";
+                    return;
+                }
+            }
+            
+            alert('뭐노');
+
+
+        });
+
+        idRegRealForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let genderChecked = false;
+
+            for (let i = 0; i < userGenderList.length; i++) {
+                if (userGenderList[i].checked) {
+                    genderChecked = true;
+                }
+            }
+
+            if (userPosition.value === "") {
+                userPosition.focus();
+                return;
+            }
+
+            if (userId.value.trim() === "") {
+                userId.focus();
+                return;
+            }
+
+            if (userPwd.value.trim() === "") {
+                userPwd.focus();
+                return;
+            }
+
+            if (userPwdConfirm.value.trim() === "") {
+                userPwdConfirm.focus();
+                return;
+            }
+
+            if (userName.value.trim() === "") {
+                userName.focus();
+                return;
+            }
+
+            if (userMajorId.value === "") {
+                userMajorId.focus();
+                return;
+            }
+
+            if (userGrade.value === "") {
+                userGrade.focus();
+                return;
+            }
+
+            if (genderChecked === false) {
+                userGenderList[0].focus();
+                return;
+            }
+
+            if (userPwdConfirm.value !== userPwd.value) {
+                userPwdConfirm.focus();
+                return;
+            }
+
+            idRegModal.style.display = "none";
+            completeText.innerText = "회원가입 완료되었습니다.";
+            completeModal.style.display = "flex";
+            userInfo.userId = userId.value;
+            userInfo.userPwd = userPwd.value;
+            userInfo.userPosition = userPosition.value;
+            userInfo.userName = userName.value;
+            userInfo.userMajorId = userMajorId.value;
+            userInfo.userGrade = userGrade.value;
+
+            // console.log(userInfo);
+
+            userInfoGroup.push(userInfo);
+
+            localStorage.setItem('userInfoGroup', JSON.stringify(userInfoGroup));
+
+            // console.log(JSON.parse(localStorage.getItem('userInfoGroup')));
+        });
+
+        completeBtn.addEventListener("click", function () {
+            completeModal.style.display = "none";
+        });
+
+
     </script>
 </body>
+
 </html>

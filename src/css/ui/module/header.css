@@ -59,7 +59,10 @@ article {
 
 /*버튼        */
 /*      스타일*/
-
+button{
+  border-radius: 10px;
+  border:none;
+}
 /*메인페이지 버튼들*/
 .mainRegbtn {
   background-color: #e0c1ff;
@@ -101,7 +104,7 @@ article {
 /*관리자버튼(수정,작성,삭제)*/
 .adminbtn {
   background-color: #e0c1ff;
-  border-radius: 10px;
+  
   font-size: 20px;
 }
 
