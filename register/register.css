@@ -1,120 +1,83 @@
-                main {
-                    display: flex;
-                    align-items: flex-start;
-                }
+.Check {
+    height: 760px;
+    border: 1px solid black;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
 
-                .topbar {
-                    width: 1600px;
-                    height: 80px;
-                    background: #EAD8FA;
-                    border: 2px solid #8B5FBF;
-                    border-radius: 10px;
-                    display: grid;
-                    grid-template-columns: repeat(4, 1fr);
-                    margin-top: 25px;
-                    margin-bottom: 15px;
-                }
+.subjectHeader {
+    background-color: #F7EDFF;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
 
-                .topbar div {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 36px;
-                    font-weight: 700;
-                }
+}
 
-                .active {
-                    box-sizing: border-box;
-                    width: 400px;
-                    height: 75px;
-                    background: #FFFFFF;
-                    border-radius: 10px;
-                    border-left: 2px solid #8B5FBF;
-                    border-right: 2px solid #8B5FBF;
-                }
+.basketHeader {
+    background-color: #F7EDFF;
 
-                .Check {
-                    width: 1600px;
-                    height: 760px;
-                    border: 1px solid black;
-                    border-radius: 8px;
-                    display: flex;
-                    flex-direction: column;
-                }
+    height: 51px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+    margin-left: 15px;
 
-                .subjectHeader {
-                    background-color: #F7EDFF;
-
-                    height: 51px;
-                    display: flex;
-                    align-items: center;
-                    border-bottom: 1px solid #ddd;
-                    border-radius: 8px;
-                    padding: 10px;
-
-                }
-
-                .basketHeader {
-                    background-color: #F7EDFF;
-
-                    height: 51px;
-                    display: flex;
-                    align-items: center;
-                    border-bottom: 1px solid #ddd;
-                    margin-bottom: 30px;
-                    margin-left: 15px;
-
-                }
+}
 
 
-                .majorSelect {
-                    display: flex;
-                    flex: 1;
-                    height: 650px;
-                }
+.majorSelect {
+    display: flex;
+    flex: 1;
+    height: 650px;
+}
 
-                .option {
-                    width: 250px;
-                    border-right: 1px solid #ccc;
-                    padding: 20px;
-                    margin-top: 0px;
-                }
+.option {
+    width: 250px;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 0px;
+}
 
-                .option select {
-                    width: 100%;
-                    padding: 10px;
-                }
+.option select {
+    width: 100%;
+    padding: 10px;
+}
 
-                .content {
-                    flex: 1;
-                    padding: 20px;
-                    display: grid;
-                    grid-template-rows: 3fr 1fr;
+.content {
+    flex: 1;
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
 
 
-                }
+}
 
-                .lectureList li {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    border-bottom: 1px solid #000000;
-                    margin-top: -20px;
-                    margin-bottom: 30px;
-                    margin-left: -20px;
-                }
+.lectureList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000000;
+    margin-top: -20px;
+    margin-bottom: 30px;
+    margin-left: -20px;
+}
 
-                .subjectInfo {
-                    display: flex;
-                    align-items: center;
-                    gap: 50px;
-                }
+.subjectInfo {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
 
-                .dot {
-                    color: #ccc;
-                }
+.dot {
+    color: #ccc;
+}
 
-                .groupRadio span {
-                    margin-right: 200px;
-                    margin-left: 30px;
-                }
+.groupRadio span {
+    margin-right: 200px;
+    margin-left: 30px;
+}

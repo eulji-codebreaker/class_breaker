@@ -1,0 +1,21 @@
+.studentTimeTable1 {
+
+    height: 760px;
+    margin-top: 20px;
+    overflow: auto;
+}
+
+.studentTimeTable1 table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+}
+
+.studentTimeTable1 th,
+.studentTimeTable1 td {
+    width: auto;
+    border: 1px solid #000000;
+    height: 70px;
+    text-align: center;
+}

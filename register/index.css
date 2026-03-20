@@ -1,42 +1,16 @@
-        main {
-            display: flex;
-            align-items: flex-start;
-        }
-        
-        .topbar {
-            width: 1600px;
-            height: 80px;
-            background: #EAD8FA;
-            border: 1px solid #8B5FBF;
-            border-radius: 10px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
+.content {
+    box-sizing: border-box;
 
-        .topbar div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 36px;
-            font-weight: 700;
+    height: 757px;
+    right: 23px;
+    top: 283px;
 
-        }
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    gap: 200px;
+}
 
-        .content {
-            box-sizing: border-box;
-            width: 1600px;
-            height: 757px;
-            right: 23px;
-            top: 283px;
-
-            background: #FFFFFF;
-            border: 1px solid #000000;
-            border-radius: 10px;
-            gap: 200px;
-        }
-
-        .selected {
-            background-color: white;
-        }
+.selected {
+    background-color: white;
+}

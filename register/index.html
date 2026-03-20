@@ -6,56 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/register/topbar.css">
 </head>
 
 <body>
     <main>
         <article>
             <div class="topbar">
-        <div class="check">조회</div>
-        <div class="basket">수강바구니</div>
-        <div class="application">수강신청</div>
-        <div class="timetable">신청한 시간표</div>
-    </div>
+                <div class="check">조회</div>
+                <div class="basket">수강바구니</div>
+                <div class="application">수강신청</div>
+                <div class="timetable">신청한 시간표</div>
+            </div>
 
-    <div class="content">
-        <p>■ 유의사항</p>
-        <p>[매크로 프로그램 방지]</p>
-        <p>매크로프로그램 사용을 방지하기 위하여 저장을 관리자가 지정한 횟수이상 시도하면 화면에 나타나는 문자열을 입력하고 계속 사용</p>
-        <p>문자열 입력시 5회 이상 틀리면 자동 로그아웃</p><br>
-        <p>[멀티로그인시 처리기능 방지]</p>
-        <p>동일한 학번으로 동시에 두 군데 이상의 PC에서 로그인을 했을 경우 조회 기능은 가능하나 수강신청 저장을 시도하면 마지막으로 로그인 한 사용자만 저장 가능하고 나머지는 로그아웃 처리</p><br>
-        <p>[팝업차단 해제]</p>
-        <p>팝업차단 설정이 해제 되지 않았을 경우 팝업차단을 해제</p>
-        <p>팝업차단 해제 방법으로 브라우저에서 “도구/인터넷옵션/팝업차단설정/” 현재 사이트의 팝업을 항상 “허용”</p><br>
-        <p>[모니터 해상도]</p>
-        <p>수강신청시스템은 1280*800 해상도에 최적화 되어 있으며 그 이상의 해상도로 화면 설정</p><br>
-        <p>[브라우저]</p>
-        <p>크롬, 파이어폭스 브라우저에 최적화 되있습니다</p>
-        <p>인터넷 익스플로러 10 이하 버전을 사용하시는 분들은 정상적으로 동작하지 않을수 있으며, 보안상의 이유로도 10 버전이상으로 업그레이드 하시기를 권장합니다.</p>
-    </div>
+            <div class="content">
+                <p>■ 유의사항</p>
+                <p>[매크로 프로그램 방지]</p>
+                <p>매크로프로그램 사용을 방지하기 위하여 저장을 관리자가 지정한 횟수이상 시도하면 화면에 나타나는 문자열을 입력하고 계속 사용</p>
+                <p>문자열 입력시 5회 이상 틀리면 자동 로그아웃</p><br>
+                <p>[멀티로그인시 처리기능 방지]</p>
+                <p>동일한 학번으로 동시에 두 군데 이상의 PC에서 로그인을 했을 경우 조회 기능은 가능하나 수강신청 저장을 시도하면 마지막으로 로그인 한 사용자만 저장 가능하고 나머지는 로그아웃 처리
+                </p><br>
+                <p>[팝업차단 해제]</p>
+                <p>팝업차단 설정이 해제 되지 않았을 경우 팝업차단을 해제</p>
+                <p>팝업차단 해제 방법으로 브라우저에서 “도구/인터넷옵션/팝업차단설정/” 현재 사이트의 팝업을 항상 “허용”</p><br>
+                <p>[모니터 해상도]</p>
+                <p>수강신청시스템은 1280*800 해상도에 최적화 되어 있으며 그 이상의 해상도로 화면 설정</p><br>
+                <p>[브라우저]</p>
+                <p>크롬, 파이어폭스 브라우저에 최적화 되있습니다</p>
+                <p>인터넷 익스플로러 10 이하 버전을 사용하시는 분들은 정상적으로 동작하지 않을수 있으며, 보안상의 이유로도 10 버전이상으로 업그레이드 하시기를 권장합니다.</p>
+            </div>
         </article>
     </main>
-    <script>
-        fetch("../layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                // console.log(responseText);
-                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            })
-        fetch("../layout/footer.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                // console.log(responseText);
-                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            })
-        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-            })
-    </script>
 
+
+    <script src="/js/register.js"></script>
 </body>
 
 </html>
