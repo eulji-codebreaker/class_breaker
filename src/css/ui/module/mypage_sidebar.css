@@ -1,0 +1,75 @@
+aside {
+    width: 275px;
+    height: 850px;
+    background: #ffffff;
+    border: 1px solid #8B5FBF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.section-title {
+    background-color: #EAD8FA;
+    padding: 15px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.info-content {
+    padding: 20px;
+    flex-shrink: 0;
+}
+
+.info-content p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+.course-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.course-list {
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.course-card {
+    width: 220px;
+    height: 60px;
+    border: 1px solid #8B5FBF;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.course-card:hover {
+  background-color: #d6adff;
+} 
+
+
+
+.course-name {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.professor {
+    font-size: 0.8rem;
+    color: #000000;
+}

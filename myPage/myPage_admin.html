@@ -4,31 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .adminOpeningList {
-            box-sizing: border-box;
-
-            width: 1600px;
-            height: 850px;
-            overflow: hidden;
-            display: grid;
-            border: 1px solid #000000;
-            background: #ffffff;
-            border-radius: 10px;
-        }
-
-        .title {
-            box-sizing: border-box;
-
-            width: 100%;
-            height: 80px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            border-radius: 10px;
-        }
-    </style>
+    <title>mypage_admin</title>
+    <link rel="stylesheet" href="mypage_admin.css">
 </head>
 
 <body>
@@ -37,33 +14,202 @@
             <div class="openingList">
                 <div class="title">
                     <div class="text">개설된 모든 과목</div>
-                </div>
-                <div class="formBox">
-                    <form action="/search" method="get"></form>
-                </div>
-                <div class="btn">
-                    <button>추가</button>
-                    <button>삭제</button>
+                    <div class="option">
+                        <select>
+                            <option>학과를 선택해주세요</option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="button-group">
+                        <button class="adminbtn">추가</button>
+                    </div>
                 </div>
 
-
+                <div class="content">
+                    <ul class="lecture-list">
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="subjectName"></span>
+                            <div class="subjectInfo">
+                                <span></span> <span class="dot">·</span>
+                                <span></span> <span class="dot">·</span>
+                                <span></span>
+                                <button class="regbtn">강의계획서</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </article>
-    <script>
-        fetch("../layout/header.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                // console.log(responseText);
-                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            })
-        fetch("../layout/footer.html") //웹문서 요청
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                // console.log(responseText);
-                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            })
-    </script>
+        </article>
+    </main>
+
+
+</html>
+<script>
+    /* header, footer, sidebar */
+    fetch("../layout/header.html")
+        .then((response) => response.text())
+        .then((responseText) => {
+            document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
+        })
+    fetch("../layout/footer.html")
+        .then((response) => response.text())
+        .then((responseText) => {
+            document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
+        })
+    fetch("../layout/mypage_sidebar.html")
+        .then((response) => response.text())
+        .then((responseText) => {
+            document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+            const courseSection = document.querySelector('.course-section');
+            if (courseSection) {
+                courseSection.style.display = 'none';
+            }
+        })
+</script>
 </body>
 
 </html>

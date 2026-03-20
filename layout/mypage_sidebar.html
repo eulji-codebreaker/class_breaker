@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 사이드바</title>
+    <link rel="stylesheet" href="../src/css/ui/module/mypage_sidebar.css">
+</head>
+
+<body>
+
+    <aside class="sidebar-container">
+        <div class="info-section">
+            <div class="section-title">내 정보</div>
+            <div class="info-content">
+                <p>이름: </p>
+                <p>학번: </p>
+                <p>학과: </p>
+                <p>학년: </p>
+            </div>
+        </div>
+
+        <div class="course-section">
+            <div class="section-title">수강신청 과목</div>
+            <div class="course-list">
+                <button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button>
+                <button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button><button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button><button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button><button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button><button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button><button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button><button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button><button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button><button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name"></p>
+                    <p class="professor"></p>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <script>
+        /**
+         * 페이지 이동 함수
+         * 1. layout 폴더에서 한 단계 나가기 (../)
+         * 2. lectureRoom 폴더로 들어가기 (lectureRoom/)
+         * 3. index.html 파일 열기
+         */
+        function goToLecture() {
+            console.log("이동 시도 중...");
+            const targetPath = "../lectureRoom/index.html";
+
+            try {
+                // 일반적인 페이지 이동
+                window.location.href = targetPath;
+
+                // 만약 iframe 안에서 실행 중이라 메인 화면이 안 바뀐다면 아래 주석을 해제하세요.
+                // parent.location.href = targetPath;
+            } catch (e) {
+                console.error("이동 중 에러 발생:", e);
+            }
+        }
+    </script>
+</body>
+
+</html>
