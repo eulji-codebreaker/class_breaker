@@ -27,7 +27,7 @@
                     <p class="titleText">수강신청 기간</p>
                     <div class="horiz">
                         <p class="date">26.02.25 ~ 26.02.28</p>
-                        <button class="mainRegbtn">수강신청</button>
+                        <button class="mainRegbtn" onclick="toregister()">수강신청</button>
                     </div>
                 </div>
             </div>
@@ -35,22 +35,22 @@
                 <div class="main myPage">
                     <div class="myPageTop">
                         <p class="titleText">내 정보</p>
-                        <button class="mainRoombtn">마이페이지</button>
+                        <button class="mainRoombtn" onclick="tomypage()">마이페이지</button>
                     </div>
                     <ul>
-                        <li>이름: </li>
-                        <li>학번: </li>
-                        <li>학과: </li>
-                        <li>학년: </li>
+                        <li><span id="label1">이름: </span><span id="val1"></span></li>
+                        <li><span id="label2">학번: </span><span id="val2"></span></li>
+                        <li><span id="label3">학과: </span><span id="val3"></span></li>
+                        <li><span id="label4">학년: </span><span id="val4"></span></li>
                     </ul>
                 </div>
                 <div class="main lecture">
                     <p class="titleText">내 강의</p>
                     <ul>
-                        <li>웹프로그래밍실무 <button class="mainRoombtn">강의실 가기</button></li>
-                        <li>운영체제 <button class="mainRoombtn">강의실 가기</button></li>
-                        <li>사회와마케팅 <button class="mainRoombtn">강의실 가기</button></li>
-                        <li>인공지능캡스톤 <button class="mainRoombtn">강의실 가기</button></li>
+                        <li>웹프로그래밍실무 <button class="mainRoombtn" onclick="tolecture()">강의실 가기</button></li>
+                        <li>운영체제 <button class="mainRoombtn" onclick="tolecture()">강의실 가기</button></li>
+                        <li>사회와마케팅 <button class="mainRoombtn" onclick="tolecture()">강의실 가기</button></li>
+                        <li>인공지능캡스톤 <button class="mainRoombtn" onclick="tolecture()">강의실 가기</button></li>
                     </ul>
                 </div>
             </div>
@@ -69,11 +69,50 @@
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
             })
 
-        /*fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-            })*/
+        function toregister() {
+            location.assign("../register/index.html");
+        }
+
+        function tomypage() {
+            location.assign("../myPage/myPage_student.html");
+        }
+
+        function tolecture() {
+            location.assign("../lectureRoom/index.html");
+        }
+
+        const store = {
+            setLocalStorage(key, value) {
+                localStorage.setItem(key, JSON.stringify(value));
+            },
+            getLocalStorage(key) {
+                return JSON.parse(localStorage.getItem(key));
+            }
+        }
+
+        // window.onload = function () {
+        //     const user = store.getLocalStorage('userData');
+
+            if (role === 'student') {
+                document.getElementById('val1').innerText = user.name;
+                document.getElementById('val2').innerText = user.id;
+                document.getElementById('val3').innerText = user.dept;
+                document.getElementById('val4').innerText = user.grade;
+            }
+            else if (role === 'prof') {
+                document.getElementById('label2').innerText = "사번: ";
+
+                document.getElementById('val1').innerText = user.name;
+                document.getElementById('val2').innerText = user.id;
+                document.getElementById('val3').innerText = user.dept;
+            }
+            else {
+                document.getElementById('label2').innerText = "사번: ";
+                document.getElementById('val1').innerText = user.name;
+                document.getElementById('val2').innerText = user.id;
+            }
+
+        // }
     </script>
 </body>
 
