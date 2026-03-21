@@ -189,7 +189,7 @@
 
 </html>
 <script>
-    /* header, footer, sidebar */
+    
     fetch("../layout/header.html")
         .then((response) => response.text())
         .then((responseText) => {
@@ -200,6 +200,7 @@
         .then((responseText) => {
             document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
         })
+
     fetch("../layout/mypage_sidebar.html")
         .then((response) => response.text())
         .then((responseText) => {
@@ -209,6 +210,8 @@
                 courseSection.style.display = 'none';
             }
         })
+
+
 </script>
 </body>
 
