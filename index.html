@@ -147,6 +147,9 @@
         var userInfoGroup = [{ userId: 111111111, userPwd: 1111, userPosition: 'prof', userName: '김교수', userMajorId: 160, userMajor: '첨단학부', userGrade: 9, userLessonList: [] },
         { userId: 22222222, userPwd: 2222, userPosition: 'admin', userName: '관리자', userMajorId: 999, userMajor: '관리자', userGrade: 0, userLessonList: [] }]
 
+        localStorage.setItem('pageNow','login');
+        
+
         loginUserBtn.addEventListener("click", function () {
             idRegModal.style.display = "flex";
         });
@@ -180,7 +183,8 @@
             for (var i in userInfoGroup) {
                 if (userInfoGroup[i].userId == loginUserId.value && userInfoGroup[i].userPwd == loginUserPwd.value) {
                     logincompleteModal.style.display = "flex";
-                    currentUserInfo = localStorage.setItem('user', JSON.stringify(userInfoGroup[i]));
+                    localStorage.setItem('user', JSON.stringify(userInfoGroup[i]));
+                    currentUserInfo = localStorage.getItem('user', JSON.stringify(userInfoGroup[i]));
                     return;
                 }
             }
@@ -268,7 +272,7 @@
             completeModal.style.display = "none";
         });
 
-
+        
     </script>
 </body>
 

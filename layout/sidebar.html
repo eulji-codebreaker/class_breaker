@@ -19,11 +19,27 @@
                 <option>인공지능캡스톤</option>
             </select>
         </div>
-        <div class="menu 2">마이페이지</div>
-        <div class="menu 3">강의실</div>
-        <div class="menu 4">수강신청</div>
-        <div class="menu 5">수강신청</div>
-        <div class="menu 6">공지사항</div>
+        <div class="menu menu2">마이페이지</div>
+        <div class="menu menu3">강의실</div>
+        <div class="menu menu4">수강신청</div>
+        <div class="menu menu5">수강신청</div>
+        <div class="menu menu6">공지사항</div>
     </aside>
+
+    <script>
+        const updateSidebar=()=>{
+        if(localStorage.getItem('pageNow')==='lectureroom'){
+            document.querySelector('.dontHover').style.backgroundColor='red';
+        }
+        if(localStorage.getItem('pageNow')==='register'){
+            document.querySelector('.dontHover').style.display='none';
+            document.querySelector('.menu2').style.display='none';
+            document.querySelector('.menu3').innerText='공지사항';
+            document.querySelector('.menu4').innerText='마이페이지';
+            document.querySelector('.menu5').innerText='강의실';
+            document.querySelector('.menu6').innerText='수강신청';
+            
+        }}
+    </script>
 </body>
 </html>
