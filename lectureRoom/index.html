@@ -17,9 +17,9 @@
             <div class="lectureRoom students">
                 <div id="attendance">
                     <div class="firstAttendance">
-                        <p>학생 출결 현황</p>
+                        <p id="attendanceText">학생 출결 현황</p>
                         <div class="firstAttendanceTopRight">
-                            <button class="adminbtn">수정</button>
+                            <button class="adminbtn" id="attendanceEdit">수정</button>
                             <div id="attendanceYes"></div>
                             <p>전체 완료</p>
                             <div id="attendanceNow"></div>
@@ -75,7 +75,7 @@
                             <p>2026.03.08</p>
                         </div>
                     </li>
-                    <li id="firstLectureNotice">
+                    <li id="secondLectureNotice">
                         <div>
                             <p>006</p>강의 시간 변경 공지<p></p>
                         </div>
@@ -84,7 +84,7 @@
                             <p>2026.03.08</p>
                         </div>
                     </li>
-                    <li id="firstLectureNotice">
+                    <li id="thirdLectureNotice">
                         <div>
                             <p>005</p>자바스크립트 및 HTML 1주차 과제 안내<p></p>
                         </div>
@@ -93,7 +93,7 @@
                             <p>2026.03.08</p>
                         </div>
                     </li>
-                    <li id="firstLectureNotice">
+                    <li id="fourthLectureNotice">
                         <div>
                             <p>004</p>자바스크립트 및 HTML 1주차 강의 자료<p></p>
                         </div>
@@ -132,12 +132,25 @@
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
             });
+
+        localStorage.setItem('pageNow', 'lectureroom');
+        var role = JSON.parse(localStorage.getItem('user')).userPosition;
+        if (role === 'student') {
+            document.querySelectorAll('.adminbtn').forEach((e) => e.style.display = 'none');
+            document.querySelector('#attendanceText').innerText = '나의 출결현황';
+            document.querySelectorAll('.firstAttendanceTopRight p')[0].innerText = '출석 완료';
+            document.querySelectorAll('.firstAttendanceTopRight p')[1].innerText = '진행 중';
+            document.querySelectorAll('.firstAttendanceTopRight p')[2].innerText = '미진행';
+        }
+        
         fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
             .then((response) => response.text())
             .then((responseText) => {
                 document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
             });
-        
+            
+            
+            
     </script>
 </body>
 

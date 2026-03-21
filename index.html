@@ -32,11 +32,19 @@
             </div>
         </article>
     </main>
-    <div class="modal" id="completeModal">
+    <div class="modal" id="logincompleteModal">
         <div class="modalContent">
             <div></div>
             <div>로그인 되었습니다.</div>
-            <div><button id="loginCompletebtn" onclick="location.assign('/mainpage/index.html')">확인</button></div>
+            <div><button class='modalclosebtn' id="loginCompletebtn"
+                    onclick="location.assign('/mainPage/index.html')">확인</button></div>
+        </div>
+    </div>
+    <div class="modal" id="regcompleteModal">
+        <div class="modalContent">
+            <div></div>
+            <div>회원가입이 완료되었습니다.</div>
+            <div><button class='modalclosebtn' id="regCompletebtn" onclick="closemodal()">확인</button></div>
         </div>
     </div>
     <div class="modal" id="idReg">
@@ -93,8 +101,10 @@
                         여성<input type="radio" name="userGender" value="f">
                     </div>
                 </div>
-
-                <button type="submit" class="idregbtn">회원가입</button>
+                <div class="btngroup">
+                    <button type="submit" class="idregbtn">회원가입</button>
+                    <button type="button" onclick="closemodal()" id="regclosebtn">닫기</button>
+                </div>
             </form>
         </div>
     </div>
@@ -116,11 +126,13 @@
         const loginForm = document.querySelector(".logForm");
         const loginUserId = document.getElementById("loginUserId");
         const loginUserPwd = document.getElementById("loginUserPwd");
+        const currentUserInfo = null;
 
         const idRegModal = document.getElementById("idReg");
-        const completeModal = document.getElementById("completeModal");
-        const completeText = document.querySelector("#completeModal .modalContent div:nth-child(2)");
-        const completeBtn = document.querySelector("#completeModal button");
+        const regcompleteModal = document.getElementById("regcompleteModal");
+        const logincompleteModal = document.getElementById("logincompleteModal");
+        const regcompleteBtn = document.querySelector("#regcompleteModal button");
+        const logincompleteBtn = document.querySelector("#logincompleteModal button");
 
         const idRegRealForm = document.getElementById("idRegRealForm");
         const userPosition = document.getElementById("userPosition");
@@ -132,12 +144,18 @@
         const userGrade = document.getElementById("userGrade");
         const userGenderList = document.querySelectorAll('input[name="userGender"]');
         var userInfo = { userId: null, userPwd: null, userPosition: null, userName: null, userMajorId: null, userMajor: null, userGrade: null, userLessonList: [] }
-        var userInfoGroup = [{ userId: 111111111, userPwd: 1111, userPosition: 1111, userName: '김교수', userMajorId: 160, userMajor: '첨단학부', userGrade: 9, userLessonList: [] },
-        { userId: 22222222, userPwd: 2222, userPosition: 2222, userName: '관리자', userMajorId: 999, userMajor: '관리자', userGrade: 0, userLessonList: [] }]
+        var userInfoGroup = [{ userId: 111111111, userPwd: 1111, userPosition: 'prof', userName: '김교수', userMajorId: 160, userMajor: '첨단학부', userGrade: 9, userLessonList: [] },
+        { userId: 22222222, userPwd: 2222, userPosition: 'admin', userName: '관리자', userMajorId: 999, userMajor: '관리자', userGrade: 0, userLessonList: [] }]
+
+        localStorage.setItem('pageNow','login');
+        
 
         loginUserBtn.addEventListener("click", function () {
             idRegModal.style.display = "flex";
         });
+        var closemodal = () => document.querySelectorAll('.modal').forEach(e => { e.style.display = 'none'; });
+
+
 
         userPosition.addEventListener("change", function () {
             if (userPosition.value === "student") {
@@ -163,14 +181,15 @@
             }
 
             for (var i in userInfoGroup) {
-                if (userInfoGroup[i].userId ==loginUserId.value &&userInfoGroup[i].userPwd == loginUserPwd.value) {
-                    completeText.innerText = "로그인 되었습니다.";
-                    completeModal.style.display = "flex";
+                if (userInfoGroup[i].userId == loginUserId.value && userInfoGroup[i].userPwd == loginUserPwd.value) {
+                    logincompleteModal.style.display = "flex";
+                    localStorage.setItem('user', JSON.stringify(userInfoGroup[i]));
+                    currentUserInfo = localStorage.getItem('user', JSON.stringify(userInfoGroup[i]));
                     return;
                 }
             }
-            
-            alert('뭐노');
+
+            alert('유효하지 않은 회원정보입니다.');
 
 
         });
@@ -232,8 +251,7 @@
             }
 
             idRegModal.style.display = "none";
-            completeText.innerText = "회원가입 완료되었습니다.";
-            completeModal.style.display = "flex";
+            regcompleteModal.style.display = "flex";
             userInfo.userId = userId.value;
             userInfo.userPwd = userPwd.value;
             userInfo.userPosition = userPosition.value;
@@ -254,6 +272,7 @@
             completeModal.style.display = "none";
         });
 
+        
     </script>
 </body>
 
