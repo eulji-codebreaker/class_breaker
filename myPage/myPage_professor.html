@@ -1,4 +1,3 @@
-```css
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,8 +11,9 @@
 <body>
     <main>
         <article>
+            <!-- top bar -->
             <div class="topbar">
-                <div class="myTimeTable active">나의 시간표</div>
+                <div class="myTimetable active">나의 시간표</div>
                 <div class="learningList">당학기 개설과목 관리</div>
                 <div class="empty-slot"></div>
                 <div class="empty-slot">
@@ -22,8 +22,8 @@
                     <button class="adminbtn" id="btn-delete">삭제</button>
                 </div>
             </div>
-
-            <div class="professorTimeTable1">
+            <!-- professor timetable 1 -->
+            <div class="professorTimetable1">
                 <div class="timetableCol nothing">
                     <div class="fixedTime">요일,교시</div>
                     <div class="fixedTime">08:00~08:50</div>
@@ -110,7 +110,8 @@
                 </div>
             </div>
 
-            <div class="professorTimeTable2">
+            <!-- professor timetable 2 -->
+            <div class="professorTimetable2">
                 <table>
                     <thead>
                         <td>□</td>
@@ -204,6 +205,7 @@
         </article>
     </main>
 
+    <!-- modeal -->
     <div class="modal" id="professor-modal">
         <div class="modalContent">
             <form id="add-form" class="modal-layout">
@@ -248,8 +250,8 @@
                         </label>
                     </div>
                     <div class="modal-btn-group">
-                        <button type="submit" class="btn-gray">개설하기</button>
-                        <button type="button" class="btn-gray" onclick="closeModal()">취소</button>
+                        <button type="submit" class="modalbtn">개설하기</button>
+                        <button type="button" class="modalbtn" onclick="closeModal()">취소</button>
                     </div>
                 </div>
             </form>
@@ -257,183 +259,51 @@
             <div id="delete-confirm" class="modal-layout" style="display: none;">
                 <h2 class="modal-title">정말 삭제하시겠습니까?</h2>
                 <div class="modal-btn-group">
-                    <button type="button" id="real-delete-btn" class="btn-gray">확인</button>
-                    <button type="button" class="btn-gray" onclick="closeModal()">취소</button>
+                    <button type="button" id="delete-btn" class="modalbtn">확인</button>
+                    <button type="button" class="modalbtn" onclick="closeModal()">취소</button>
                 </div>
             </div>
 
             <div id="delete-alert" class="modal-layout" style="display: none;">
                 <h2 class="modal-title">삭제할 항목을 선택해주세요.</h2>
                 <div class="modal-btn-group">
-                    <button type="button" class="btn-gray" onclick="closeModal()">확인</button>
+                    <button type="button" class="modalbtn" onclick="closeModal()">확인</button>
                 </div>
             </div>
 
             <div id="delete-done" class="modal-layout" style="display: none;">
                 <h2 class="modal-title">삭제되었습니다!</h2>
                 <div class="modal-btn-group">
-                    <button type="button" class="btn-gray" onclick="closeModal()">돌아가기</button>
+                    <button type="button" class="modalbtn" onclick="closeModal()">돌아가기</button>
                 </div>
             </div>
         </div>
     </div>
 
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('professor-modal');
-            const addForm = document.getElementById('add-form');
-            const weeklyContainer = document.getElementById('weekly-inputs');
-            const layouts = document.querySelectorAll('.modal-layout');
-            const tbody = document.querySelector('.professorTimeTable2 tbody');
+        /* top bar */
+        const tabTimetable = document.querySelector('.myTimetable');
+        const tabLearningList = document.querySelector('.learningList');
+        const table1 = document.querySelector('.professorTimetable1');
+        const table2 = document.querySelector('.professorTimetable2');
 
-            let editTargetRow = null;
-            let lectureData = {};
+        tabTimetable.addEventListener('click', () => {
+            tabTimetable.classList.add('active');
+            tabLearningList.classList.remove('active');
 
-            if (weeklyContainer && weeklyContainer.children.length === 0) {
-                let html = '';
-                for (let i = 1; i <= 15; i++) {
-                    html += `<div class="weekly-row"><span>${i}주 :</span><input type="text" class="week-content"></div>`;
-                }
-                weeklyContainer.innerHTML = html;
-            }
-
-            const hideAllLayouts = () => layouts.forEach(l => l.style.display = 'none');
-
-            const tabTimeTable = document.querySelector('.myTimeTable');
-            const tabLearningList = document.querySelector('.learningList');
-            const table1 = document.querySelector('.professorTimeTable1');
-            const table2 = document.querySelector('.professorTimeTable2');
-            const btnGroup = document.querySelectorAll('.topbar .empty-slot')[1];
-
-            const switchTab = (activeTab) => {
-                const isTimeTable = activeTab === 'timetable';
-                tabTimeTable.classList.toggle('active', isTimeTable);
-                tabLearningList.classList.toggle('active', !isTimeTable);
-                table1.style.display = isTimeTable ? 'grid' : 'none';
-                table2.style.display = isTimeTable ? 'none' : 'block';
-                btnGroup.style.display = isTimeTable ? 'none' : 'flex';
-            };
-
-            tabTimeTable.onclick = () => switchTab('timetable');
-            tabLearningList.onclick = () => switchTab('learningList');
-
-            const openFormModal = (mode = 'add') => {
-                hideAllLayouts();
-                addForm.reset();
-
-                const weekInputs = document.querySelectorAll('.week-content');
-                weekInputs.forEach(input => input.value = "");
-
-                const modalContent = document.querySelector('.modalContent');
-                const scrollBox = document.querySelector('.weekly-scroll-container');
-                if (modalContent) modalContent.scrollTop = 0;
-                if (scrollBox) scrollBox.scrollTop = 0;
-
-                const title = document.querySelector('.modal-title');
-                const submitBtn = addForm.querySelector('button[type="submit"]');
-
-                if (mode === 'edit') {
-                    const checked = document.querySelectorAll('.row-check:checked');
-                    if (checked.length !== 1) {
-                        document.getElementById('delete-alert').querySelector('.modal-title').innerText = "수정할 항목을 하나만 선택해주세요.";
-                        document.getElementById('delete-alert').style.display = 'flex';
-                    } else {
-                        editTargetRow = checked[0].closest('tr');
-                        const cells = editTargetRow.cells;
-                        const originalName = cells[2].innerText.replace(" (필수)", "");
-
-                        document.getElementById('add-type').value = cells[1].innerText;
-                        document.getElementById('add-name').value = originalName;
-                        document.getElementById('add-required').checked = cells[2].innerText.includes("(필수)");
-                        document.getElementById('add-max').value = cells[4].innerText.split(' / ')[1];
-                        document.getElementById('add-time').value = cells[3].innerText.replace("시간", "");
-
-                        if (lectureData[originalName]) {
-                            weekInputs.forEach((input, index) => {
-                                input.value = lectureData[originalName][index] || "";
-                            });
-                        }
-
-                        title.innerText = "강의 정보 수정";
-                        submitBtn.innerText = "수정하기";
-                        addForm.style.display = 'flex';
-                    }
-                } else {
-                    editTargetRow = null;
-                    title.innerText = "강의 개설 신청";
-                    submitBtn.innerText = "개설하기";
-                    addForm.style.display = 'flex';
-                }
-                modal.style.display = 'flex';
-            };
-
-            document.getElementById('btn-add').onclick = () => openFormModal('add');
-            document.getElementById('btn-edit').onclick = () => openFormModal('edit');
-
-            document.getElementById('btn-delete').onclick = () => {
-                const checked = document.querySelectorAll('.row-check:checked');
-                hideAllLayouts();
-                if (checked.length === 0) {
-                    document.getElementById('delete-alert').querySelector('.modal-title').innerText = "삭제할 항목을 선택해주세요.";
-                    document.getElementById('delete-alert').style.display = 'flex';
-                } else {
-                    document.getElementById('delete-confirm').style.display = 'flex';
-                    document.getElementById('real-delete-btn').onclick = () => {
-                        checked.forEach(cb => {
-                            const name = cb.closest('tr').cells[2].innerText.replace(" (필수)", "");
-                            delete lectureData[name];
-                            cb.closest('tr').remove();
-                        });
-                        hideAllLayouts();
-                        document.getElementById('delete-done').style.display = 'flex';
-                    };
-                }
-                modal.style.display = 'flex';
-            };
-
-            addForm.onsubmit = (e) => {
-                e.preventDefault();
-                const type = document.getElementById('add-type').value;
-                const name = document.getElementById('add-name').value.trim();
-                const isReq = document.getElementById('add-required').checked ? " (필수)" : "";
-                const maxNum = parseInt(document.getElementById('add-max').value);
-                const time = document.getElementById('add-time').value;
-
-                if (!name) { alert("과목명을 입력해주세요."); return; }
-                if (isNaN(maxNum) || maxNum <= 0) { alert("최대 인원은 1명 이상이어야 합니다."); return; }
-                if (!time) { alert("강의시간을 선택해주세요."); return; }
-
-                const weeklyContents = Array.from(document.querySelectorAll('.week-content')).map(input => input.value);
-                lectureData[name] = weeklyContents;
-
-                if (editTargetRow) {
-                    editTargetRow.cells[1].innerText = type;
-                    editTargetRow.cells[2].innerText = name + isReq;
-                    editTargetRow.cells[3].innerText = time + "시간"; 
-                    editTargetRow.cells[4].innerText = `0 / ${maxNum}`;
-                } else {
-                    const newRow = `<tr>
-                <td><input type="checkbox" class="row-check"></td>
-                <td>${type}</td>
-                <td>${name}${isReq}</td>
-                <td>${time}시간</td> 
-                <td>0 / ${maxNum}</td>
-            </tr>`;
-                    tbody.insertAdjacentHTML('afterbegin', newRow);
-                }
-                closeModal();
-            };
-
-            window.onclick = (e) => { if (e.target == modal) closeModal(); };
+            table1.style.display = 'grid';
+            table2.style.display = 'none';
         });
 
-        window.closeModal = () => {
-            const modal = document.getElementById('professor-modal');
-            if (modal) modal.style.display = 'none';
-        };
+        tabLearningList.addEventListener('click', () => {
+            tabLearningList.classList.add('active');
+            tabTimetable.classList.remove('active');
 
-        
+            table1.style.display = 'none';
+            table2.style.display = 'block';
+        });
+
+        /* header, footer, sideber */
         fetch("../layout/header.html")
             .then((response) => response.text())
             .then((responseText) => {
@@ -457,4 +327,3 @@
 </body>
 
 </html>
-```

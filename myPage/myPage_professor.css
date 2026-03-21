@@ -1,77 +1,82 @@
+/* top bar */
 .topbar {
     width: 100%;
     height: 80px;
+
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+
     margin-bottom: 15px;
     border-radius: 10px;
-    border: 1px solid #8B5FBF;
-    background: #EAD8FA;
+    border: 1px solid #8b5fbf;
+
+    background: #ead8fa;
+
     overflow: hidden;
     cursor: pointer;
 }
 
 .topbar .empty-slot {
     display: flex;
+
+    padding-right: 15px;
+    gap: 10px;
+
     justify-content: flex-end;
     align-items: center;
-    padding-right: 20px;
-    gap: 10px;
-}
-
-.topbar .empty-slot:last-child {
-    display: none;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 20px;
-    gap: 10px;
-}
-
-article {
-    min-width: 0;
-    flex: 1;
 }
 
 .topbar>div {
     font-weight: bold;
     font-size: 30px;
     line-height: 80px;
+
     text-align: center;
     white-space: nowrap;
+
     overflow: hidden;
 }
 
 .active {
+    width: 100%;
     height: 80px;
     line-height: 80px;
+
     padding: 0;
     margin: 0;
     border-radius: 10px;
-    background: #FFFFFF;
+
+    background: white;
 }
 
-/* --- 시간표 1 (나의 시간표) --- */
-.professorTimeTable1 {
+/* Timetable1 (myTimetable) */
+.professorTimetable1 {
     width: 100%;
     height: 755px;
+
     display: grid;
     grid-template-columns: 130px repeat(5, minmax(150px, 1fr));
+
+    border: 1px solid black;
     border-radius: 10px;
-    border: 1px solid #000000;
+
     text-align: center;
     align-items: center;
+
     overflow: hidden;
 }
 
-.professorTimeTable1>*>* {
+.professorTimetable1>*>* {
     padding: 5px;
 }
 
 .timetableCol {
+    width: 100%;
     height: 100%;
+
     display: grid;
     grid-template-rows: repeat(12, 1fr);
-    border-right: 1px solid #000000;
+    border-right: 1px solid black;
 }
 
 .timetableCol:last-child {
@@ -81,57 +86,58 @@ article {
 .timetableCol>div {
     width: 100%;
     height: 100%;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid #000000;
-}
-
-.timetableCol>div:last-child {
-    border-bottom: none;
 }
 
 .fixedTime {
-    border-bottom: 1px solid #000000;
-    background-color: #ffffff;
+    border-bottom: 1px solid black;
 }
 
 .lastTime {
     border-bottom: none;
 }
 
-/* --- 시간표 2 (과목 관리 리스트) --- */
-.professorTimeTable2 {
+/* Timetable2 (learningList) */
+.professorTimetable2 {
     width: 100%;
     height: 755px;
-    margin-bottom: 15px;
+
+    display: grid;
+    grid-template-columns: 130px repeat(5, minmax(150px, 1fr));
+
+    border: 1px solid black;
     border-radius: 10px;
-    border: 1px solid #000000;
+
     text-align: center;
     align-items: center;
-    overflow: auto;
+
     display: none;
+    overflow: auto;
 }
 
-.professorTimeTable2 table {
+.professorTimetable2 table {
     width: 100%;
+
     border-collapse: collapse;
     border-style: hidden;
     table-layout: fixed;
 }
 
-.professorTimeTable2 th,
-.professorTimeTable2 td {
-    height: 80px;
-    border: 1px solid #000000;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+.professorTimetable2 th:first-child {
+    font-weight: bold;
 }
 
-.professorTimeTable2 th {
-    font-weight: bold;
+.professorTimetable2 th,
+.professorTimetable2 td {
+    height: 80px;
+
+    border: 1px solid black;
+    text-align: center;
+    overflow: hidden;
 }
 
 .professorTimeTable2 th:nth-child(1),
@@ -159,6 +165,7 @@ article {
     width: 20%;
 }
 
+/* modal */
 .modal {
     width: 100%;
     height: 100%;
@@ -316,7 +323,7 @@ article {
     margin-top: 10px;
 }
 
-.btn-gray {
+.modalbtn {
     width: 170px;
     height: 50px;
     font-size: 18px;
@@ -330,6 +337,6 @@ article {
     justify-content: center;
 }
 
-.btn-gray:hover {
+.modalbtn:hover {
     background-color: #ababab;
 }
