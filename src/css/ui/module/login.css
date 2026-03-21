@@ -103,6 +103,18 @@ main {
             padding: 40px 0;
         }
 
+        .btngroup{
+            display: flex;
+            flex-direction: row;
+            gap:10px;
+            justify-content: center;
+        }
+        .btngroup>*{
+            width:140px;
+            height:70px;
+            font-size: 20px;
+        }
+
         .modal-header {
             font-size: 64px;
             padding-bottom: 35px;
@@ -122,9 +134,7 @@ main {
             font-weight: 400;
         }
 
-        .idregbtn {
-            margin-top: 10px;
-        }
+        
 
         .idRegFormLeft,
         .idRegFormRight {
@@ -171,11 +181,15 @@ main {
             font-size: 18px;
         }
 
-        #completeModal {
+        #logincompleteModal {
             display: flex;
         }
 
-        #completeModal>.modalContent {
+        #regcompleteModal {
+            display: flex;
+        }
+
+        #regcompleteModal>.modalContent {
             width: 50%;
             height: 30%;
             background-color: white;
@@ -185,20 +199,43 @@ main {
             padding: 20px;
         }
 
-        #completeModal>.modalContent>div:nth-child(2) {
+        #logincompleteModal>.modalContent {
+            width: 50%;
+            height: 30%;
+            background-color: white;
+            border-radius: 10px;
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            padding: 20px;
+        }
+
+        #logincompleteModal>.modalContent>div:nth-child(2) {
             display: grid;
             place-items: center;
             font-size: 32px;
         }
 
-        #completeModal>.modalContent>div:nth-child(3) {
+        #regcompleteModal>.modalContent>div:nth-child(2) {
+            display: grid;
+            place-items: center;
+            font-size: 32px;
+        }
+
+        #logincompleteModal>.modalContent>div:nth-child(3) {
+            display: grid;
+            justify-content: end;
+            align-content: end;
+        }
+
+        #regcompleteModal>.modalContent>div:nth-child(3) {
             display: grid;
             justify-content: end;
             align-content: end;
         }
 
         #idReg,
-        #completeModal {
+        #regcompleteModal,
+        #logincompleteModal {
             display: none;
         }
 
