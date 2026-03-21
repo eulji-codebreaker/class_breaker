@@ -6,9 +6,8 @@
     flex-direction: column;
 }
 
-.subjectHeader {
+.subjectHeader .basketHeader{
     background-color: #F7EDFF;
-
     height: 51px;
     display: flex;
     align-items: center;
@@ -18,17 +17,7 @@
 
 }
 
-.basketHeader {
-    background-color: #F7EDFF;
 
-    height: 51px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 30px;
-    margin-left: 15px;
-
-}
 
 
 .majorSelect {
@@ -54,8 +43,6 @@
     padding: 20px;
     display: grid;
     grid-template-rows: 3fr 1fr;
-
-
 }
 
 .lectureList li {

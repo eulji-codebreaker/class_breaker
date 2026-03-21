@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../mainPage/mainPage.css">
+    <link rel="stylesheet" href="../mainpage/mainpage.css">
 </head>
 
 <body>
@@ -74,45 +74,41 @@
         }
 
         function tomypage() {
-            location.assign("../myPage/myPage_student.html");
+            location.assign("../mypage/mypage_student.html");
         }
 
         function tolecture() {
-            location.assign("../lectureRoom/index.html");
+            location.assign("../lectureroom/index.html");
         }
 
-        const store = {
-            setLocalStorage(key, value) {
-                localStorage.setItem(key, JSON.stringify(value));
-            },
-            getLocalStorage(key) {
-                return JSON.parse(localStorage.getItem(key));
-            }
+        var role = JSON.parse(localStorage.getItem('user')).userPosition;
+        var name = JSON.parse(localStorage.getItem('user')).userName;
+        var id = JSON.parse(localStorage.getItem('user')).userId;
+        var major = JSON.parse(localStorage.getItem('user')).userMajorId;
+        var grade = JSON.parse(localStorage.getItem('user')).userGrade;
+
+        if(role === 'student'){
+            document.querySelector('#val1').innerText = name;
+            document.querySelector('#val2').innerText = id;
+            document.querySelector('#val3').innerText = major;
+            document.querySelector('#val4').innerText = grade;
+        }
+        else if (role === 'prof') {
+            document.querySelector('#label2').innerText = '사번: ';
+            document.querySelector('#val1').innerText = name;
+            document.querySelector('#val2').innerText = id;
+            document.querySelector('#val3').innerText = major;
+            document.querySelector('#label4').style.display = "none";
+        }
+        else if(role === 'admin'){
+            ocument.querySelector('#label2').innerText = '사번: ';
+            document.querySelector('#val1').innerText = name;
+            document.querySelector('#val2').innerText = id;
+            document.querySelector('#label3').style.display = "none";
+            document.querySelector('#label4').style.display = "none";
         }
 
-        // window.onload = function () {
-        //     const user = store.getLocalStorage('userData');
-
-            if (role === 'student') {
-                document.getElementById('val1').innerText = user.name;
-                document.getElementById('val2').innerText = user.id;
-                document.getElementById('val3').innerText = user.dept;
-                document.getElementById('val4').innerText = user.grade;
-            }
-            else if (role === 'prof') {
-                document.getElementById('label2').innerText = "사번: ";
-
-                document.getElementById('val1').innerText = user.name;
-                document.getElementById('val2').innerText = user.id;
-                document.getElementById('val3').innerText = user.dept;
-            }
-            else {
-                document.getElementById('label2').innerText = "사번: ";
-                document.getElementById('val1').innerText = user.name;
-                document.getElementById('val2').innerText = user.id;
-            }
-
-        // }
+        console.log(localStorage);
     </script>
 </body>
 

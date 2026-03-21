@@ -1,16 +1,8 @@
 .content {
-    box-sizing: border-box;
-
     height: 757px;
     right: 23px;
     top: 283px;
-
-    background: #FFFFFF;
     border: 1px solid #000000;
     border-radius: 10px;
-    gap: 200px;
-}
-
-.selected {
-    background-color: white;
+  
 }

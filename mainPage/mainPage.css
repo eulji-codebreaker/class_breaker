@@ -116,7 +116,6 @@ li {
 .myPage>ul>li {
     font-size: 30px; 
     padding: 10px 0;
-    border-bottom: 1px dashed #eee;
 }
 
 /* 강의실 박스 */

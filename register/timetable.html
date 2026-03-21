@@ -128,6 +128,13 @@
         </article>
     </main>
     <script src="/js/register.js"></script>
+    <script>
+        var role = JSON.parse(localStorage.getItem('user')).userPosition;
+
+        if (role !== 'student') {
+            querryselector('button').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
