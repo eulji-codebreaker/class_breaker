@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/register_prof/prof_update.css">
+    <link rel="stylesheet" href="/register/topbar.css">
+    <link rel="stylesheet" href="/register_prof/all.css">
+</head>
+
+<body>
+    <main>
+        <article>
+            <div class="topbar">
+                <div>개설과목 추가</div>
+                <div class="active">개설과목 수정</div>
+                <div>개설과목 삭제</div>
+                <div>신청한 시간표</div>
+            </div>
+
+            <div class="Check">
+                <div class="subjectHeader">
+                    <div class="groupRadio">
+                        <span>강의 조회</span>
+                        <input type="radio" name="subject" id="major"><label for="major">전공</label>
+                        <input type="radio" name="subject" id="culture"><label for="culture">교양</label>
+                    </div>
+                </div>
+
+                <div class="majorSelect">
+                    <div class="option">
+                        <select name="userMajorId" id="userMajorId">
+                            <option value="" disabled selected hidden>학과를 선택해주세요.</option>
+                            <option value="162">의료it학과</option>
+                            <option value="158">빅데이터의료융합학과</option>
+                            <option value="160">첨단학부</option>
+                            <option value="123">간호학과</option>
+                            <option value="119">응급구조학과</option>
+                            <option value="238">임상병리학과</option>
+                            <option value="130">방사선학과</option>
+                            <option value="234">물리치료학과</option>
+                            <option value="228">치위생학과</option>
+                            <option value="888">안경광학과</option>
+                            <option value="999">관리자</option>
+                        </select>
+                    </div>
+
+                    <div class="content">
+                        <ul class="lecture-list">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+    <div class="modal" id="professor-modal">
+        <div class="modalContent">
+            <form id="add-form" class="modal-layout">
+                <h1 class="modal-title">강의 개설 신청</h1>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="label">구분</div>
+                        <select id="add-type">
+                            <option value="전공">전공</option>
+                            <option value="교양">교양</option>
+                        </select>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">과목명</div>
+                        <input type="text" id="add-name" required>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">최대인원</div>
+                        <input type="number" id="add-max" required>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">강의시간</div>
+                        <select id="add-time" required>
+                            <option value="" disabled selected>강의시간을 선택해주세요</option>
+                            <option value="0.5">0.5</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weekly-scroll-container">
+                    <div id="weekly-inputs">
+                    </div>
+                </div>
+
+                <div class="form-footer">
+                    <div class="checkbox-wrapper">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="add-required"> 필수 과목 여부
+                        </label>
+                    </div>
+                    <div class="modal-btn-group">
+                        <button type="submit" class="btn-gray">수정하기</button>
+                        <button type="button" class="btn-gray" onclick="closeModal()">취소</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 필요한 요소들 가져오기
+            const modal = document.getElementById('professor-modal');
+            const addForm = document.getElementById('add-form');
+            const weeklyContainer = document.getElementById('weekly-inputs');
+            const layouts = document.querySelectorAll('.modal-layout');
+            const regBtns = document.querySelectorAll('.regbtn'); // 강의계획서 버튼들
+
+            // 2. 주차별 입력창 자동 생성 (1~15주)
+            if (weeklyContainer && weeklyContainer.children.length === 0) {
+                let html = '';
+                for (let i = 1; i <= 15; i++) {
+                    html += `<div class="weekly-row"><span>${i}주 :</span><input type="text" class="week-content"></div>`;
+                }
+                weeklyContainer.innerHTML = html;
+            }
+
+            // 3. 모든 모달 레이아웃 숨기기 함수
+            const hideAllLayouts = () => {
+                layouts.forEach(l => l.style.display = 'none');
+            };
+
+            // 4. [핵심] 강의계획서 버튼 클릭 시 모달 열기
+            regBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    hideAllLayouts();
+                    addForm.style.display = 'flex';
+                    modal.style.display = 'flex';
+
+                    const title = addForm.querySelector('.modal-title');
+                    if (title) title.innerText = "강의계획서 조회/수정";
+                });
+            });
+
+            window.onclick = (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            };
+
+        });
+
+        // 강의 임시데이터 넣기 js코드
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('professor-modal');
+            const addForm = document.getElementById('add-form');
+            const weeklyContainer = document.getElementById('weekly-inputs');
+            const lectureList = document.querySelector('.lecture-list');
+            const majorSelect = document.getElementById('userMajorId');
+            const radioButtons = document.querySelectorAll('input[name="subject"]');
+
+     
+            const dummyLectures = [
+                { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", prof: "정동근", type: "전공", lessonpoint: 3 },
+                { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", prof: "김규동", type: "전공", lessonpoint: 3 },
+                { id: 3, majorId: "162", lessonName: "건강정보의 이해", prof: "ooo", type: "교양", lessonpoint: 2 },
+                { id: 4, majorId: "158", lessonName: "빅데이터 분석", prof: "ooo", type: "전공", lessonpoint: 3 }
+            ];
+
+            const renderLectures = (data) => {
+                if (data.length === 0) {
+                    lectureList.innerHTML = '<p style="text-align:center; padding:20px;">조회된 강의가 없습니다.</p>';
+                    return;
+                }
+
+                lectureList.innerHTML = data.map(lecture => `
+            <li data-id="${lecture.id}">
+                <span class="subjectName">${lecture.lessonName}</span>
+                <div class="subjectInfo">
+                    <span>${lecture.prof}</span> <span class="dot">·</span>
+                    <span>${lecture.type}</span> <span class="dot">·</span>
+                    <span>${lecture.lessonpoint}학점</span>
+                    <span><button class="regbtn">강의 수정</button></span>
+                </div>
+            </li>
+        `).join('');
+            };
+
+            const updateList = () => {
+                const selectedMajor = majorSelect.value;
+                const selectedType = document.querySelector('input[name="subject"]:checked')?.id;
+
+                const typeKOR = selectedType === 'major' ? '전공' : (selectedType === 'culture' ? '교양' : '');
+
+                if (!selectedMajor || !typeKOR) return; 
+                
+                const filteredData = dummyLectures.filter(lec =>
+                    lec.majorId === selectedMajor && lec.type === typeKOR
+                );
+
+                renderLectures(filteredData);
+            };
+
+            majorSelect.addEventListener('change', updateList);
+            radioButtons.forEach(radio => radio.addEventListener('change', updateList));
+
+            if (weeklyContainer && weeklyContainer.children.length === 0) {
+                let html = '';
+                for (let i = 1; i <= 15; i++) {
+                    html += `<div class="weekly-row"><span>${i}주 :</span><input type="text" class="week-content"></div>`;
+                }
+                weeklyContainer.innerHTML = html;
+            }
+
+            lectureList.addEventListener('click', (e) => {
+                if (e.target.classList.contains('regbtn')) {
+                    e.preventDefault();
+                    modal.style.display = 'flex';
+                    addForm.style.display = 'flex';
+
+                    const row = e.target.closest('li');
+                    const subjectName = row.querySelector('.subjectName').innerText;
+                    document.getElementById('add-name').value = subjectName;
+
+                    const title = addForm.querySelector('.modal-title');
+                    if (title) title.innerText = "강의계획서 조회/수정";
+                }
+            });
+
+            window.onclick = (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        });
+
+        function closeModal() {
+            const modal = document.getElementById('professor-modal');
+            if (modal) modal.style.display = 'none';
+        }
+    </script>
+
+    <script src="/js/register_prof.js"></script>
+</body>
+
+</html>

@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="check.css">
     <link rel="stylesheet" href="/register/topbar.css">
+    <link rel="stylesheet" href="/register_prof/all.css">
 </head>
 
 <body>
@@ -30,19 +31,20 @@
 
                 <div class="majorSelect">
                     <div class="option">
-                        <select>
-                            <option>학과를 선택해주세요</option>
-                            <option>의료it학과</option>
-                            <option>빅데이터학과</option>
-                            <option>첨단학부</option>
-                            <option>간호학과</option>
-                            <option>응급구조학과</option>
-                            <option>임상병리학과</option>
-                            <option>방사선학과</option>
-                            <option>물리치료학과</option>
-                            <option>치위생학과</option>
-                            <option>안경광학학과</option>
-                        </select>
+                       <select name="userMajorId" id="userMajorId">
+                        <option value="" disabled selected hidden>학과를 선택해주세요.</option>
+                        <option value="162">의료it학과</option>
+                        <option value="158">빅데이터의료융합학과</option>
+                        <option value="160">첨단학부</option>
+                        <option value="123">간호학과</option>
+                        <option value="119">응급구조학과</option>
+                        <option value="238">임상병리학과</option>
+                        <option value="130">방사선학과</option>
+                        <option value="234">물리치료학과</option>
+                        <option value="228">치위생학과</option>
+                        <option value="888">안경광학과</option>
+                        <option value="999">관리자</option>
+                    </select>
                     </div>
 
                     <!-- 코드 리팩토링 해야할듯 -->

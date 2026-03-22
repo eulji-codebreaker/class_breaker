@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/register_prof/prof-delete.css">
+    <link rel="stylesheet" href="/register/topbar.css">
+    <link rel="stylesheet" href="/register_prof/modal.css">
+    <link rel="stylesheet" href="/register_prof/all.css">
+    <link rel="stylesheet" href="/register_prof/re_modal.css">
+</head>
+
+<body>
+    <main>
+        <article>
+            <div class="topbar">
+                <div>개설과목 추가</div>
+                <div>개설과목 수정</div>
+                <div class="active">개설과목 삭제</div>
+                <div>신청한 시간표</div>
+            </div>
+
+            <div class="Check">
+                <div class="subjectHeader">
+                    <div class="groupRadio">
+                        <span>강의 조회</span>
+                        <input type="radio" name="subject" id="major"><label for="major">전공</label>
+                        <input type="radio" name="subject" id="culture"><label for="culture">교양</label>
+                    </div>
+                </div>
+
+                <div class="majorSelect">
+                    <div class="option">
+                        <select name="userMajorId" id="userMajorId">
+                            <option value="" disabled selected hidden>학과를 선택해주세요.</option>
+                            <option value="162">의료it학과</option>
+                            <option value="158">빅데이터의료융합학과</option>
+                            <option value="160">첨단학부</option>
+                            <option value="123">간호학과</option>
+                            <option value="119">응급구조학과</option>
+                            <option value="238">임상병리학과</option>
+                            <option value="130">방사선학과</option>
+                            <option value="234">물리치료학과</option>
+                            <option value="228">치위생학과</option>
+                            <option value="888">안경광학과</option>
+                            <option value="999">관리자</option>
+                        </select>
+                    </div>
+
+                    <div class="content">
+                        <ul class="lecture-list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+    <div class="modal" id="delete-modal">
+        <div class="modalContent">
+            <p class="delete">삭제하시겠습니까?</p>
+            <div class="btnGroup">
+                <button type="button" class="checkbtn">확인</button>
+                <button type="button" class="canclebtn">취소</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deleteModal = document.getElementById('delete-modal');
+            const lectureList = document.querySelector('.lecture-list');
+            const majorSelect = document.getElementById('userMajorId');
+            const radioButtons = document.querySelectorAll('input[name="subject"]');
+
+            const confirmBtn = deleteModal.querySelector('.checkbtn');
+            const cancelBtn = deleteModal.querySelector('.canclebtn');
+
+            let targetElement = null; // 삭제할 요소를 저장할 변수
+
+            // --- 1. 가짜 데이터 (기존 유지) ---
+            const dummyLectures = [
+                { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", prof: "정동근", type: "전공", lessonpoint: 3 },
+                { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", prof: "김규동", type: "전공", lessonpoint: 3 },
+                { id: 3, majorId: "162", lessonName: "건강정보의 이해", prof: "ooo", type: "교양", lessonpoint: 2 },
+                { id: 4, majorId: "158", lessonName: "빅데이터 분석", prof: "ooo", type: "전공", lessonpoint: 3 }
+            ];
+
+            // --- 2. 강의 렌더링 함수 ---
+            const renderLectures = (data) => {
+                if (data.length === 0) {
+                    lectureList.innerHTML = '<p style="text-align:center; padding:20px;">조회된 강의가 없습니다.</p>';
+                    return;
+                }
+
+                lectureList.innerHTML = data.map(lecture => `
+            <li data-id="${lecture.id}">
+                <span class="subjectName">${lecture.lessonName}</span>
+                <div class="subjectInfo">
+                    <span>${lecture.prof}</span> <span class="dot">·</span>
+                    <span>${lecture.type}</span> <span class="dot">·</span>
+                    <span>${lecture.lessonpoint}학점</span>
+                    <span><button class="regbtn">강의 삭제</button></span>
+                </div>
+            </li>
+        `).join('');
+            };
+
+            // --- 3. 조회 필터 로직 ---
+            const updateList = () => {
+                const selectedMajor = majorSelect.value;
+                const selectedType = document.querySelector('input[name="subject"]:checked')?.id;
+                const typeKOR = selectedType === 'major' ? '전공' : (selectedType === 'culture' ? '교양' : '');
+
+                if (!selectedMajor || !typeKOR) return;
+
+                const filteredData = dummyLectures.filter(lec =>
+                    lec.majorId === selectedMajor && lec.type === typeKOR
+                );
+
+                renderLectures(filteredData);
+            };
+
+            majorSelect.addEventListener('change', updateList);
+            radioButtons.forEach(radio => radio.addEventListener('change', updateList));
+
+            // --- 4. 삭제 로직 (이벤트 위임 방식) ---
+            // 부모인 lectureList에 이벤트를 걸어서 새로 생기는 버튼도 인식하게 합니다.
+            lectureList.addEventListener('click', (e) => {
+                if (e.target.classList.contains('regbtn')) {
+                    e.preventDefault();
+                    // 클릭된 버튼의 가장 가까운 'li' 태그를 저장
+                    targetElement = e.target.closest('li');
+                    deleteModal.style.display = 'flex';
+                }
+            });
+
+            // 모달 닫기
+            const closeDeleteModal = () => {
+                deleteModal.style.display = 'none';
+                targetElement = null;
+            };
+
+            cancelBtn.addEventListener('click', closeDeleteModal);
+
+            // 확인 버튼 클릭 시 실제 삭제
+            confirmBtn.addEventListener('click', () => {
+                if (targetElement) {
+                    targetElement.remove();
+                    alert("삭제되었습니다.");
+                }
+                closeDeleteModal();
+            });
+
+            // 배경 클릭 시 닫기
+            window.addEventListener('click', (e) => {
+                if (e.target === deleteModal) {
+                    closeDeleteModal();
+                }
+            });
+        });
+    </script>
+
+    <script src="/js/register_prof.js"></script>
+</body>
+
+</html>

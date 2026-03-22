@@ -1,10 +1,3 @@
-.Check {
-    height: 760px;
-    border: 1px solid black;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-}
 
 .subjectHeader .basketHeader{
     background-color: #F7EDFF;
@@ -18,33 +11,6 @@
 }
 
 
-
-
-.majorSelect {
-    display: flex;
-    flex: 1;
-    height: 650px;
-}
-
-.option {
-    width: 250px;
-    border-right: 1px solid #ccc;
-    padding: 20px;
-    margin-top: 0px;
-}
-
-.option select {
-    width: 100%;
-    padding: 10px;
-}
-
-.content {
-    flex: 1;
-    padding: 20px;
-    display: grid;
-    grid-template-rows: 3fr 1fr;
-}
-
 .lectureList li {
     display: flex;
     justify-content: space-between;
@@ -53,19 +19,4 @@
     margin-top: -20px;
     margin-bottom: 30px;
     margin-left: -20px;
-}
-
-.subjectInfo {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-
-.dot {
-    color: #ccc;
-}
-
-.groupRadio span {
-    margin-right: 200px;
-    margin-left: 30px;
 }
