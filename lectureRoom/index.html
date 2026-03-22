@@ -120,11 +120,18 @@
     </main>
     <!--footer-->
     <script>
+        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+            });
         fetch("../layout/header.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
+                document.querySelector('#headerLogo')
+                    .onclick = () => location.href = '/mainPage/index.html';
             });
         fetch("../layout/footer.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
@@ -133,7 +140,6 @@
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
             });
 
-        localStorage.setItem('pageNow', 'lectureroom');
         var role = JSON.parse(localStorage.getItem('user')).userPosition;
         if (role === 'student') {
             document.querySelectorAll('.adminbtn').forEach((e) => e.style.display = 'none');
@@ -141,16 +147,13 @@
             document.querySelectorAll('.firstAttendanceTopRight p')[0].innerText = '출석 완료';
             document.querySelectorAll('.firstAttendanceTopRight p')[1].innerText = '진행 중';
             document.querySelectorAll('.firstAttendanceTopRight p')[2].innerText = '미진행';
+            document.querySelectorAll('#task').forEach((e) => e.innerText = '');
         }
-        
-        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-            });
-            
-            
-            
+
+
+
+
+
     </script>
 </body>
 

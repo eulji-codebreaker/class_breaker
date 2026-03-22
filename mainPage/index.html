@@ -79,6 +79,7 @@
 
         function tolecture() {
             location.assign("../lectureroom/index.html");
+            localStorage.setItem('pageNow','lectureroom')
         }
 
         var role = JSON.parse(localStorage.getItem('user')).userPosition;

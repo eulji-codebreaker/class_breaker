@@ -126,7 +126,6 @@
         const loginForm = document.querySelector(".logForm");
         const loginUserId = document.getElementById("loginUserId");
         const loginUserPwd = document.getElementById("loginUserPwd");
-        const currentUserInfo = null;
 
         const idRegModal = document.getElementById("idReg");
         const regcompleteModal = document.getElementById("regcompleteModal");
@@ -143,12 +142,11 @@
         const userMajorId = document.getElementById("userMajorId");
         const userGrade = document.getElementById("userGrade");
         const userGenderList = document.querySelectorAll('input[name="userGender"]');
-        var userInfo = { userId: null, userPwd: null, userPosition: null, userName: null, userMajorId: null, userMajor: null, userGrade: null, userLessonList: [] }
         var userInfoGroup = [{ userId: 111111111, userPwd: 1111, userPosition: 'prof', userName: '김교수', userMajorId: 160, userMajor: '첨단학부', userGrade: 9, userLessonList: [] },
         { userId: 22222222, userPwd: 2222, userPosition: 'admin', userName: '관리자', userMajorId: 999, userMajor: '관리자', userGrade: 0, userLessonList: [] }]
 
-        localStorage.setItem('pageNow','login');
-        
+        localStorage.setItem('pageNow', 'login');
+
 
         loginUserBtn.addEventListener("click", function () {
             idRegModal.style.display = "flex";
@@ -184,7 +182,6 @@
                 if (userInfoGroup[i].userId == loginUserId.value && userInfoGroup[i].userPwd == loginUserPwd.value) {
                     logincompleteModal.style.display = "flex";
                     localStorage.setItem('user', JSON.stringify(userInfoGroup[i]));
-                    currentUserInfo = localStorage.getItem('user', JSON.stringify(userInfoGroup[i]));
                     return;
                 }
             }
@@ -193,11 +190,30 @@
 
 
         });
-
+        const wrongInput = (e) => {
+            e.focus();
+            e.classList.add('wrong');
+        }
+        const majorMap = {
+            162: '의료it학과',
+            158: "빅데이터의료융합학과",
+            160: "첨단학부",
+            123: "간호학과",
+            119: "응급구조학과",
+            238: "임상병리학과",
+            130: "방사선학과",
+            234: "물리치료학과",
+            228: "치위생학과",
+            888: "안경광학과",
+            999: "관리자"
+        }
         idRegRealForm.addEventListener("submit", function (e) {
             e.preventDefault();
-
             let genderChecked = false;
+            idRegRealForm.querySelectorAll('.wrong').forEach((el) => {
+                el.classList.remove('wrong');
+            });
+
 
             for (let i = 0; i < userGenderList.length; i++) {
                 if (userGenderList[i].checked) {
@@ -206,73 +222,116 @@
             }
 
             if (userPosition.value === "") {
-                userPosition.focus();
+                wrongInput(userPosition);
                 return;
             }
 
             if (userId.value.trim() === "") {
-                userId.focus();
+                wrongInput(userId);
+                return;
+            } else for (let i = 0; i < userInfoGroup.length; i++) {
+                if (userId.value.trim() === String(userInfoGroup[i].userId)) {
+                    wrongInput(userId);
+                    alert('중복된 아이디입니다. 다른 아이디를 이용하세요.');
+                    return;
+                }
+            }
+
+            if (userPosition.value === 'student' && userId.value.trim().length !== 10) {
+                wrongInput(userId);
+                return;
+            }
+            if (userPosition.value === 'prof' && userId.value.trim().length !== 9) {
+                wrongInput(userId);
+                return;
+            }
+            if (userPosition.value === 'admin' && userId.value.trim().length !== 7) {
+                wrongInput(userId);
                 return;
             }
 
             if (userPwd.value.trim() === "") {
-                userPwd.focus();
+                wrongInput(userPwd);
                 return;
             }
 
             if (userPwdConfirm.value.trim() === "") {
-                userPwdConfirm.focus();
+                wrongInput(userPwdConfirm);
                 return;
             }
 
             if (userName.value.trim() === "") {
-                userName.focus();
+                wrongInput(userName);
                 return;
             }
 
             if (userMajorId.value === "") {
-                userMajorId.focus();
+                wrongInput(userMajorId);
                 return;
             }
 
             if (userGrade.value === "") {
-                userGrade.focus();
+                wrongInput(userGrade);
                 return;
             }
 
             if (genderChecked === false) {
-                userGenderList[0].focus();
+                wrongInput(userGenderList[0]);
                 return;
             }
 
-            if (userPwdConfirm.value !== userPwd.value) {
-                userPwdConfirm.focus();
+            if (userPwdConfirm.value != userPwd.value) {
+                wrongInput(userPwdConfirm);
+                return;
+            }
+
+            if (userPosition.value == 'admin' && userMajorId.value != 999) {
+                wrongInput(userMajorId);
+                return;
+            }
+
+            if (userPosition.value == 'admin' && userGrade.value != 0) {
+                wrongInput(userGrade);
+                return;
+            }
+
+            if (userPosition.value != 'admin' && userMajorId.value == 999) {
+                wrongInput(userMajorId);
+                return;
+            }
+
+            if (userPosition.value == 'prof' && userGrade.value != 9) {
+                wrongInput(userGrade);
                 return;
             }
 
             idRegModal.style.display = "none";
             regcompleteModal.style.display = "flex";
-            userInfo.userId = userId.value;
-            userInfo.userPwd = userPwd.value;
-            userInfo.userPosition = userPosition.value;
-            userInfo.userName = userName.value;
-            userInfo.userMajorId = userMajorId.value;
-            userInfo.userGrade = userGrade.value;
+            const newUser = {
+                userId: userId.value,
+                userPwd: userPwd.value,
+                userPosition: userPosition.value,
+                userName: userName.value,
+                userMajorId: userMajorId.value,
+                userMajor: majorMap[userMajorId.value],
+                userGrade: userGrade.value,
+                userLessonList: []
+            };
 
-            // console.log(userInfo);
 
-            userInfoGroup.push(userInfo);
+            userInfoGroup.push(newUser);
 
             localStorage.setItem('userInfoGroup', JSON.stringify(userInfoGroup));
+            idRegRealForm.reset();
 
             // console.log(JSON.parse(localStorage.getItem('userInfoGroup')));
         });
 
-        completeBtn.addEventListener("click", function () {
-            completeModal.style.display = "none";
-        });
+        // completeBtn.addEventListener("click", function () {
+        //     completeModal.style.display = "none";
+        // });
 
-        
+
     </script>
 </body>
 
