@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <main>
+    <main class="wrap">
         <article>
             <div class="artLeft">
                 <div class="main notice">
@@ -45,7 +45,10 @@
                     </ul>
                 </div>
                 <div class="main lecture">
-                    <p class="titleText">내 강의</p>
+                    <div class="mainlectureTop">
+                        <p class="titleText">내 강의</p>
+                        <button class="mainRoombtn" onclick="tolectureroom()">강의실 가기</button>
+                    </div>
                     <ul id="lecture-list">
 
                     </ul>
@@ -75,6 +78,10 @@
             location.assign("../mypage/mypage_student.html");
         }
 
+        function tolectureroom() {
+            location.assign("../lectureRoom/index.html");
+        }
+
         var userLocal = localStorage.getItem('user');
 
         if (userLocal !== null) {
@@ -82,7 +89,7 @@
             var role = user.userPosition;
             var name = user.userName;
             var id = user.userId;
-            var major = user.userMajorId;
+            var major = user.userMajor;
             var grade = user.userGrade;
 
             if (role === 'student') {
