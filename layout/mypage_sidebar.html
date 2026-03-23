@@ -1,35 +1,33 @@
-    <!DOCTYPE html>
-    <html lang="ko">
+<!DOCTYPE html>
+<html lang="ko">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>마이페이지 사이드바</title>
-        <link rel="stylesheet" href="../src/css/ui/module/mypage_sidebar.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sidebar</title>
+    <link rel="stylesheet" href="../src/css/ui/module/mypage_sidebar.css">
+</head>
 
-    <body>
-        <aside class="sidebar-container">
-            <div class="info-section">
-                <div class="section-title">내 정보</div>
-                <div class="info-content">
-                    <p id="info-name">이름: </p>
-                    <p id="info-id">학번: </p>
-                    <p id="info-major">학과: </p>
-                    <p id="info-grade">학년: </p>
-                </div>
+<body>
+    <aside class="sidebar-container">
+        <div class="info-section">
+            <div class="section-title">내 정보</div>
+            <div class="info-content">
+                <ul class="info-list" id="sidebar-info-details">
+                    <li><span id="label1">이름: </span><span id="val1"></span></li>
+                    <li><span id="label2">학번: </span><span id="val2"></span></li>
+                    <li><span id="label3">학과: </span><span id="val3"></span></li>
+                    <li><span id="label4">학년: </span><span id="val4"></span></li>
+                </ul>
             </div>
+        </div>
 
-            <div class="course-section">
-                <div class="section-title">수강신청 과목</div>
-                <div class="course-list">
-                    <button type="button" class="course-card" onclick="goToLecture()">
-                        <p class="course-name"></p>
-                        <p class="professor"></p>
-                    </button>
-                </div>
+        <div class="course-section">
+            <div class="section-title" id="course-section-title">수강신청 과목</div>
+            <div class="course-list">
             </div>
-        </aside>
-    </body>
+        </div>
+    </aside>
+</body>
 
-    </html>
+</html>

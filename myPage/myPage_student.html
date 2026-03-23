@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mypage_student</title>
+    <title>student</title>
     <link rel="stylesheet" href="mypage_student.css">
 </head>
 
 <body>
     <main>
         <article>
+            <!-- top bar -->
             <div class="topbar">
                 <div class="myTimetable active">나의 시간표</div>
                 <div class="learningList">필수과목 이수여부</div>
@@ -18,6 +19,7 @@
                 <div class="empty-slot"></div>
             </div>
 
+            <!-- timetable1 -->
             <div class="studentTimetable1">
                 <div class="timetableCol nothing">
                     <div class="fixedTime">요일,교시</div>
@@ -105,6 +107,7 @@
                 </div>
             </div>
 
+            <!-- timetable2 -->
             <div class="studentTimetable2">
                 <table>
                     <thead>
@@ -190,19 +193,64 @@
     </main>
 
     <script>
+        // 시간 옵션 렌더링 함수
+        const renderTimeOptions = () => {
+            const beginSel = document.getElementById('lessonBegin');
+            const endSel = document.getElementById('lessonEnd');
+            if (!beginSel || !endSel) return;
+            let bOptions = '', eOptions = '';
+            for (let i = 8; i <= 18; i++) {
+                bOptions += `<option value="${i}">${i}:00</option>`;
+                eOptions += `<option value="${i}">${i}:50</option>`;
+            }
+            beginSel.innerHTML = bOptions;
+            endSel.innerHTML = eOptions;
+        };
+
+        function getDayClass(n) {
+            return { 1: 'mon', 2: 'tue', 3: 'wed', 4: 'thr', 5: 'fri' }[n] || '';
+        }
+
+        // 학생 UI 렌더링 (시간표 및 사이드바 목록)
         window.renderStudentUI = () => {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) return;
 
-            var myLessons = userData.userLessonList || [];
-            const localUpdate=()=>{
-                localStorage.setItem('myLessons',JSON.stringify(myLessons));
-                myLessons=JSON.parse(localStorage.getItem('myLessons'));
-                userData.userLessonList=myLessons;
-            };
-            localUpdate();
+            // const myLessons = userData.userLessonList || [];
+            var myLessons=localStorage.getItem('myLessons'); //const로 바꾸셈
+            myLessons=[
+                {lessonId: '121aaa',
+                lessonName: 'fffff',
+                lessonProfId: 222222222,
+                lessonProf: '강민수',
+                lessonMajorId: 160,
+                lessonGrade: 4,
+                lessonNow: 0,
+                lessonMax: 40,
+                lessonRoom: '박123',
+                lessonDay: 3,
+                lessonBegin: '08:00',
+                lessonEnd: '11:50',
+                lessonPoint: 3,
+                lessonSyllabus: 'ㅁㄴㅇ'},
 
-            // table1 업데이트
+                {lessonId: 'pasd01',
+                lessonName: 'fucktlqkf',
+                lessonProfId: 333333333,
+                lessonProf: '정명애',
+                lessonMajorId: 160,
+                lessonGrade: 4,
+                lessonNow: 3,
+                lessonMax: 40,
+                lessonRoom: '박444',
+                lessonDay: 5,
+                lessonBegin: '13:00',
+                lessonEnd: '15:50',
+                lessonPoint: 5,
+                lessonSyllabus: '강의계획서'}
+            ]
+
+            // 시간표(Table1) 업데이트
             document.querySelectorAll('.studentTimetable1 .timetableCol div:not(.fixedTime)').forEach(el => {
                 el.innerText = '';
                 el.style.backgroundColor = '';
@@ -228,7 +276,7 @@
                 }
             });
 
-            // table2 업데이트
+            // 이수현황(Table2) 업데이트
             const tbody = document.querySelector('.studentTimetable2 tbody');
             if (tbody) {
                 if (myLessons.length === 0) {
@@ -245,7 +293,7 @@
                 }
             }
 
-            // 사이드바 업데이트
+            // 3. 사이드바 강의 목록 업데이트
             const sidebarCourseList = document.querySelector('.course-list');
             if (sidebarCourseList) {
                 sidebarCourseList.innerHTML = myLessons.map(l => `
@@ -257,76 +305,72 @@
             }
         };
 
-        function getDayClass(n) {
-            return { 1: 'mon', 2: 'tue', 3: 'wed', 4: 'thr', 5: 'fri' }[n] || '';
-        }
+        // 모든 리소스 로드 후 실행
+        window.onload = () => {
+            renderTimeOptions();
 
-        /* top bar */
-        const tabTimetable = document.querySelector('.myTimetable');
-        const tabLearningList = document.querySelector('.learningList');
-        const table1 = document.querySelector('.studentTimetable1');
-        const table2 = document.querySelector('.studentTimetable2');
+            // 헤더 로드
+            fetch("../layout/header.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("afterbegin", h));
+            // 푸터 로드
+            fetch("../layout/footer.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("beforeend", h));
 
-        
-        if (tabTimetable && tabLearningList) {
-            tabTimetable.addEventListener('click', () => {
-                tabTimetable.classList.add('active');
-                tabLearningList.classList.remove('active');
-                table1.style.display = 'grid';
-                table2.style.display = 'none';
-                renderStudentUI();
-            });
+            // 사이드바 로드 및 데이터 바인딩
+            fetch("../layout/mypage_sidebar.html")
+                .then(res => res.text())
+                .then(html => {
+                    const main = document.querySelector('main');
+                    if (!document.querySelector('.sidebar-container')) {
+                        main.insertAdjacentHTML("afterbegin", html);
+                    }
 
-            tabLearningList.addEventListener('click', () => {
-                tabLearningList.classList.add('active');
-                tabTimetable.classList.remove('active');
-                table1.style.display = 'none';
-                table2.style.display = 'block';
-                renderStudentUI();
-            });
-        }
+                    const userLocal = localStorage.getItem('user');
+                    if (userLocal) {
+                        const user = JSON.parse(userLocal);
 
-        /* sidebar,  수강신청과목*/
-        fetch("../layout/mypage_sidebar.html")
-            .then(res => res.text())
-            .then(html => {
-                const main = document.querySelector('main');
-                if (!document.querySelector('.sidebar-container')) {
-                    main.insertAdjacentHTML("afterbegin", html);
-                }
+                        // 내 정보 채우기
+                        const setVal = (id, txt) => {
+                            const el = document.querySelector(id);
+                            if (el) el.innerText = txt;
+                        };
 
-                renderStudentUI();
+                        setVal('#val1', user.userName);
+                        setVal('#val2', user.userId);
+                        setVal('#val3', user.userMajor || '미지정');
+                        setVal('#val4', user.userGrade + '학년');
 
-                const userData = JSON.parse(localStorage.getItem('user'));
-                if (userData) {
-                    const nameEl = document.getElementById('info-name');
-                    const idEl = document.getElementById('info-id');
-                    const majorEl = document.getElementById('info-major');
-                    const gradeEl = document.getElementById('info-grade');
+                        // 학생이므로 제목은 "수강신청 과목" 유지 (필요시 변경)
+                    }
 
-                    if (nameEl) nameEl.innerText = `이름: ${userData.userName}`;
-                    if (idEl) idEl.innerText = `학번: ${userData.userId}`;
-                    if (majorEl) majorEl.innerText = `학과: ${userData.userMajor || '미지정'}`;
-                    if (gradeEl) gradeEl.innerText = `학년: ${userData.userGrade}학년`;
-                }
-            })
-            .catch(err => console.error("사이드바 로드 실패:", err));
+                    // 데이터 채우기 실행
+                    renderStudentUI();
+                })
+                .catch(err => console.error("사이드바 로드 실패:", err));
 
-        /* header, footer */
-        fetch("../layout/header.html")
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            })
-        fetch("../layout/footer.html")
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            })
+            // 탭 이벤트 설정
+            const tabTimetable = document.querySelector('.myTimetable');
+            const tabLearningList = document.querySelector('.learningList');
+            const table1 = document.querySelector('.studentTimetable1');
+            const table2 = document.querySelector('.studentTimetable2');
+
+            if (tabTimetable && tabLearningList) {
+                tabTimetable.addEventListener('click', () => {
+                    tabTimetable.classList.add('active');
+                    tabLearningList.classList.remove('active');
+                    table1.style.display = 'grid';
+                    table2.style.display = 'none';
+                });
+
+                tabLearningList.addEventListener('click', () => {
+                    tabLearningList.classList.add('active');
+                    tabTimetable.classList.remove('active');
+                    table1.style.display = 'none';
+                    table2.style.display = 'block';
+                });
+            }
+        };
 
         window.goToLecture = function () {
-            const targetPath = "../lectureRoom/index.html";
-            location.href = targetPath;
+            location.href = "../lectureRoom/index.html";
         };
     </script>
 </body>

@@ -1,16 +1,68 @@
-/* top bar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'normalFont';
+}
+
+@font-face {
+    font-family: 'normalFont';
+    src: url('../../../font/SCDream4.otf') format('opentype');
+}
+
+body {
+    display: grid;
+    grid-template-rows: 90px 1fr 60px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+}
+
+article {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+#headerLogo:hover {
+    cursor: pointer;
+}
+
+header {
+    width: 100%;
+    background-color: #EFDFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+footer {
+    height: 60px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
 .topbar {
     width: 100%;
-    height: 80px;
+    height: 60px;
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
-    margin-bottom: 15px;
+    margin-bottom: 11px;
     border-radius: 10px;
     border: 1px solid #8b5fbf;
 
-    background: #ead8fa;
+    background: #EFDFFF;
 
     overflow: hidden;
     cursor: pointer;
@@ -18,9 +70,10 @@
 
 .topbar>div {
     font-weight: bold;
-    font-size: 30px;
-    line-height: 80px;
+    font-size: 25px;
+    line-height: 60px;
 
+    font-size: 1.2rem;
     text-align: center;
     white-space: nowrap;
 
@@ -29,7 +82,7 @@
 
 .active {
     width: 100%;
-    height: 80px;
+    height: 60px;
     line-height: 80px;
 
     padding: 0;
@@ -42,7 +95,7 @@
 /* Timetable1 (myTimetable) */
 .studentTimetable1 {
     width: 100%;
-    height: 755px;
+    height: 529px;
 
     display: grid;
     grid-template-columns: 130px repeat(5, minmax(150px, 1fr));
@@ -99,7 +152,7 @@
 /* Timetable2 (learningList) */
 .studentTimetable2 {
     width: 100%;
-    height: 755px;
+    height: 529px;
 
     display: grid;
     grid-template-columns: 130px repeat(5, minmax(150px, 1fr));
@@ -127,7 +180,7 @@
 
 .studentTimetable2 th,
 .studentTimetable2 td {
-    height: 80px;
+    height: 45px;
 
     border: 1px solid black;
     border-top: none;

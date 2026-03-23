@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mypage_admin</title>
+    <title>admin</title>
     <link rel="stylesheet" href="mypage_admin.css">
 </head>
 
@@ -48,7 +48,8 @@
                     <div class="info-item full-width">
                         <div class="label">과목 ID 생성</div>
                         <div class="id-combo">
-                            <select id="modal-major-select" required>
+                            <select id="modal-major-select" required
+                                onchange="document.getElementById('modal-num').value = this.value">
                                 <option value="" disabled selected hidden>학과를 선택해주세요.</option>
                                 <option value="162">의료it학과</option>
                                 <option value="158">빅데이터의료융합학과</option>
@@ -65,8 +66,8 @@
                                 <option value="m">m (전공필수)</option>
                                 <option value="s">s (전공선택)</option>
                             </select>
-                            <input type="number" id="modal-num" placeholder="00" min="0" max="99" required>
-                            <span class="helper-text">* 학과번호</span>
+                            <input type="number" id="modal-num" placeholder="000" readonly>
+                            <span class="helper-text">* 자동입력</span>
                         </div>
                     </div>
                     <div class="info-item">
@@ -89,7 +90,7 @@
                     </div>
                     <div class="info-item">
                         <div class="label">강의실</div>
-                        <input type="text" id="lessonRoom" required>
+                        <input type="text" id="lessonRoom" required placeholder="예: 본관 301호">
                     </div>
                     <div class="info-item">
                         <div class="label">요일</div>
@@ -114,10 +115,12 @@
                         <input type="number" id="lessonPoint" min="1" max="5" value="3">
                     </div>
                 </div>
-                <div class="info-item textarea-item">
-                    <div class="label">강의설명</div>
-                    <textarea id="lessonContent" placeholder="강의 상세 내용을 입력하세요."></textarea>
+
+                <div class="syllabus-container">
+                    <div class="label">강의계획서 (1~15주차)</div>
+                    <div class="week-grid" id="syllabus-weeks"></div>
                 </div>
+
                 <div class="modal-btn-group" id="admin-modal-btns">
                     <button type="submit" class="modalbtn primary">저장하기</button>
                     <button type="button" class="modalbtn" onclick="closeModal()">취소</button>
@@ -146,12 +149,41 @@
     </div>
 
     <script>
-        let isEditMode = false;
-        let editTargetId = null;
+        /* 전역 변수 선언 */
         const mainModal = document.getElementById('admin-modal');
         const resModal = document.getElementById('result-modal');
         const addForm = document.getElementById('add-form');
+        let isEditMode = false;
+        let editTargetId = null;
 
+        // 15주차 강의계획서 입력 필드 생성
+        const renderSyllabusFields = () => {
+            const container = document.getElementById('syllabus-weeks');
+            if (!container) return;
+            let html = '';
+            for (let i = 1; i <= 15; i++) {
+                html += `
+            <div class="week-item">
+                <span>${i}주차</span>
+                <input type="text" class="syllabus-input" data-week="${i}" placeholder="내용 입력">
+            </div>`;
+            }
+            container.innerHTML = html;
+        };
+
+        // 시작/종료 시간 선택 옵션 생성 (08:00 ~ 18:00)
+        const renderTimeOptions = () => {
+            const beginSel = document.getElementById('lessonBegin');
+            const endSel = document.getElementById('lessonEnd');
+            let opt = '';
+            for (let i = 8; i <= 18; i++) {
+                opt += `<option value="${i}">${i}:00</option>`;
+            }
+            if (beginSel) beginSel.innerHTML = opt;
+            if (endSel) endSel.innerHTML = opt;
+        };
+
+        // 결과 알림 모달 출력
         function showResultModal(title, message) {
             document.getElementById('result-title').innerText = title;
             document.getElementById('result-message').innerText = message;
@@ -160,17 +192,21 @@
 
         window.closeResultModal = () => { resModal.style.display = 'none'; };
 
+        /* 모달창 */
         const openLayout = (layoutId) => {
             mainModal.style.display = 'flex';
             document.querySelectorAll('.modal-layout').forEach(l => l.style.display = 'none');
             document.getElementById(layoutId).style.display = 'flex';
+            if (layoutId === 'add-form') renderSyllabusFields();
         };
 
         window.closeModal = () => {
             mainModal.style.display = 'none';
             addForm.reset();
+            document.getElementById('modal-num').value = '';
         };
 
+        /* 데이터 렌더링 함수 (강의 목록) */
         function renderAdminLessonList() {
             const allLessons = JSON.parse(localStorage.getItem('openedLessons') || '[]');
             const listContainer = document.querySelector('.lecture-list');
@@ -180,7 +216,7 @@
 
             const filteredLessons = (filterValue === "999")
                 ? allLessons
-                : allLessons.filter(l => l.lessonId.startsWith(filterValue));
+                : allLessons.filter(l => String(l.lessonId).startsWith(filterValue));
 
             if (filteredLessons.length === 0) {
                 listContainer.innerHTML = '<li style="justify-content:center; padding:20px;">개설된 과목이 없습니다.</li>';
@@ -193,29 +229,23 @@
                 "130": "방사선", "234": "물리치료", "228": "치위생", "888": "안경광학"
             };
 
-            listContainer.innerHTML = filteredLessons.map(l => {
-                const majorCode = l.lessonId.substring(0, 3);
-                const majorName = majorNames[majorCode] || "기타";
-                return `
-                    <li data-id="${l.lessonId}">
-                        <span class="subjectName"><strong>${l.lessonName}</strong> (${l.lessonId})</span>
-                        <div class="subjectInfo" style="display:flex; align-items:center; gap:10px;">
-                            <span>${majorName}</span> <span class="dot">·</span>
-                            <span>${l.lessonProf || '관리자'} 교수</span> <span class="dot">·</span>
-                            <span>${l.lessonPoint || 3}학점</span> <span class="dot">·</span>
-                            <span>${l.lessonNow || 0}/${l.lessonMax}명</span>
-                            <button class="regbtn" style="margin-left:15px;" onclick="openLectureDetail('${l.lessonId}')">강의계획서</button>
-                        </div>
-                    </li>
-                `;
-            }).join('');
+            listContainer.innerHTML = filteredLessons.map(l => `
+        <li data-id="${l.lessonId}">
+            <span class="subjectName">${l.lessonName} (${l.lessonId})</span>
+            <div class="subjectInfo" style="display:flex; align-items:center; gap:10px;">
+                <span>${majorNames[String(l.lessonId).substring(0, 3)] || "기타"}</span> <span class="dot">·</span>
+                <span>${l.lessonProf || '관리자'} 교수</span> <span class="dot">·</span>
+                <span>${l.lessonPoint || 3}학점</span> <span class="dot">·</span>
+                <span>${l.lessonNow || 0}/${l.lessonMax}명</span>
+                <button class="regbtn" style="margin-left:15px;" onclick="openLectureDetail('${l.lessonId}')">강의계획서</button>
+            </div>
+        </li>`).join('');
         }
 
-        document.getElementById('id-major').addEventListener('change', renderAdminLessonList);
-
+        // 강의계획서 버튼 클릭
         window.openLectureDetail = (id) => {
             const allLessons = JSON.parse(localStorage.getItem('openedLessons') || '[]');
-            const target = allLessons.find(l => l.lessonId === id);
+            const target = allLessons.find(l => String(l.lessonId) === String(id));
             if (!target) return;
 
             isEditMode = true;
@@ -223,24 +253,29 @@
             openLayout('add-form');
             document.querySelector('.modal-title').innerText = "강의 관리 (수정/삭제)";
 
-            document.getElementById('modal-major-select').value = target.lessonId.substring(0, 3);
-            document.getElementById('modal-req').value = target.lessonId.substring(3, 4);
-            document.getElementById('modal-num').value = parseInt(target.lessonId.substring(4, 6));
+            document.getElementById('modal-major-select').value = String(target.lessonId).substring(0, 3);
+            document.getElementById('modal-num').value = String(target.lessonId).substring(0, 3);
+            document.getElementById('modal-req').value = String(target.lessonId).substring(3, 4);
             document.getElementById('lessonName').value = target.lessonName;
             document.getElementById('lessonMax').value = target.lessonMax;
             document.getElementById('lessonRoom').value = target.lessonRoom || "";
-            document.getElementById('lessonGrade').value = target.lessonGrade || "1";
-            document.getElementById('lessonDay').value = target.lessonDay || "1";
-            document.getElementById('lessonBegin').value = target.lessonBegin || "9";
-            document.getElementById('lessonEnd').value = target.lessonEnd || "10";
+            document.getElementById('lessonGrade').value = String(target.lessonGrade);
+            document.getElementById('lessonDay').value = String(target.lessonDay);
+            document.getElementById('lessonBegin').value = String(target.lessonBegin);
+            document.getElementById('lessonEnd').value = String(target.lessonEnd);
             document.getElementById('lessonPoint').value = target.lessonPoint || 3;
-            document.getElementById('lessonContent').value = target.lessonContent || "";
 
+            if (target.lessonSyllabus) {
+                document.querySelectorAll('.syllabus-input').forEach(input => {
+                    input.value = target.lessonSyllabus[input.dataset.week] || "";
+                });
+            }
+
+            // 버튼 변경
             document.getElementById('admin-modal-btns').innerHTML = `
-                <button type="submit" class="modalbtn primary">정보 수정</button>
-                <button type="button" class="modalbtn danger" id="admin-delete-trigger">강의 삭제</button>
-                <button type="button" class="modalbtn" onclick="closeModal()">닫기</button>
-            `;
+        <button type="submit" class="modalbtn primary">정보 수정</button>
+        <button type="button" class="modalbtn danger" id="admin-delete-trigger">강의 삭제</button>
+        <button type="button" class="modalbtn" onclick="closeModal()">닫기</button>`;
 
             document.getElementById('admin-delete-trigger').onclick = () => {
                 openLayout('delete-confirm');
@@ -248,40 +283,40 @@
             };
         };
 
+        // 삭제 실행
         document.getElementById('execute-delete-btn').onclick = () => {
             let allOpened = JSON.parse(localStorage.getItem('openedLessons') || '[]');
-            allOpened = allOpened.filter(l => l.lessonId !== editTargetId);
+            allOpened = allOpened.filter(l => String(l.lessonId) !== String(editTargetId));
             localStorage.setItem('openedLessons', JSON.stringify(allOpened));
 
             let allUsers = JSON.parse(localStorage.getItem('userInfoGroup') || '[]');
             allUsers = allUsers.map(u => {
-                if (u.userLessonList) u.userLessonList = u.userLessonList.filter(l => l.lessonId !== editTargetId);
+                if (u.userLessonList) u.userLessonList = u.userLessonList.filter(l => String(l.lessonId) !== String(editTargetId));
                 return u;
             });
             localStorage.setItem('userInfoGroup', JSON.stringify(allUsers));
 
             closeModal();
-            setTimeout(() => {
-                showResultModal("삭제 완료", "강의가 삭제되었습니다.");
-                renderAdminLessonList();
-            }, 200);
+            setTimeout(() => { showResultModal("삭제 완료", "강의가 삭제되었습니다."); renderAdminLessonList(); }, 200);
         };
 
+        // 폼 저장, 추가, 수정
         addForm.onsubmit = (e) => {
             e.preventDefault();
+            const bTime = Number(document.getElementById('lessonBegin').value);
+            const eTime = Number(document.getElementById('lessonEnd').value);
+            if (bTime >= eTime) return showResultModal("오류", "종료 시간은 시작 시간보다 늦어야 합니다.");
+
             const major = document.getElementById('modal-major-select').value;
             const req = document.getElementById('modal-req').value;
-            const num = document.getElementById('modal-num').value.padStart(2, '0');
-            const fullId = `${major}${req}${num}`;
-
-            if (!major) { showResultModal("오류", "학과를 선택해주세요."); return; }
+            const syllabusData = {};
+            document.querySelectorAll('.syllabus-input').forEach(input => syllabusData[input.dataset.week] = input.value);
 
             let allOpened = JSON.parse(localStorage.getItem('openedLessons') || '[]');
-            let allUsers = JSON.parse(localStorage.getItem('userInfoGroup') || '[]');
-            const prev = allOpened.find(l => l.lessonId === editTargetId);
+            const prev = allOpened.find(l => String(l.lessonId) === String(editTargetId));
 
             const newLesson = {
-                lessonId: fullId,
+                lessonId: isEditMode ? editTargetId : `${major}${req}${Math.floor(Math.random() * 90) + 10}`,
                 lessonName: document.getElementById('lessonName').value,
                 lessonProf: isEditMode ? (prev?.lessonProf || "관리자") : "관리자",
                 lessonProfId: isEditMode ? prev?.lessonProfId : 999,
@@ -291,61 +326,71 @@
                 lessonRoom: document.getElementById('lessonRoom').value,
                 lessonGrade: Number(document.getElementById('lessonGrade').value),
                 lessonDay: Number(document.getElementById('lessonDay').value),
-                lessonBegin: Number(document.getElementById('lessonBegin').value),
-                lessonEnd: Number(document.getElementById('lessonEnd').value),
+                lessonBegin: bTime,
+                lessonEnd: eTime,
                 lessonPoint: Number(document.getElementById('lessonPoint').value),
-                lessonContent: document.getElementById('lessonContent').value
+                lessonSyllabus: syllabusData
             };
 
             if (isEditMode) {
-                const idx = allOpened.findIndex(l => l.lessonId === editTargetId);
+                const idx = allOpened.findIndex(l => String(l.lessonId) === String(editTargetId));
                 if (idx !== -1) allOpened[idx] = newLesson;
-                allUsers = allUsers.map(u => {
-                    if (u.userLessonList) {
-                        const uIdx = u.userLessonList.findIndex(l => l.lessonId === editTargetId);
-                        if (uIdx !== -1) u.userLessonList[uIdx] = newLesson;
-                    }
-                    return u;
-                });
             } else {
                 allOpened.push(newLesson);
             }
 
             localStorage.setItem('openedLessons', JSON.stringify(allOpened));
-            localStorage.setItem('userInfoGroup', JSON.stringify(allUsers));
-
             closeModal();
-            setTimeout(() => {
-                showResultModal("성공", "강의 정보가 반영되었습니다.");
-                renderAdminLessonList();
-            }, 200);
+            setTimeout(() => { showResultModal("성공", "강의 정보가 반영되었습니다."); renderAdminLessonList(); }, 200);
         };
 
         window.onload = () => {
-            const b = document.getElementById('lessonBegin'), e = document.getElementById('lessonEnd');
-            let opt = '';
-            for (let i = 8; i <= 18; i++) opt += `<option value="${i}">${i}:00</option>`;
-            b.innerHTML = opt; e.innerHTML = opt;
+            renderTimeOptions();
             renderAdminLessonList();
+            document.getElementById('id-major').addEventListener('change', renderAdminLessonList);
 
+            // 헤더/푸터 로드
             fetch("../layout/header.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("afterbegin", h));
             fetch("../layout/footer.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("beforeend", h));
+
+            // 사이드바 로드 및 관리자 모드 처리
             fetch("../layout/mypage_sidebar.html").then(res => res.text()).then(html => {
-                document.querySelector('main').insertAdjacentHTML("afterbegin", html);
-                const user = JSON.parse(localStorage.getItem('user'));
-                if (user) {
-                    document.getElementById('info-name').innerText = `이름: ${user.userName}`;
-                    document.getElementById('info-id').innerText = `사번: ${user.userId}`;
-                    const gradeEl = document.getElementById('info-grade');
-                    if (gradeEl) { gradeEl.innerText = "직책: 관리자"; gradeEl.style.display = "block"; }
+
+                const main = document.querySelector('main');
+                if (!document.querySelector('.sidebar-container')) {
+                    main.insertAdjacentHTML("afterbegin", html);
                 }
+
+                const userLocal = localStorage.getItem('user');
+
+                if (userLocal) {
+                    const user = JSON.parse(userLocal);
+                    const namePlace = document.querySelector('.namePlace');
+                    if (namePlace) namePlace.innerText = `${user.userName} 관리자님`;
+                    const label2 = document.querySelector('#label2');
+                    if (label2) label2.innerText = "사번: ";
+                    const setVal = (id, txt) => { const el = document.querySelector(id); if (el) el.innerText = txt; };
+                    setVal('#val1', user.userName);
+                    setVal('#val2', user.userId);
+                    const hideTargets = ['#label3', '#val3', '#label4', '#val4'];
+                    hideTargets.forEach(selector => {
+                        const el = document.querySelector(selector);
+                        if (el && el.closest('li')) el.closest('li').style.display = 'none';
+                    });
+
+                }
+
             });
 
+            // 메인 추가 버튼 클릭 시
             document.getElementById('btn-add-main').onclick = () => {
                 isEditMode = false; editTargetId = null;
                 openLayout('add-form');
                 document.querySelector('.modal-title').innerText = "새 강의 직접 개설";
                 document.getElementById('modal-major-select').value = "";
+                document.getElementById('admin-modal-btns').innerHTML = `
+            <button type="submit" class="modalbtn primary">저장하기</button>
+            <button type="button" class="modalbtn" onclick="closeModal()">취소</button>`;
             };
         };
     </script>

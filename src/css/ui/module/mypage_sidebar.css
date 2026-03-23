@@ -1,6 +1,6 @@
 aside {
     width: 275px;
-    height: 850px;
+    height: 600px;
     background: #ffffff;
     border: 1px solid #8B5FBF;
     border-radius: 10px;
@@ -10,7 +10,7 @@ aside {
 }
 
 .section-title {
-    background-color: #EAD8FA;
+    background-color: #efdfff;
     padding: 15px 0;
     font-size: 1.2rem;
     font-weight: bold;
@@ -58,7 +58,7 @@ aside {
 }
 
 .course-card:hover {
-    background-color: #EAD8FA;
+    background-color: #efdfff;
 }
 
 .course-name {
@@ -70,4 +70,8 @@ aside {
 .professor {
     font-size: 0.8rem;
     color: black;
+}
+
+.sidebar-container ul {
+    list-style: none; 
 }
