@@ -19,20 +19,21 @@ fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러�
 const topbarItems = document.querySelectorAll('.topbar div');
 
 topbarItems[0].addEventListener('click', () => {
-    location.href = "check.html";
+    location.href = "prof_index.html";
 });
 
 topbarItems[1].addEventListener('click', () => {
-    location.href = "basket.html";
+    location.href = "prof_update.html";
 });
 
 topbarItems[2].addEventListener('click', () => {
-    location.href = "register.html";
+    location.href = "prof_delete.html";
 });
 
 topbarItems[3].addEventListener('click', () => {
-    location.href = "timetable.html";
+    location.href = "prof_timetable.html";
 });
 
 
-var role=JSON.parse(localStorage.getItem('student')).userPosition;
+
+var role=JSON.parse(localStorage.getItem('prof')).userPosition;

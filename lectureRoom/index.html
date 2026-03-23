@@ -120,11 +120,6 @@
     </main>
     <!--footer-->
     <script>
-        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-            });
         fetch("../layout/header.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
@@ -149,11 +144,12 @@
             document.querySelectorAll('.firstAttendanceTopRight p')[2].innerText = '미진행';
             document.querySelectorAll('#task').forEach((e) => e.innerText = '');
         }
-
-
-
-
-
+        
+        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+            });           
     </script>
 </body>
 
