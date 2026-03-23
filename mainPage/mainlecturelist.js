@@ -29,17 +29,8 @@ function mylecture() {
             // 강의 이름
             var lectureTitle = document.createElement('span');
             lectureTitle.innerText = lectureName + " ";
-            var gobutton = document.createElement('button');
-            gobutton.innerText = "강의실 가기";
-            gobutton.className = "mainRoombtn";
-
-            gobutton.onclick = function () {
-                localStorage.setItem('currentLecture', lectureName);
-                location.assign("../lectureroom/index.html");
-            };
 
             lectureli.appendChild(lectureTitle);
-            lectureli.appendChild(gobutton);
             lectureList.appendChild(lectureli);
         }
     }

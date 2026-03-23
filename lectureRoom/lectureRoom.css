@@ -1,3 +1,40 @@
+        aside {
+  width: 275px;
+  height: 100%;
+  background: #EAD8FA;
+  border: 1px solid #8B5FBf;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
+
+}
+
+.menu {
+  width: 275px;
+  height: 80px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hover:hover {
+  cursor: pointer;
+  background-color: #cc97ff;
+}
+
+/* js로 클릭했을 때 하얀색되게 */
+.menuActive {
+  background: #ffffff;
+  border: 1px solid #8B5FBF;
+}
+
+/*사이드바 끝*/
+        
+        
         * {
             margin: 0;
             
@@ -96,19 +133,22 @@
             margin-right: 10px;
             width: 23px;
             height: 23px;
-            background-color: #d9d9d9;
         }
 
+        .firstAttendanceTopRight>.attendanceYes{background-color: #7CAF36;}
+        .firstAttendanceTopRight>.attendanceNow{background-color: #FFE08A;}
+        .firstAttendanceTopRight>.attendanceYet{background-color: #d9d9d9;}
 
-        #attendanceYes {
+
+        .attendanceStatus>.attendanceYes {
             background-color: #7CAF36;
         }
 
-        #attendanceNow {
+        .attendanceStatus>.attendanceNow {
             background-color: #FFE08A;
         }
 
-        #attendanceYet {
+        .attendanceStatus>.attendanceYet {
             background-color: #d9d9d9;
         }
 

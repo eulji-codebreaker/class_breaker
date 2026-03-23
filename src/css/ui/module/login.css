@@ -1,251 +1,264 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+}
+
 main {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f5f5f5;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+}
 
-        .loginLabel {
-            font-size: 30px;
-            text-align: right;
-            width: 100px;
-        }
+.loginLabel {
+    font-size: 30px;
+    text-align: right;
+    width: 100px;
+}
 
-        .logBox p {
-            font-size: 50px;
-        }
+.logBox p {
+    font-size: 50px;
+}
 
-        .logBox {
-            box-sizing: border-box;
-            width: 1200px;
-            height: 800px;
-            background: #FFFFFF;
-            border: 1px solid #ABABAB;
-            border-radius: 10px;
+.logBox {
+    box-sizing: border-box;
+    width: 1200px;
+    height: 800px;
+    background: #FFFFFF;
+    border: 1px solid #ABABAB;
+    border-radius: 10px;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .logBox form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .wrong{
-            background-color:gray;
-            color:black;
-        }
+.logBox form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 
-        .formInput {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            gap: 30px;
-        }
+.buttonZip {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 50px;
+}
 
-        .formInput input {
-            width: 500px;
-            height: 50px;
-            padding: 10px 15px;
-            font-size: 24px;
+.wrong {
+    background-color: gray;
+    color: black;
+}
 
-            border-radius: 10px;
-        }
+.formInput {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
 
-        .input-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
+.formInput input {
+    width: 500px;
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 24px;
 
-        .loginbtn {
-            box-sizing: border-box;
-            display: flex;
-            gap: 30px;
-            margin-top: 50px;
-            width: 840px;
-            height: 70px;
-            border-radius: 10px;
+    border-radius: 10px;
+}
 
-            justify-content: center;
-            align-items: center;
-            font-size: 36px;
+.input-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
 
-            cursor: pointer;
-        }
+.loginbtn {
+    box-sizing: border-box;
+    display: flex;
+    gap: 30px;
+    width: 400px;
+    height: 70px;
+    border-radius: 10px;
 
-        .loginUserBtn {
-            display: flex;
-            cursor: pointer;
-        }
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
 
-        .modal {
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            position: fixed;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-        }
+    cursor: pointer;
+}
 
-        #idReg>.modalContent {
-            background-color: white;
-            width: 52%;
-            min-height: 82vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 40px 0;
-        }
+.loginUserBtn {
+    display: flex;
+    cursor: pointer;
+}
 
-        .btngroup{
-            display: flex;
-            flex-direction: row;
-            gap:10px;
-            justify-content: center;
-        }
-        .btngroup>*{
-            width:140px;
-            height:70px;
-            font-size: 20px;
-        }
+.modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
 
-        .modal-header {
-            font-size: 64px;
-            padding-bottom: 35px;
-        }
+#idReg>.modalContent {
+    background-color: white;
+    width: 52%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 0;
+    overflow-y: auto;
+}
 
-        #idRegForm {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            padding-bottom: 16px;
-            gap: 14px 18px;
-            align-items: center;
-        }
+.btngroup {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
 
-        #idRegForm>label {
-            text-align: end;
-            font-size: 24px;
-            font-weight: 400;
-        }
+.btngroup>* {
+    width: 140px;
+    height: 70px;
+    font-size: 20px;
+}
 
-        
+.modal-header {
+    font-size: 64px;
+    padding-bottom: 35px;
+}
 
-        .idRegFormLeft,
-        .idRegFormRight {
-            display: flex;
-            flex-direction: column;
-        }
+#idRegForm {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding-bottom: 16px;
+    gap: 14px 18px;
+    align-items: center;
+}
 
-        #idRegRealForm {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 78%;
-        }
+#idRegForm>label {
+    text-align: end;
+    font-size: 24px;
+    font-weight: 400;
+}
 
 
 
-        #idRegForm input::placeholder {
-            font-size: 18px;
-        }
+.idRegFormLeft,
+.idRegFormRight {
+    display: flex;
+    flex-direction: column;
+}
 
-        #idRegForm>div {
-            font-size: 20px;
-        }
+#idRegRealForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 78%;
+}
 
-        #idRegForm input::placeholder {
-            font-size: 18px;
-        }
 
-        #idRegForm>div {
-            font-size: 20px;
-        }
 
-        #idRegForm input:not([type="radio"]),
-        #idRegForm select {
-            height: 58px;
-            padding: 0 12px;
-            font-size: 18px;
-        }
+#idRegForm input::placeholder {
+    font-size: 18px;
+}
 
-        #idRegForm input:not([type="radio"]),
-        #idRegForm select {
-            height: 58px;
-            padding: 0 12px;
-            font-size: 18px;
-        }
+#idRegForm>div {
+    font-size: 20px;
+}
 
-        #logincompleteModal {
-            display: flex;
-        }
+#idRegForm input::placeholder {
+    font-size: 18px;
+}
 
-        #regcompleteModal {
-            display: flex;
-        }
+#idRegForm>div {
+    font-size: 20px;
+}
 
-        #regcompleteModal>.modalContent {
-            width: 50%;
-            height: 30%;
-            background-color: white;
-            border-radius: 10px;
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr;
-            padding: 20px;
-        }
+#idRegForm input:not([type="radio"]),
+#idRegForm select {
+    height: 58px;
+    padding: 0 12px;
+    font-size: 18px;
+}
 
-        #logincompleteModal>.modalContent {
-            width: 50%;
-            height: 30%;
-            background-color: white;
-            border-radius: 10px;
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr;
-            padding: 20px;
-        }
+#idRegForm input:not([type="radio"]),
+#idRegForm select {
+    height: 58px;
+    padding: 0 12px;
+    font-size: 18px;
+}
 
-        #logincompleteModal>.modalContent>div:nth-child(2) {
-            display: grid;
-            place-items: center;
-            font-size: 32px;
-        }
+#logincompleteModal {
+    display: flex;
+}
 
-        #regcompleteModal>.modalContent>div:nth-child(2) {
-            display: grid;
-            place-items: center;
-            font-size: 32px;
-        }
+#regcompleteModal {
+    display: flex;
+}
 
-        #logincompleteModal>.modalContent>div:nth-child(3) {
-            display: grid;
-            justify-content: end;
-            align-content: end;
-        }
+#regcompleteModal>.modalContent {
+    width: 50%;
+    height: 30%;
+    background-color: white;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 20px;
+}
 
-        #regcompleteModal>.modalContent>div:nth-child(3) {
-            display: grid;
-            justify-content: end;
-            align-content: end;
-        }
+#logincompleteModal>.modalContent {
+    width: 50%;
+    height: 30%;
+    background-color: white;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 20px;
+}
 
-        #idReg,
-        #regcompleteModal,
-        #logincompleteModal {
-            display: none;
-        }
+#logincompleteModal>.modalContent>div:nth-child(2) {
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+}
 
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+#regcompleteModal>.modalContent>div:nth-child(2) {
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+}
+
+#logincompleteModal>.modalContent>div:nth-child(3) {
+    display: grid;
+    justify-content: end;
+    align-content: end;
+}
+
+#regcompleteModal>.modalContent>div:nth-child(3) {
+    display: grid;
+    justify-content: end;
+    align-content: end;
+}
+
+#idReg,
+#regcompleteModal,
+#logincompleteModal {
+    display: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

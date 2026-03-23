@@ -215,24 +215,25 @@
                         <div class="label">과목 ID 생성</div>
                         <div class="id-combo">
                             <select id="id-major" required>
-                                <option value="" disabled selected hidden>학과 선택</option>
-                                <option value="162">162(의료it학과)</option>
-                                <option value="158">158(빅데이터의료융합학과)</option>
-                                <option value="160">160(첨단학부)</option>
-                                <option value="123">123(간호학과)</option>
-                                <option value="119">119(응급구조학과)</option>
-                                <option value="238">238(임상병리학과)</option>
-                                <option value="130">130(방사선학과)</option>
-                                <option value="234">234(물리치료학과)</option>
-                                <option value="228">228(치위생학과)</option>
-                                <option value="888">888(안경광학과)</option>
-                                <option value="999">999(관리자)</option>
+                                <option value="" disabled selected hidden>학과를 선택해주세요.</option>
+                                <option value="162">의료it학과</option>
+                                <option value="158">빅데이터의료융합학과</option>
+                                <option value="160">첨단학부</option>
+                                <option value="123">간호학과</option>
+                                <option value="119">응급구조학과</option>
+                                <option value="238">임상병리학과</option>
+                                <option value="130">방사선학과</option>
+                                <option value="234">물리치료학과</option>
+                                <option value="228">치위생학과</option>
+                                <option value="888">안경광학과</option>
+                                <option value="999">관리자</option>
+                            </select>
                             </select>
                             <select id="id-req">
                                 <option value="m">m (전공필수)</option>
                                 <option value="s">s (전공선택)</option>
                             </select>
-                            <input type="number" id="id-num" placeholder="00" min="0" max="99" required>
+                            <input type="number" id="id-num" placeholder="00" min="0" max="999" required>
                             <span class="helper-text">* 학과번호</span>
                         </div>
                     </div>
@@ -312,7 +313,16 @@
                     <button type="button" class="modalbtn" onclick="closeModal()">취소</button>
                 </div>
             </div>
+
+            <div id="alert-layout" class="modal-layout">
+                <h2 class="modal-title" id="alert-title">알림</h2>
+                <p id="alert-message" style="margin-bottom: 20px; text-align: center;"></p>
+                <div class="modal-btn-group">
+                    <button type="button" class="modalbtn primary" onclick="closeModal()">확인</button>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
 
     <script>
@@ -327,6 +337,7 @@
         let isEditMode = false;
         let editTargetId = null;
 
+        /* table render */
         window.renderLessonTable = () => {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) return;
@@ -349,8 +360,8 @@
                     const cell = document.querySelector(`.${dayClass}.time${i}`);
                     if (cell) {
                         cell.innerText = l.lessonName;
-                        cell.style.backgroundColor = '#ead8fa';
-                        cell.style.fontSize = '14px';
+                        cell.style.backgroundColor = '#F8F3FD';
+                        cell.style.fontSize = '12px';
                         cell.style.display = 'flex';
                         cell.style.alignItems = 'center';
                         cell.style.justifyContent = 'center';
@@ -359,29 +370,29 @@
                 }
             });
 
-            // table2 업데이트
+            // Table2 업데이트
             const tbody = document.querySelector('.professorTimetable2 tbody');
             if (tbody) {
                 tbody.innerHTML = lessons.map(l => `
-                    <tr data-id="${l.lessonId}">
-                        <td><input type="checkbox" class="row-check"></td>
-                        <td>${l.lessonId.includes('m') ? '전필' : '전선'}</td>
-                        <td>${l.lessonName}</td>
-                        <td>${getKDay(l.lessonDay)} ${l.lessonBegin}:00~${l.lessonEnd}:50</td>
-                        <td>${l.lessonNow}/${l.lessonMax}</td>
-                    </tr>
-                `).join('');
+                <tr data-id="${l.lessonId}">
+                    <td><input type="checkbox" class="row-check"></td>
+                    <td>${l.lessonId.includes('m') ? '전필' : '전선'}</td>
+                    <td>${l.lessonName}</td>
+                    <td>${getKDay(l.lessonDay)} ${l.lessonBegin}:00~${l.lessonEnd}:50</td>
+                    <td>${l.lessonNow || 0}/${l.lessonMax}</td>
+                </tr>
+            `).join('');
             }
 
             // sidebar 업데이트
             const sidebarCourseList = document.querySelector('.course-list');
             if (sidebarCourseList) {
                 sidebarCourseList.innerHTML = lessons.map(l => `
-                    <button type="button" class="course-card" onclick="goToLecture()">
-                        <p class="course-name">${l.lessonName}</p>
-                        <p class="professor">${l.lessonProf} 교수님</p>
-                    </button>
-                `).join('');
+                <button type="button" class="course-card" onclick="goToLecture()">
+                    <p class="course-name">${l.lessonName}</p>
+                    <p class="professor">${l.lessonProf} 교수님</p>
+                </button>
+            `).join('');
             }
         };
 
@@ -402,7 +413,6 @@
             if (endSel) endSel.innerHTML = eOptions;
         };
 
-
         /* top bar */
         tabTimetable.addEventListener('click', () => {
             tabTimetable.classList.add('active');
@@ -422,12 +432,7 @@
             renderLessonTable();
         });
 
-
-        /* modal */
-        window.closeModal = () => {
-            modal.style.display = 'none';
-            addForm.reset();
-        };
+        window.closeModal = () => { modal.style.display = 'none'; addForm.reset(); };
 
         const openLayout = (layoutId) => {
             modal.style.display = 'flex';
@@ -435,144 +440,166 @@
             document.getElementById(layoutId).style.display = 'flex';
         };
 
-        document.getElementById('btn-add').addEventListener('click', () => {
-            isEditMode = false;
-            editTargetId = null;
-            openLayout('add-form');
-            document.querySelector('.modal-title').innerText = "강의 개설 신청";
-        });
+        const showAlert = (message, title = "알림") => {
+            openLayout('alert-layout');
+            document.getElementById('alert-title').innerText = title;
+            document.getElementById('alert-message').innerText = message;
+        };
 
-        document.getElementById('btn-edit').addEventListener('click', () => {
-            const checked = document.querySelector('.row-check:checked');
-            if (!checked) return alert("수정할 과목을 선택해주세요.");
-
-            const lessonId = checked.closest('tr').dataset.id;
-            const allLessons = JSON.parse(localStorage.getItem('openedLessons')) || [];
-            const target = allLessons.find(l => l.lessonId === lessonId);
-
-            if (target) {
-                isEditMode = true;
-                editTargetId = lessonId;
-                openLayout('add-form');
-                document.querySelector('.modal-title').innerText = "강의 정보 수정";
-
-                document.getElementById('id-major').value = target.lessonId.substring(0, 3);
-                document.getElementById('id-req').value = target.lessonId.substring(3, 4);
-                document.getElementById('id-num').value = target.lessonId.substring(4, 6);
-                document.getElementById('lessonName').value = target.lessonName;
-                document.getElementById('lessonGrade').value = target.lessonGrade;
-                document.getElementById('lessonMax').value = target.lessonMax;
-                document.getElementById('lessonRoom').value = target.lessonRoom;
-                document.getElementById('lessonDay').value = target.lessonDay;
-                document.getElementById('lessonBegin').value = target.lessonBegin;
-                document.getElementById('lessonEnd').value = target.lessonEnd;
-                document.getElementById('lessonPoint').value = target.lessonPoint || 3;
-                document.getElementById('lessonContent').value = target.lessonContent || "";
-            }
-        });
-
-        document.getElementById('btn-delete').addEventListener('click', () => {
-            const checked = document.querySelector('.row-check:checked');
-            if (!checked) return alert("삭제할 과목을 선택해주세요.");
-            editTargetId = checked.closest('tr').dataset.id;
-            const lessonName = checked.closest('tr').children[2].innerText;
-            openLayout('delete-confirm');
-            document.getElementById('delete-target-info').innerText = `과목: ${lessonName} (${editTargetId})`;
-        });
-
+        // delete 실행
         document.getElementById('execute-delete-btn').addEventListener('click', () => {
-            let all = JSON.parse(localStorage.getItem('openedLessons')) || [];
-            localStorage.setItem('openedLessons', JSON.stringify(all.filter(l => l.lessonId !== editTargetId)));
+            if (!editTargetId) return;
+
+            let allOpened = JSON.parse(localStorage.getItem('openedLessons') || '[]');
+            allOpened = allOpened.filter(l => l.lessonId !== editTargetId);
+            localStorage.setItem('openedLessons', JSON.stringify(allOpened));
+
             const user = JSON.parse(localStorage.getItem('user'));
-            user.userLessonList = (user.userLessonList || []).filter(l => l.lessonId !== editTargetId);
-            localStorage.setItem('user', JSON.stringify(user));
-            closeModal();
-            renderLessonTable();
-        });
+            if (user) {
+                user.userLessonList = (user.userLessonList || []).filter(l => l.lessonId !== editTargetId);
+                localStorage.setItem('user', JSON.stringify(user));
 
-        addForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const user = JSON.parse(localStorage.getItem('user'));
-            const major = document.getElementById('id-major').value;
-            const req = document.getElementById('id-req').value;
-            const num = document.getElementById('id-num').value.padStart(2, '0');
-            const fullId = `${major}${req}${num}`;
-
-            const newLesson = {
-                lessonId: fullId,
-                lessonName: document.getElementById('lessonName').value,
-                lessonProfId: Number(user.userId),
-                lessonProf: user.userName,
-                lessonMajorId: Number(major),
-                lessonGrade: Number(document.getElementById('lessonGrade').value),
-                lessonNow: isEditMode ? (JSON.parse(localStorage.getItem('openedLessons')).find(l => l.lessonId === editTargetId).lessonNow) : 0,
-                lessonMax: Number(document.getElementById('lessonMax').value),
-                lessonRoom: document.getElementById('lessonRoom').value,
-                lessonDay: Number(document.getElementById('lessonDay').value),
-                lessonBegin: Number(document.getElementById('lessonBegin').value),
-                lessonEnd: Number(document.getElementById('lessonEnd').value),
-                lessonPoint: Number(document.getElementById('lessonPoint').value),
-                lessonContent: document.getElementById('lessonContent').value
-            };
-
-            let all = JSON.parse(localStorage.getItem('openedLessons')) || [];
-            if (isEditMode) {
-                const idx = all.findIndex(l => l.lessonId === editTargetId);
-                all[idx] = newLesson;
-                const uIdx = user.userLessonList.findIndex(l => l.lessonId === editTargetId);
-                user.userLessonList[uIdx] = newLesson;
-            } else {
-                if (!user.userLessonList) user.userLessonList = [];
-                user.userLessonList.push(newLesson);
-                all.push(newLesson);
+                let allUsers = JSON.parse(localStorage.getItem('userInfoGroup') || '[]');
+                const finalUsers = allUsers.map(u => {
+                    if (String(u.userId) === String(user.userId)) return user; //
+                    return u;
+                });
+                localStorage.setItem('userInfoGroup', JSON.stringify(finalUsers));
             }
-            localStorage.setItem('openedLessons', JSON.stringify(all));
-            localStorage.setItem('user', JSON.stringify(user));
-            alert("완료되었습니다.");
+
             closeModal();
-            renderLessonTable();
+            setTimeout(() => { showAlert("강의가 삭제되었습니다.", "완료"); renderLessonTable(); }, 100);
         });
 
+        addForm.onsubmit = (e) => {
+    e.preventDefault();
 
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
 
-        /* sidebar */
-        renderTimeOptions();
+    const major = document.getElementById('id-major').value;
+    const req = document.getElementById('id-req').value;
+    const num = document.getElementById('id-num').value.padStart(2, '0');
+    const fullId = `${major}${req}${num}`;
 
-        fetch("../layout/mypage_sidebar.html")
-            .then(res => res.text())
-            .then(html => {
+    let allOpened = JSON.parse(localStorage.getItem('openedLessons')) || [];
+    const prevData = allOpened.find(l => l.lessonId === editTargetId);
+
+    const newLesson = {
+        lessonId: fullId,
+        lessonName: document.getElementById('lessonName').value,
+        lessonProfId: Number(user.userId),
+        lessonProf: user.userName,
+        lessonMajorId: major,
+        lessonGrade: Number(document.getElementById('lessonGrade').value),
+        lessonNow: isEditMode ? (prevData?.lessonNow || 0) : 0,
+        lessonMax: Number(document.getElementById('lessonMax').value),
+        lessonRoom: document.getElementById('lessonRoom').value,
+        lessonDay: Number(document.getElementById('lessonDay').value),
+        lessonBegin: Number(document.getElementById('lessonBegin').value),
+        lessonEnd: Number(document.getElementById('lessonEnd').value),
+        lessonPoint: Number(document.getElementById('lessonPoint').value),
+        lessonContent: document.getElementById('lessonContent').value
+    };
+
+    if (isEditMode) {
+        const idx = allOpened.findIndex(l => l.lessonId === editTargetId);
+        if (idx !== -1) allOpened[idx] = newLesson;
+    } else {
+        allOpened.push(newLesson);
+    }
+    localStorage.setItem('openedLessons', JSON.stringify(allOpened));
+
+    if (!user.userLessonList) user.userLessonList = [];
+    if (isEditMode) {
+        const uIdx = user.userLessonList.findIndex(l => l.lessonId === editTargetId);
+        if (uIdx !== -1) user.userLessonList[uIdx] = newLesson;
+    } else {
+        user.userLessonList.push(newLesson);
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+
+    let allUsers = JSON.parse(localStorage.getItem('userInfoGroup')) || [];
+    
+    const updatedUsers = allUsers.map(u => {
+        if (String(u.userId) === String(user.userId)) {
+            return user; 
+        }
+        return u; 
+    });
+    
+    localStorage.setItem('userInfoGroup', JSON.stringify(updatedUsers));
+
+    closeModal();
+    
+    setTimeout(() => {
+        showAlert("추가되었습니다.", "완료");
+        renderLessonTable();
+    }, 100);
+};
+
+        window.onload = () => {
+            renderTimeOptions();
+
+            fetch("../layout/mypage_sidebar.html").then(res => res.text()).then(html => {
                 const main = document.querySelector('main');
-                if (!document.querySelector('.sidebar-container')) {
-                    main.insertAdjacentHTML("afterbegin", html);
-                }
-                renderLessonTable();
+                if (!document.querySelector('.sidebar-container')) main.insertAdjacentHTML("afterbegin", html);
 
                 const user = JSON.parse(localStorage.getItem('user'));
                 if (user) {
-                    const nameEl = document.getElementById('info-name');
-                    const idEl = document.getElementById('info-id');
-                    if (nameEl) nameEl.innerText = `이름: ${user.userName} 교수님`;
-                    if (idEl) idEl.innerText = `사번: ${user.userId}`;
+                    document.getElementById('info-name').innerText = `이름: ${user.userName} 교수님`;
+                    document.getElementById('info-id').innerText = `사번: ${user.userId}`;
+                    const gradeEl = document.getElementById('info-grade');
+                    if (gradeEl) { gradeEl.innerText = "직책: 교수"; gradeEl.style.display = "block"; }
                 }
+                renderLessonTable();
             });
 
+            fetch("../layout/header.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("afterbegin", h));
+            fetch("../layout/footer.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("beforeend", h));
 
-        /* header, footer */
-        fetch("../layout/header.html")
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            })
-        fetch("../layout/footer.html")
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            })
+            document.getElementById('btn-add').onclick = () => {
+                isEditMode = false; editTargetId = null;
+                openLayout('add-form');
+                document.querySelector('.modal-title').innerText = "강의 개설 신청";
+            };
 
-        window.goToLecture = function () {
-            const targetPath = "../lectureRoom/index.html";
-            location.href = targetPath;
+            document.getElementById('btn-edit').onclick = () => {
+                const checked = document.querySelector('.row-check:checked');
+                if (!checked) return showAlert("수정할 과목을 선택해주세요.");
+                const lessonId = checked.closest('tr').dataset.id;
+                const user = JSON.parse(localStorage.getItem('user'));
+                const target = user.userLessonList.find(l => l.lessonId === lessonId);
+                if (target) {
+                    isEditMode = true; editTargetId = lessonId;
+                    openLayout('add-form');
+                    document.querySelector('.modal-title').innerText = "강의 정보 수정";
+                    document.getElementById('id-major').value = target.lessonId.substring(0, 3);
+                    document.getElementById('id-req').value = target.lessonId.substring(3, 4);
+                    document.getElementById('id-num').value = parseInt(target.lessonId.substring(4, 6));
+                    document.getElementById('lessonName').value = target.lessonName;
+                    document.getElementById('lessonGrade').value = String(target.lessonGrade);
+                    document.getElementById('lessonMax').value = target.lessonMax;
+                    document.getElementById('lessonRoom').value = target.lessonRoom || "";
+                    document.getElementById('lessonDay').value = String(target.lessonDay);
+                    document.getElementById('lessonBegin').value = String(target.lessonBegin);
+                    document.getElementById('lessonEnd').value = String(target.lessonEnd);
+                    document.getElementById('lessonPoint').value = target.lessonPoint || 3;
+                    document.getElementById('lessonContent').value = target.lessonContent || "";
+                }
+            };
+
+            document.getElementById('btn-delete').onclick = () => {
+                const checked = document.querySelector('.row-check:checked');
+                if (!checked) return showAlert("삭제할 과목을 선택해주세요.");
+                editTargetId = checked.closest('tr').dataset.id;
+                const lessonName = checked.closest('tr').children[2].innerText;
+                openLayout('delete-confirm');
+                document.getElementById('delete-target-info').innerText = `과목: ${lessonName} (${editTargetId})`;
+            };
         };
+
+        window.goToLecture = function () { location.href = "../lectureRoom/index.html"; };
     </script>
 </body>
 
