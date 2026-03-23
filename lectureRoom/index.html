@@ -178,15 +178,15 @@
             .then((responseText) => {
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-
             })
 
 
         var role = JSON.parse(localStorage.getItem('user')).userPosition; //현재 접속중인 사람의 정체
         var roleView = null;
         if (role == 'student') {
-            roleView = '학생'
-        } else if (role == 'admin') { roleView = '교직원' } else { roleView = '교수' };
+            roleView = '학생';
+            numberView='학번';
+        } else if (role == 'admin') { roleView = '교직원'; numberView='사번'; } else { roleView = '교수';numberView='사번'; };
 
 
 
@@ -215,7 +215,7 @@
 
                 const user = JSON.parse(localStorage.getItem('user'));
                 document.querySelector('.menu3').innerText = `${roleView} ${user.userName}님
-                ${user.userId}`;
+                ${numberView} : ${user.userId}`;
                 document.querySelector('.menu3').classList.remove('hover');
 
                 document.querySelector('.menu4').innerText = '자료실';
@@ -236,14 +236,16 @@
                 document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceYet');
                 document.querySelectorAll('.attendanceStatus li')[3].classList.add('attendanceNow');
                 document.querySelectorAll('.attendanceStatus li')[4].classList.add('attendanceNow');
-            } else if (selected.value == 'social') {
+            }
+            else if (selected.value == 'social') {
                 document.querySelectorAll('.attendanceStatus li')[0].classList.add('attendanceYes');
                 document.querySelectorAll('.attendanceStatus li')[10].classList.add('attendanceYes');
                 document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceYes');
                 document.querySelectorAll('.attendanceStatus li')[3].classList.add('attendanceYes');
                 document.querySelectorAll('.attendanceStatus li')[4].classList.add('attendanceYes');
                 document.querySelectorAll('.attendanceStatus li')[5].classList.add('attendanceYes');
-            } else if (selected.value == 'ai') {
+            }
+            else if (selected.value == 'ai') {
                 document.querySelectorAll('.attendanceStatus li')[0].classList.add('attendanceNow');
                 document.querySelectorAll('.attendanceStatus li')[1].classList.add('attendanceNow');
                 document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceNow');
