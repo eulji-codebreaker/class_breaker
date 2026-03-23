@@ -150,6 +150,7 @@ li {
     padding: 3px 0;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .myPageTop {
@@ -192,9 +193,7 @@ li {
     align-items: center;
 
     padding: 8px 15px;
-
     min-height: 45px;
-    flex-shrink: 0;
 }
 
 /* 제목 */
@@ -203,3 +202,68 @@ li {
     font-weight: 700;
     font-size: 20px;
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh; 
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    
+    /* 자스에서 flex로 바꿀 때 중앙 정렬 */
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContent {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    width: 350px; /* 박스 가로 크기 */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/*모달 제목*/
+.modal-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.modalContent p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.modal-btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;    
+}
+
+.modalbtn {
+    width: 100px;   
+    height: 40px; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*버튼*/
+.modalbtn.danger {
+    background-color: #ff4d4d;
+    color: white;
+}
+.modalbtn.danger:hover { background-color: #e63939; }

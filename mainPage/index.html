@@ -50,8 +50,18 @@
                         <button class="mainRoombtn" onclick="tolectureroom()">강의실 가기</button>
                     </div>
                     <ul id="lecture-list">
-
                     </ul>
+                </div>
+            </div>
+
+            <div id="logout-confirm-modal" class="modal">
+                <div class="modalContent">
+                    <h2 class="modal-title">로그아웃</h2>
+                    <p>정말 로그아웃 하시겠습니까?</p>
+                    <div class="modal-btn-group">
+                        <button type="button" id="real-logout-btn" class="modalbtn danger">로그아웃</button>
+                        <button type="button" class="modalbtn" onclick="closeLogoutModal()">취소</button>
+                    </div>
                 </div>
             </div>
         </article>
@@ -59,11 +69,38 @@
 
     <script src="../mainpage/mainlecturelist.js"></script>
     <script>
-        fetch("../layout/nosideheader.html") //header불러오기
+        // 헤더 불러오기 및 로그아웃 모달 제어
+        fetch("../layout/nosideheader.html")
             .then((response) => response.text())
             .then((responseText) => {
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-            })
+
+                var logoutBtn = document.getElementById('logoutBtn'); // 헤더의 로그아웃 글자
+                var logoutModal = document.getElementById('logout-confirm-modal');
+                var realLogoutBtn = document.getElementById('real-logout-btn');
+
+                if (logoutBtn) {
+                    // 로그아웃 클릭 시 모달 열기
+                    logoutBtn.onclick = function () {
+                        logoutModal.style.display = "flex";
+                    };
+                }
+
+                if (realLogoutBtn) {
+                    // 로그아웃
+                    realLogoutBtn.onclick = function () {
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('currentLecture');
+                        location.assign("../index.html");
+                    };
+                }
+            });
+
+        // 취소 버튼
+        function closeLogoutModal() {
+            document.getElementById('logout-confirm-modal').style.display = "none";
+        }
+
         fetch("../layout/footer.html") //footer불러오기
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {

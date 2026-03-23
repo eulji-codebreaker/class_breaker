@@ -66,6 +66,26 @@ footer {
   margin-right: 30px;
 }
 
+.noheader{
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+#logoutBtn {
+  background: none;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#logoutBtn:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
 /*버튼        */
 /*      스타일*/
 
