@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="basket.css">
     <link rel="stylesheet" href="/register/topbar.css">
-     <link rel="stylesheet" href="/register_prof/all.css">
+    <link rel="stylesheet" href="/register_prof/all.css">
 </head>
 
 <body>
@@ -24,137 +24,39 @@
                 <div class="subjectHeader">
                     <div class="groupRadio">
                         <span>강의 조회</span>
-                        <input type="radio" name="subject" id="major"><label for="major">전공</label>
+                        <input type="radio" name="subject" id="major" checked><label for="major">전공</label>
                         <input type="radio" name="subject" id="culture"><label for="culture">교양</label>
                     </div>
                 </div>
 
                 <div class="majorSelect">
                     <div class="option">
-                       <select name="userMajorId" id="userMajorId">
-                        <option value="" disabled selected hidden>학과를 선택해주세요.</option>
-                        <option value="162">의료it학과</option>
-                        <option value="158">빅데이터의료융합학과</option>
-                        <option value="160">첨단학부</option>
-                        <option value="123">간호학과</option>
-                        <option value="119">응급구조학과</option>
-                        <option value="238">임상병리학과</option>
-                        <option value="130">방사선학과</option>
-                        <option value="234">물리치료학과</option>
-                        <option value="228">치위생학과</option>
-                        <option value="888">안경광학과</option>
-                        <option value="999">관리자</option>
-                    </select>
+                        <select name="userMajorId" id="userMajorId">
+                            <option value="" disabled selected hidden>학과를 선택해주세요.</option>
+                            <option value="162">의료it학과</option>
+                            <option value="158">빅데이터의료융합학과</option>
+                            <option value="160">첨단학부</option>
+                            <option value="123">간호학과</option>
+                            <option value="119">응급구조학과</option>
+                            <option value="238">임상병리학과</option>
+                            <option value="130">방사선학과</option>
+                            <option value="234">물리치료학과</option>
+                            <option value="228">치위생학과</option>
+                            <option value="888">안경광학과</option>
+
+                        </select>
                     </div>
 
                     <div class="content">
                         <ul class="lectureList">
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">바구니 담기</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">바구니 담기</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">바구니 담기</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">바구니 담기</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">바구니 담기</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">바구니 담기</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">바구니 담기</button></span>
-                                </div>
-                            </li>
                         </ul>
+
                         <div class="subjectBasket">
                             <div class="basketHeader">
                                 <span>수강바구니 목록</span>
                             </div>
                             <div>
                                 <ul class="lectureList">
-                                    <li>
-                                        <span class="subjectName">000000 과목</span>
-                                        <div class="subjectInfo">
-                                            <span>이00</span> <span class="dot">·</span>
-                                            <span>전공</span> <span class="dot">·</span>
-                                            <span>3학점</span>
-                                            <span><button class="regbtn-delete">바구니 빼기</button></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="subjectName">000000 과목</span>
-                                        <div class="subjectInfo">
-                                            <span>이00</span> <span class="dot">·</span>
-                                            <span>전공</span> <span class="dot">·</span>
-                                            <span>3학점</span>
-                                            <span><button class="regbtn-delete">바구니 빼기</button></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="subjectName">000000 과목</span>
-                                        <div class="subjectInfo">
-                                            <span>이00</span> <span class="dot">·</span>
-                                            <span>전공</span> <span class="dot">·</span>
-                                            <span>3학점</span>
-                                            <span><button class="regbtn-delete">바구니 빼기</button></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="subjectName">000000 과목</span>
-                                        <div class="subjectInfo">
-                                            <span>이00</span> <span class="dot">·</span>
-                                            <span>전공</span> <span class="dot">·</span>
-                                            <span>3학점</span>
-                                            <span><button class="regbtn-delete">바구니 빼기</button></span>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -186,69 +88,149 @@
         </div>
 
     </div>
-
+    <div class="modal" id="alertModal">
+        <div class="modalContent">
+            <p id="alertMessage" class="delete"></p>
+            <div class="btnGroup">
+                <button type="button" class="checkbtn" id="alertCloseBtn">확인</button>
+            </div>
+        </div>
+    </div>
     <script src="/js/register.js"></script>
     <script>
+        var basket = [];
+        if (!localStorage.getItem('basket')) {
+            localStorage.setItem('basket', JSON.stringify([]));
+        } else {
+            basket = JSON.parse(localStorage.getItem('basket'));
+        }
+        const lectureData = [
+            { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", lessonProf: "정동근", type: "전공", lessonpoint: 3 },
+            { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", lessonProf: "김규동", type: "전공", lessonpoint: 3 },
+            { id: 3, majorId: "162", lessonName: "건강정보의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
+            { id: 4, majorId: "158", lessonName: "빅데이터 분석", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 5, majorId: "162", lessonName: "프로그램 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 6, majorId: "162", lessonName: "통계기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 7, majorId: "162", lessonName: "창의적사고와 코딩", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
+            { id: 8, majorId: "162", lessonName: "운영체제", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 9, majorId: "158", lessonName: "데이터 분석실무", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 10, majorId: "162", lessonName: "의료영상처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 11, majorId: "162", lessonName: "데이터베이스 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 12, majorId: "162", lessonName: "조사방법론", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 13, majorId: "162", lessonName: "객체모델링", lessonProf: "ooo", type: "전공", lessonpoint: 2 },
+            { id: 14, majorId: "162", lessonName: "파이썬프로그래밍", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
+        ];
+        const basketReload = () => localStorage.setItem('basket', JSON.stringify(basket));
         let targetLi = null;
+        const saved = localStorage.getItem('basket');
+        if (saved) {
+            basket = JSON.parse(saved);
+        }
 
-        // 모달 요소들 각각 선언
+        // 요소 선택
         const resModal = document.getElementById('clickresbtn');
         const delModal = document.getElementById('clickbtn');
-        const basketList = document.querySelector('.subjectBasket .lectureList');
+        const alertModal = document.getElementById('alertModal');
+        const alertMessage = document.getElementById('alertMessage');
+        const alertCloseBtn = document.getElementById('alertCloseBtn');
 
-        //신청/담기
-        document.querySelectorAll('.regbtn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                targetLi = btn.closest('li');
-                resModal.style.display = 'flex';
+        const lectureListUl = document.querySelector('.lectureList');
+        const basketListUl = document.querySelector('.subjectBasket .lectureList');
+        const majorSelect = document.getElementById('userMajorId');
+        const radioButtons = document.querySelectorAll('input[name="subject"]');
+
+        // 2. 알림 모달 출력 함수
+        function showAlert(message) {
+            alertMessage.innerText = message;
+            alertModal.style.display = 'flex';
+        }
+
+        // 3. 강의 목록 렌더링 함수
+        function renderLectures() {
+            const selectedMajor = majorSelect.value;
+            const selectedType = document.querySelector('input[name="subject"]:checked')?.id === 'major' ? '전공' : '교양';
+            const filtered = lectureData.filter(l => l.majorId === selectedMajor && l.type === selectedType);
+
+            lectureListUl.innerHTML = '';
+            filtered.forEach(lecture => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                [${lecture.type}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonpoint}학점
+                <button type="button" class="regbtn" data-id="${lecture.id}">신청하기</button>
+            `;
+                lectureListUl.appendChild(li);
             });
+        }
+
+        // 4. 이벤트 리스너 등록 (학과/구분 변경 시)
+        majorSelect.addEventListener('change', renderLectures);
+        radioButtons.forEach(radio => radio.addEventListener('change', renderLectures));
+
+        // 5. 신청 버튼 클릭 (강의 목록)
+        lectureListUl.addEventListener('click', (e) => {
+            if (e.target.classList.contains('regbtn')) {
+                targetLi = e.target.closest('li');
+                resModal.style.display = 'flex';
+            }
         });
 
+        // 6. 신청 확인 모달 '확인' 버튼 (중복 방지를 위해 한 번만 정의)
         resModal.querySelector('.checkbtn').addEventListener('click', () => {
             if (targetLi) {
                 const clone = targetLi.cloneNode(true);
                 const btn = clone.querySelector('button');
 
                 btn.className = 'regbtn-delete';
-                btn.innerText = '바구니 빼기';
+                btn.innerText = '취소하기';
 
-                // 빼기버튼에 삭제 모달 이벤트 연결
-                btn.addEventListener('click', () => {
-                    targetLi = btn.closest('li');
-                    delModal.style.display = 'flex';
-                });
+                basketListUl.appendChild(clone);
 
-                basketList.appendChild(clone);
+                // ✅ 여기서 basket 배열에 추가
+                const id = clone.querySelector('button').dataset.id;
+                const lecture = lectureData.find(l => l.id == id);
+                basket.push(lecture);
+
+                // ✅ 그리고 저장
+                basketReload();
+
+                resModal.style.display = 'none';
+                showAlert("신청이 완료되었습니다.");
             }
-            resModal.style.display = 'none';
         });
 
-        resModal.querySelector('.canclebtn').addEventListener('click', () => {
-            resModal.style.display = 'none';
-        });
-
-        //삭제/빼기
-        document.querySelectorAll('.regbtn-delete').forEach(btn => {
-            btn.addEventListener('click', () => {
-                targetLi = btn.closest('li');
+        // 7. 취소 버튼 클릭 (수강신청 목록)
+        basketListUl.addEventListener('click', (e) => {
+            if (e.target.classList.contains('regbtn-delete')) {
+                targetLi = e.target.closest('li');
                 delModal.style.display = 'flex';
+            }
+        });
+
+        // 8. 취소 확인 모달 '확인' 버튼
+        delModal.querySelector('.checkbtn').addEventListener('click', () => {
+            if (targetLi) {
+                const id = targetLi.querySelector('button').dataset.id;
+
+                // ✅ 배열에서도 제거
+                basket = basket.filter(l => l.id != id);
+
+                // ✅ 저장 갱신
+                basketReload();
+
+                targetLi.remove();
+                delModal.style.display = 'none';
+                showAlert("취소가 완료되었습니다.");
+            }
+        });
+
+        // 9. 모든 '취소' 및 알림 '확인' 버튼 닫기 처리
+        document.querySelectorAll('.canclebtn, #alertCloseBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                resModal.style.display = 'none';
+                delModal.style.display = 'none';
+                alertModal.style.display = 'none';
             });
         });
-
-        delModal.querySelector('.checkbtn').addEventListener('click', () => {
-            if (targetLi) targetLi.remove();
-            delModal.style.display = 'none';
-        });
-
-        delModal.querySelector('.canclebtn').addEventListener('click', () => {
-            delModal.style.display = 'none';
-        });
-
-        var role = JSON.parse(localStorage.getItem('user')).userPosition;
-
-        if (role !== 'student') {
-            querryselector('button').style.display = 'none';
-        }
 
 
     </script>

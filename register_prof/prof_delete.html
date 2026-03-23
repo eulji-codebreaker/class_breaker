@@ -66,27 +66,37 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="delete-check">
+        <div class="modalContent">
+            <p class="delete">삭제되었습니다</p>
+            <div class="btnGroup">
+                <button type="button" class="checkbtn">확인</button>
+                <button type="button" class="canclebtn">취소</button>
+            </div>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const deleteModal = document.getElementById('delete-modal');
+            const deleteCheckModal = document.getElementById('delete-check');
+
             const lectureList = document.querySelector('.lecture-list');
             const majorSelect = document.getElementById('userMajorId');
             const radioButtons = document.querySelectorAll('input[name="subject"]');
-
             const confirmBtn = deleteModal.querySelector('.checkbtn');
             const cancelBtn = deleteModal.querySelector('.canclebtn');
 
-            let targetElement = null; // 삭제할 요소를 저장할 변수
+            const finalConfirmBtn = deleteCheckModal.querySelector('.checkbtn');
 
-            // --- 1. 가짜 데이터 (기존 유지) ---
+            let targetElement = null; 
+
             const dummyLectures = [
-                { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", prof: "정동근", type: "전공", lessonpoint: 3 },
-                { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", prof: "김규동", type: "전공", lessonpoint: 3 },
-                { id: 3, majorId: "162", lessonName: "건강정보의 이해", prof: "ooo", type: "교양", lessonpoint: 2 },
-                { id: 4, majorId: "158", lessonName: "빅데이터 분석", prof: "ooo", type: "전공", lessonpoint: 3 }
+                { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", lessonProf: "정동근", type: "전공", lessonpoint: 3 },
+                { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", lessonProf: "김규동", type: "전공", lessonpoint: 3 },
+                { id: 3, majorId: "162", lessonName: "건강정보의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
+                { id: 4, majorId: "158", lessonName: "빅데이터 분석", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
             ];
 
-            // --- 2. 강의 렌더링 함수 ---
             const renderLectures = (data) => {
                 if (data.length === 0) {
                     lectureList.innerHTML = '<p style="text-align:center; padding:20px;">조회된 강의가 없습니다.</p>';
@@ -94,19 +104,18 @@
                 }
 
                 lectureList.innerHTML = data.map(lecture => `
-            <li data-id="${lecture.id}">
-                <span class="subjectName">${lecture.lessonName}</span>
-                <div class="subjectInfo">
-                    <span>${lecture.prof}</span> <span class="dot">·</span>
-                    <span>${lecture.type}</span> <span class="dot">·</span>
-                    <span>${lecture.lessonpoint}학점</span>
-                    <span><button class="regbtn">강의 삭제</button></span>
-                </div>
-            </li>
-        `).join('');
+                    <li data-id="${lecture.id}">
+                        <span class="subjectName">${lecture.lessonName}</span>
+                        <div class="subjectInfo">
+                            <span>${lecture.lessonProf}</span> <span class="dot">·</span>
+                            <span>${lecture.type}</span> <span class="dot">·</span>
+                            <span>${lecture.lessonpoint}학점</span>
+                            <span><button class="regbtn">강의 삭제</button></span>
+                        </div>
+                    </li>
+                `).join('');
             };
 
-            // --- 3. 조회 필터 로직 ---
             const updateList = () => {
                 const selectedMajor = majorSelect.value;
                 const selectedType = document.querySelector('input[name="subject"]:checked')?.id;
@@ -124,41 +133,43 @@
             majorSelect.addEventListener('change', updateList);
             radioButtons.forEach(radio => radio.addEventListener('change', updateList));
 
-            // --- 4. 삭제 로직 (이벤트 위임 방식) ---
-            // 부모인 lectureList에 이벤트를 걸어서 새로 생기는 버튼도 인식하게 합니다.
             lectureList.addEventListener('click', (e) => {
                 if (e.target.classList.contains('regbtn')) {
                     e.preventDefault();
-                    // 클릭된 버튼의 가장 가까운 'li' 태그를 저장
                     targetElement = e.target.closest('li');
-                    deleteModal.style.display = 'flex';
+                    deleteModal.style.display = 'flex'; 
                 }
             });
 
-            // 모달 닫기
-            const closeDeleteModal = () => {
+            cancelBtn.addEventListener('click', () => {
                 deleteModal.style.display = 'none';
                 targetElement = null;
-            };
-
-            cancelBtn.addEventListener('click', closeDeleteModal);
-
-            // 확인 버튼 클릭 시 실제 삭제
-            confirmBtn.addEventListener('click', () => {
-                if (targetElement) {
-                    targetElement.remove();
-                    alert("삭제되었습니다.");
-                }
-                closeDeleteModal();
             });
 
-            // 배경 클릭 시 닫기
+            confirmBtn.addEventListener('click', () => {
+                if (targetElement) {
+                    targetElement.remove(); 
+                    deleteModal.style.display = 'none';
+                    deleteCheckModal.style.display = 'flex';
+                }
+            });
+
+            finalConfirmBtn.addEventListener('click', () => {
+                deleteCheckModal.style.display = 'none';
+                targetElement = null;
+            });
+
             window.addEventListener('click', (e) => {
                 if (e.target === deleteModal) {
-                    closeDeleteModal();
+                    deleteModal.style.display = 'none';
+                    targetElement = null;
+                }
+                if (e.target === deleteCheckModal) {
+                    deleteCheckModal.style.display = 'none';
                 }
             });
         });
+    </script>
     </script>
 
     <script src="/js/register_prof.js"></script>

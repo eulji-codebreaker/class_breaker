@@ -24,95 +24,30 @@
                 <div class="subjectHeader">
                     <div class="groupRadio">
                         <span>강의 조회</span>
-                        <input type="radio" name="subject" id="major"><label for="major">전공</label>
+                        <input type="radio" name="subject" id="major" checked><label for="major">전공</label>
                         <input type="radio" name="subject" id="culture"><label for="culture">교양</label>
                     </div>
                 </div>
 
                 <div class="majorSelect">
                     <div class="option">
-                       <select name="userMajorId" id="userMajorId">
-                        <option value="" disabled selected hidden>학과를 선택해주세요.</option>
-                        <option value="162">의료it학과</option>
-                        <option value="158">빅데이터의료융합학과</option>
-                        <option value="160">첨단학부</option>
-                        <option value="123">간호학과</option>
-                        <option value="119">응급구조학과</option>
-                        <option value="238">임상병리학과</option>
-                        <option value="130">방사선학과</option>
-                        <option value="234">물리치료학과</option>
-                        <option value="228">치위생학과</option>
-                        <option value="888">안경광학과</option>
-                        <option value="999">관리자</option>
-                    </select>
+                        <select name="userMajorId" id="userMajorId">
+                            <option value="" disabled selected hidden>학과를 선택해주세요.</option>
+                            <option value="162">의료it학과</option>
+                            <option value="158">빅데이터의료융합학과</option>
+                            <option value="160">첨단학부</option>
+                            <option value="123">간호학과</option>
+                            <option value="119">응급구조학과</option>
+                            <option value="238">임상병리학과</option>
+                            <option value="130">방사선학과</option>
+                            <option value="234">물리치료학과</option>
+                            <option value="228">치위생학과</option>
+                            <option value="888">안경광학과</option>
+                        </select>
                     </div>
 
-                    <!-- 코드 리팩토링 해야할듯 -->
                     <div class="content">
                         <ul class="lecture-list">
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">강의계획서</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">강의계획서</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">강의계획서</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">강의계획서</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">강의계획서</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">강의계획서</button></span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="subjectName">000000 과목</span>
-                                <div class="subjectInfo">
-                                    <span>이00</span> <span class="dot">·</span>
-                                    <span>전공</span> <span class="dot">·</span>
-                                    <span>3학점</span>
-                                    <span><button class="regbtn">강의계획서</button></span>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -219,28 +154,92 @@
 
         </div>
 
-
-
         <script>
-            const regBtns = document.querySelectorAll('.regbtn');
-            const modal = document.getElementById('professor-modal');
-            const addForm = document.getElementById('add-form');
+            // 모달 닫기 함수는 전역으로 유지 (HTML의 onclick="closeModal()" 대응)
+            function closeModal() {
+                document.getElementById('professor-modal').style.display = 'none';
+            };
+            const openedLessons=JSON.parse(localStorage.getItem('openedLessons'));
 
-            regBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    modal.style.display = 'flex';   // 모달 열기
-                    addForm.style.display = 'flex'; // 기본 화면 보여주기
-                });
+            document.addEventListener('DOMContentLoaded', () => {
+                const dummyLectures = [
+                    { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", lessonProf: "정동근", type: "전공", lessonpoint: 3 },
+                    { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", lessonProf: "김규동", type: "전공", lessonpoint: 3 },
+                    { id: 3, majorId: "162", lessonName: "건강정보의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
+                    { id: 4, majorId: "158", lessonName: "빅데이터 분석", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                    { id: 5, majorId: "162", lessonName: "프로그램 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                    { id: 6, majorId: "162", lessonName: "통계기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                    { id: 7, majorId: "162", lessonName: "창의적사고와 코딩", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
+                    { id: 8, majorId: "162", lessonName: "운영체제", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                    { id: 9, majorId: "158", lessonName: "데이터 분석실무", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                    { id: 10, majorId: "162", lessonName: "의료영상처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                    { id: 11, majorId: "162", lessonName: "데이터베이스 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                    { id: 12, majorId: "162", lessonName: "조사방법론", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                    { id: 13, majorId: "162", lessonName: "객체모델링", lessonProf: "ooo", type: "전공", lessonpoint: 2 },
+                    { id: 14, majorId: "162", lessonName: "파이썬프로그래밍", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
+                ];
+
+                const majorSelect = document.getElementById('userMajorId');
+                const typeRadios = document.querySelectorAll('input[name="subject"]');
+                const lectureList = document.querySelector('.lecture-list');
+                const modal = document.getElementById('professor-modal');
+                const addForm = document.getElementById('add-form');
+
+                // 강의 목록 렌더링 함수
+                function renderLectures() {
+                    const selectedMajor = majorSelect.value;
+                    const selectedRadio = document.querySelector('input[name="subject"]:checked');
+
+                    if (!selectedMajor || !selectedRadio) return; // 학과와 구분이 모두 선택되어야 실행
+
+                    const selectedType = selectedRadio.id === 'major' ? '전공' : '교양';
+
+                    const filtered = dummyLectures.filter(lecture =>
+                        lecture.majorId === selectedMajor && lecture.type === selectedType
+                    );
+
+                    lectureList.innerHTML = filtered.map(lecture => `
+            <li class="lecture-item">
+                <div class="lecture-info">
+                    [${lecture.type}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonpoint}학점
+                </div>
+                <button type="button" class="regbtn" data-id="${lecture.id}">계획서 보기</button>
+            </li>
+        `).join('');
+
+                    attachModalEvents();
+                }
+
+                // 모달에 데이터 채우고 열기
+                function attachModalEvents() {
+                    const btns = document.querySelectorAll('.regbtn');
+                    const checkTexts = modal.querySelectorAll('.checktext'); // [구분, 과목명, 인원, 학점] 순서
+
+                    btns.forEach(btn => {
+                        btn.onclick = () => {
+                            const id = btn.getAttribute('data-id');
+                            const data = dummyLectures.find(l => l.id == id);
+
+                            if (data) {
+                                // 모달 내부 텍스트 변경
+                                checkTexts[0].innerText = data.type;
+                                checkTexts[1].innerText = data.lessonName;
+                                checkTexts[2].innerText = "40명"; // 임시 데이터
+                                checkTexts[3].innerText = data.lessonpoint + "학점";
+
+                                modal.style.display = 'flex';
+                                addForm.style.display = 'flex';
+                            }
+                        };
+                    });
+                }
+
+                // 이벤트 리스너
+                majorSelect.addEventListener('change', renderLectures);
+                typeRadios.forEach(radio => radio.addEventListener('change', renderLectures));
             });
 
-            function closeModal() {
-                modal.style.display = 'none';
-            }
-            var role = JSON.parse(localStorage.getItem('user')).userPosition;
-
-            if (role !== 'student') {
-                querryselector('button').style.display = 'none';
-            }
+            
         </script>
 
         <script src="/js/register.js"></script>
