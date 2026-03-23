@@ -44,12 +44,12 @@ aside {
 }
 
 .course-card {
-    width: 220px;
+    width: 240px;
     height: 60px;
     border: 1px solid #8B5FBF;
     padding: 8px 12px;
     margin-bottom: 10px;
-    background-color: #ffffff;
+    background-color: #F8F3FD;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,7 +58,7 @@ aside {
 }
 
 .course-card:hover {
-    background-color: #d6adff;
+    background-color: #EAD8FA;
 }
 
 .course-name {
