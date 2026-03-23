@@ -12,7 +12,22 @@
 <body>
     <!--header-->
     <main>
-        <!--<aside></aside>-->
+        <aside>
+            <div class="menu menu1">
+                <select>
+                    <option value='none' disabled selected hidden>강의실 선택</option>
+                    <option value="os">운영체제</option>
+                    <option value="social">사회와 마케팅</option>
+                    <option value="web">웹프로그래밍</option>
+                    <option value="ai">인공지능캡스톤</option>
+                </select>
+            </div>
+            <div class="menu menu2 hover">마이페이지</div>
+            <div class="menu menu3 hover">강의실</div>
+            <div class="menu menu4 hover">수강신청</div>
+            <div class="menu menu5 hover">수강신청</div>
+            <div class="menu menu6 hover">공지사항</div>
+        </aside>
         <article>
             <div class="lectureRoom students">
                 <div id="attendance">
@@ -20,17 +35,17 @@
                         <p id="attendanceText">학생 출결 현황</p>
                         <div class="firstAttendanceTopRight">
                             <button class="adminbtn" id="attendanceEdit">수정</button>
-                            <div id="attendanceYes"></div>
+                            <div class="attendanceYes"></div>
                             <p>전체 완료</p>
-                            <div id="attendanceNow"></div>
+                            <div class="attendanceNow"></div>
                             <p>진행 중</p>
-                            <div id="attendanceYet"></div>
+                            <div class="attendanceYet"></div>
                             <p>미완료</p>
                         </div>
                     </div>
                     <ul class="attendanceStatus"> <!--attendanceYes|attendanceNow|attendanceYet-->
-                        <li id="attendanceYes"></li>
-                        <li id="attendanceNow"></li>
+                        <li class="attendanceYes"></li>
+                        <li class="attendanceNow"></li>
                         <li></li>
                         <li></li>
                         <li></li>
@@ -120,6 +135,36 @@
     </main>
     <!--footer-->
     <script>
+        localStorage.setItem('pageNow', 'lectureroom');
+        const mLessons = [ //전체 강의목록 불러오기(서민지님 마이페이지 완성되면 받아오기)
+            { lessonId: 1, lessonName: "기모띠" },
+            { lessonId: 123, lessonName: "하이" }
+        ];
+        localStorage.setItem('myLessons', JSON.stringify(mLessons)); //
+        // const allLessons = JSON.parse(localStorage.getItem('openedLessons')) || [];
+        const myLessons = JSON.parse(localStorage.getItem('myLessons')) || [];
+        const addLecture = (value, text) => { //사이드바 드롭다운에 강의추가하기
+            const select = document.querySelector('.menu1 select');
+
+            const option = document.createElement('option');
+            option.value = value;
+            option.innerText = text;
+
+            select.appendChild(option);
+        };
+
+        const getMyLesson = () => {
+            myLessons.forEach(e => {
+                addLecture(e.lessonId, e.lessonName);
+            })
+        }
+        getMyLesson();
+        // fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+        //     .then((response) => response.text())
+        //     .then((responseText) => {
+        //         document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+
+        //     });
         fetch("../layout/header.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
@@ -133,10 +178,19 @@
             .then((responseText) => {
                 // console.log(responseText);
                 document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            });
 
-        var role = JSON.parse(localStorage.getItem('user')).userPosition;
-        if (role === 'student') {
+            })
+
+
+        var role = JSON.parse(localStorage.getItem('user')).userPosition; //현재 접속중인 사람의 정체
+        var roleView = null;
+        if (role == 'student') {
+            roleView = '학생'
+        } else if (role == 'admin') { roleView = '교직원' } else { roleView = '교수' };
+
+
+
+        if (role === 'student') { //교수관리자는 기본값, 학생은 내용이 약간 바뀌면서 관리버튼 안보이게
             document.querySelectorAll('.adminbtn').forEach((e) => e.style.display = 'none');
             document.querySelector('#attendanceText').innerText = '나의 출결현황';
             document.querySelectorAll('.firstAttendanceTopRight p')[0].innerText = '출석 완료';
@@ -144,12 +198,73 @@
             document.querySelectorAll('.firstAttendanceTopRight p')[2].innerText = '미진행';
             document.querySelectorAll('#task').forEach((e) => e.innerText = '');
         }
-        
-        fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-            });           
+
+
+        var userInfo = JSON.parse(localStorage.getItem('user'));
+        // currentUserInfo;
+        var selected = document.querySelector('.menu1 select option:checked');
+        const reloadSide = () => {
+            if (localStorage.getItem('pageNow') === "lectureroom") {
+
+                selected = document.querySelector('.menu1 select option:checked');
+                document.querySelector('.menu2').innerText =
+                    selected ? selected.innerText : '강의실 선택';
+
+
+                document.querySelector('.menu2').classList.remove('hover');
+
+                const user = JSON.parse(localStorage.getItem('user'));
+                document.querySelector('.menu3').innerText = `${roleView} ${user.userName}님
+                ${user.userId}`;
+                document.querySelector('.menu3').classList.remove('hover');
+
+                document.querySelector('.menu4').innerText = '자료실';
+                document.querySelector('.menu5').innerText = '강의';
+                document.querySelector('.menu6').innerText = '공지사항';
+            }
+        }
+
+        const reloadAttendance = () => {
+            document.querySelectorAll('.attendanceStatus li').forEach((el, id) => {
+                el.classList.remove('attendanceYes');
+                el.classList.remove('attendanceNow');
+                el.classList.remove('attendanceYet');
+            });
+            if (selected.value == 'os') {
+                document.querySelectorAll('.attendanceStatus li')[0].classList.add('attendanceYes');
+                document.querySelectorAll('.attendanceStatus li')[1].classList.add('attendanceYet');
+                document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceYet');
+                document.querySelectorAll('.attendanceStatus li')[3].classList.add('attendanceNow');
+                document.querySelectorAll('.attendanceStatus li')[4].classList.add('attendanceNow');
+            } else if (selected.value == 'social') {
+                document.querySelectorAll('.attendanceStatus li')[0].classList.add('attendanceYes');
+                document.querySelectorAll('.attendanceStatus li')[10].classList.add('attendanceYes');
+                document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceYes');
+                document.querySelectorAll('.attendanceStatus li')[3].classList.add('attendanceYes');
+                document.querySelectorAll('.attendanceStatus li')[4].classList.add('attendanceYes');
+                document.querySelectorAll('.attendanceStatus li')[5].classList.add('attendanceYes');
+            } else if (selected.value == 'ai') {
+                document.querySelectorAll('.attendanceStatus li')[0].classList.add('attendanceNow');
+                document.querySelectorAll('.attendanceStatus li')[1].classList.add('attendanceNow');
+                document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceNow');
+                document.querySelectorAll('.attendanceStatus li')[3].classList.add('attendanceNow');
+                document.querySelectorAll('.attendanceStatus li')[4].classList.add('attendanceNow');
+                document.querySelectorAll('.attendanceStatus li')[5].classList.add('attendanceNow');
+            }
+        }
+
+        const reloadNotice = () => {
+
+        }
+        const reload = () => {
+            reloadSide();
+            reloadAttendance();
+        }
+
+        reload();
+        document.querySelector('.menu1 select').addEventListener('change', reload);
+
+
     </script>
 </body>
 

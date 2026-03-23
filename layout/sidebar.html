@@ -10,7 +10,7 @@
 
 <body>
     <aside>
-        <div class="dontHover menu1">
+        <div class="menu menu1">
             <select>
                 <option disabled selected hidden>강의실 선택</option>
                 <option>운영체제</option>
@@ -19,22 +19,26 @@
                 <option>인공지능캡스톤</option>
             </select>
         </div>
-        <div class="menu menu2">마이페이지</div>
-        <div class="menu menu3">강의실</div>
-        <div class="menu menu4">수강신청</div>
-        <div class="menu menu5">수강신청</div>
-        <div class="menu menu6">공지사항</div>
+        <div class="menu menu2 hover">마이페이지</div>
+        <div class="menu menu3 hover">강의실</div>
+        <div class="menu menu4 hover">수강신청</div>
+        <div class="menu menu5 hover">수강신청</div>
+        <div class="menu menu6 hover">공지사항</div>
     </aside>
 
     <script>
         var userInfo=JSON.parse(localStorage.getItem('user'));
-        currentUserInfo
+        // currentUserInfo;
+        const change=()=>{
         if(localStorage.getItem('pageNow')==="lectureroom"){
             // document.querySelector('.menu1').style.backgroundColor='red';
             document.querySelector('.menu2').classList.add('dontHover');
-            // document.querySelector('.menu2').innerText=lectureNow;
-            document.querySelector('.menu3').classList.add('dontHover');
-            document.querySelector('.menu3').innerText='';
+            var temp=document.querySelector('.menu1 select option:checked');
+            document.querySelector('.menu2').innerText=`${temp.innerText}`;
+            document.querySelector('.menu2').classList.remove('hover');
+            document.querySelector('.menu3').classList.remove('hover');
+            var user=JSON.parse(localStorage.getItem('user'));
+            document.querySelector('.menu3').innerText=`${user.userName}님`;
             document.querySelector('.menu4').innerText='마이페이지';
             document.querySelector('.menu5').innerText='강의실';
             document.querySelector('.menu6').innerText='수강신청';
@@ -47,7 +51,16 @@
             document.querySelector('.menu5').innerText='강의실';
             document.querySelector('.menu6').innerText='수강신청';
             
+        }}
+        change();
+        const a=()=>{
+            // document.querySelector('.menu1>select').innerText=document.querySelector('option:checked').innerText;
+            console.log(`${document.querySelector('option checked').innerText}`);
+            
         }
+        // document.querySelectorAll('option').forEach(e, (e)=>{
+        //     addEventListener('change',a());    
+        //     })
     </script>
 </body>
 </html>

@@ -21,7 +21,7 @@ aside {
   justify-content: center;
 }
 
-.menu:hover {
+.hover:hover {
   cursor: pointer;
   background-color: #cc97ff;
 }
@@ -32,9 +32,3 @@ aside {
   border: 1px solid #8B5FBF;
 }
 
-.dontHover {
-  width: 275px;
-  height: 80px;
-  margin-top: 100px;
-
-}
