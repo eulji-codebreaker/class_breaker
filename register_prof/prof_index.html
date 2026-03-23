@@ -44,7 +44,6 @@
                             <option value="234">물리치료학과</option>
                             <option value="228">치위생학과</option>
                             <option value="888">안경광학과</option>
-                            <option value="999">관리자</option>
                         </select>
                     </div>
 
@@ -102,18 +101,15 @@
                         </label>
                     </div>
                     <div class="modal-btn-group">
-                        <button type="submit" class="btn-gray">수정하기</button>
+                        <button type="submit" class="btn-gray">등록하기</button>
                         <button type="button" class="btn-gray" onclick="closeModal()">취소</button>
                     </div>
                 </div>
             </form>
-
-
         </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
             const modal = document.getElementById('professor-modal');
             const addForm = document.getElementById('add-form');
             const weeklyContainer = document.getElementById('weekly-inputs');
@@ -165,10 +161,20 @@
 
 
             const dummyLectures = [
-                { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", prof: "정동근", type: "전공", lessonpoint: 3 },
-                { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", prof: "김규동", type: "전공", lessonpoint: 3 },
-                { id: 3, majorId: "162", lessonName: "건강정보의 이해", prof: "ooo", type: "교양", lessonpoint: 2 },
-                { id: 4, majorId: "158", lessonName: "빅데이터 분석", prof: "ooo", type: "전공", lessonpoint: 3 }
+                { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 2, majorId: "162", lessonName: "데이터베이스 이론", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 3, majorId: "162", lessonName: "건강정보의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
+                { id: 4, majorId: "158", lessonName: "빅데이터 분석", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 5, majorId: "162", lessonName: "프로그램 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 6, majorId: "162", lessonName: "통계기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 7, majorId: "162", lessonName: "창의적사고와 코딩", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
+                { id: 8, majorId: "162", lessonName: "운영체제", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 9, majorId: "158", lessonName: "데이터 분석실무", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 10, majorId: "162", lessonName: "의료영상처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 11, majorId: "162", lessonName: "데이터베이스 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 12, majorId: "162", lessonName: "조사방법론", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 13, majorId: "162", lessonName: "객체모델링", lessonProf: "ooo", type: "전공", lessonpoint: 2 },
+                { id: 14, majorId: "162", lessonName: "파이썬프로그래밍", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
             ];
 
             const renderLectures = (data) => {
@@ -181,7 +187,7 @@
             <li data-id="${lecture.id}">
                 <span class="subjectName">${lecture.lessonName}</span>
                 <div class="subjectInfo">
-                    <span>${lecture.prof}</span> <span class="dot">·</span>
+                    <span>${lecture.lessonProf}</span> <span class="dot">·</span>
                     <span>${lecture.type}</span> <span class="dot">·</span>
                     <span>${lecture.lessonpoint}학점</span>
                 </div>
@@ -241,6 +247,17 @@
             const modal = document.getElementById('professor-modal');
             if (modal) modal.style.display = 'none';
         }
+
+        // 1. 상단 [강의 추가] 버튼 클릭 시 모달 열기 및 초기화
+        const addLectureBtn = document.querySelector('.groupRadio .regbtn');
+        addLectureBtn.addEventListener('click', () => {
+            addForm.reset(); // 폼 입력값 초기화
+            const title = addForm.querySelector('.modal-title');
+            if (title) title.innerText = "강의 개설 신청";
+            modal.style.display = 'flex';
+            addForm.style.display = 'flex';
+        });
+
     </script>
 
     <script src="/js/register_prof.js"></script>

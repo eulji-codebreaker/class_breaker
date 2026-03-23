@@ -45,7 +45,6 @@
                             <option value="234">물리치료학과</option>
                             <option value="228">치위생학과</option>
                             <option value="888">안경광학과</option>
-                            <option value="999">관리자</option>
                         </select>
                     </div>
 
@@ -88,13 +87,23 @@
 
             const finalConfirmBtn = deleteCheckModal.querySelector('.checkbtn');
 
-            let targetElement = null; 
+            let targetElement = null;
 
             const dummyLectures = [
                 { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", lessonProf: "정동근", type: "전공", lessonpoint: 3 },
-                { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", lessonProf: "김규동", type: "전공", lessonpoint: 3 },
+                { id: 2, majorId: "162", lessonName: "데이터베이스 이론", lessonProf: "김규동", type: "전공", lessonpoint: 3 },
                 { id: 3, majorId: "162", lessonName: "건강정보의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
-                { id: 4, majorId: "158", lessonName: "빅데이터 분석", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
+                { id: 4, majorId: "158", lessonName: "빅데이터 분석", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 5, majorId: "162", lessonName: "프로그램 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 6, majorId: "162", lessonName: "통계기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 7, majorId: "162", lessonName: "창의적사고와 코딩", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
+                { id: 8, majorId: "162", lessonName: "운영체제", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 9, majorId: "158", lessonName: "데이터 분석실무", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 10, majorId: "162", lessonName: "의료영상처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 11, majorId: "162", lessonName: "데이터베이스 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 12, majorId: "162", lessonName: "조사방법론", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+                { id: 13, majorId: "162", lessonName: "객체모델링", lessonProf: "ooo", type: "전공", lessonpoint: 2 },
+                { id: 14, majorId: "162", lessonName: "파이썬프로그래밍", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
             ];
 
             const renderLectures = (data) => {
@@ -137,7 +146,7 @@
                 if (e.target.classList.contains('regbtn')) {
                     e.preventDefault();
                     targetElement = e.target.closest('li');
-                    deleteModal.style.display = 'flex'; 
+                    deleteModal.style.display = 'flex';
                 }
             });
 
@@ -148,7 +157,7 @@
 
             confirmBtn.addEventListener('click', () => {
                 if (targetElement) {
-                    targetElement.remove(); 
+                    targetElement.remove();
                     deleteModal.style.display = 'none';
                     deleteCheckModal.style.display = 'flex';
                 }

@@ -10,11 +10,14 @@ fetch("../layout/footer.html") //웹문서 요청
         // console.log(responseText);
         document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
     })
-fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-    .then((response) => response.text())
-    .then((responseText) => {
-        document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-    })
+
+// fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+//     .then((response) => response.text())
+//     .then((responseText) => {
+//         document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+//     })
+
+
     
 const topbarItems = document.querySelectorAll('.topbar div');
 

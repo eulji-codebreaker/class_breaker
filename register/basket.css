@@ -1,11 +1,20 @@
+.content {
+    flex: 1;
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    overflow-y: auto;
+    
+}
+
 .basketHeader {
     background-color: #F7EDFF;
     height: 51px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 30px;
-    margin-left: 15px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 
 }
 
@@ -15,16 +24,21 @@
 
 
 }
-.subjectBasket > div {
-    max-height: 300px;
-    overflow-y: auto;
-}
 
 .majorSelect {
     display: flex;
-    flex: 1;
-    height: 650px;
+    /* flex: 1; */
+    /* height: 650px; */
 }
+
+.lectureList {
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 5px;
+    padding-top: 30px;
+    border: 1px solid black;
+}
+
 
 .lectureList li {
     display: flex;
@@ -35,6 +49,7 @@
     margin-bottom: 30px;
     margin-left: -20px;
 }
+
 
 .modal {
     display: none;
