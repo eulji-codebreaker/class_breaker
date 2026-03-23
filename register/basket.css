@@ -15,10 +15,6 @@
 
 
 }
-.subjectBasket > div {
-    max-height: 300px;
-    overflow-y: auto;
-}
 
 .majorSelect {
     display: flex;
