@@ -10,7 +10,7 @@
 
 <body>
     <aside>
-        <div class="dontHover">
+        <div class="dontHover menu1">
             <select>
                 <option disabled selected hidden>강의실 선택</option>
                 <option>운영체제</option>
@@ -27,9 +27,17 @@
     </aside>
 
     <script>
-        const updateSidebar=()=>{
-        if(localStorage.getItem('pageNow')==='lectureroom'){
-            document.querySelector('.dontHover').style.backgroundColor='red';
+        var userInfo=JSON.parse(localStorage.getItem('user'));
+        currentUserInfo
+        if(localStorage.getItem('pageNow')==="lectureroom"){
+            // document.querySelector('.menu1').style.backgroundColor='red';
+            document.querySelector('.menu2').classList.add('dontHover');
+            // document.querySelector('.menu2').innerText=lectureNow;
+            document.querySelector('.menu3').classList.add('dontHover');
+            document.querySelector('.menu3').innerText='';
+            document.querySelector('.menu4').innerText='마이페이지';
+            document.querySelector('.menu5').innerText='강의실';
+            document.querySelector('.menu6').innerText='수강신청';
         }
         if(localStorage.getItem('pageNow')==='register'){
             document.querySelector('.dontHover').style.display='none';
@@ -39,7 +47,7 @@
             document.querySelector('.menu5').innerText='강의실';
             document.querySelector('.menu6').innerText='수강신청';
             
-        }}
+        }
     </script>
 </body>
 </html>

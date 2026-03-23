@@ -35,6 +35,11 @@ main {
             align-items: center;
             gap: 10px;
         }
+        
+        .wrong{
+            background-color:gray;
+            color:black;
+        }
 
         .formInput {
             display: flex;
