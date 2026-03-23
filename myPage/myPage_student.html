@@ -194,7 +194,13 @@
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) return;
 
-            const myLessons = userData.userLessonList || [];
+            var myLessons = userData.userLessonList || [];
+            const localUpdate=()=>{
+                localStorage.setItem('myLessons',JSON.stringify(myLessons));
+                myLessons=JSON.parse(localStorage.getItem('myLessons'));
+                userData.userLessonList=myLessons;
+            };
+            localUpdate();
 
             // table1 업데이트
             document.querySelectorAll('.studentTimetable1 .timetableCol div:not(.fixedTime)').forEach(el => {
@@ -212,7 +218,7 @@
                     const cell = document.querySelector(`.studentTimetable1 .${dayClass}.time${i}`);
                     if (cell) {
                         cell.innerText = l.lessonName;
-                        cell.style.backgroundColor = '#ead8fa';
+                        cell.style.backgroundColor = '#F8F3FD';
                         cell.style.fontSize = '12px';
                         cell.style.fontWeight = 'bold';
                         cell.style.display = 'flex';
