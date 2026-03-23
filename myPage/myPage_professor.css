@@ -1,16 +1,68 @@
-/* top bar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'normalFont';
+}
+
+@font-face {
+    font-family: 'normalFont';
+    src: url('../../../font/SCDream4.otf') format('opentype');
+}
+
+body {
+    display: grid;
+    grid-template-rows: 90px 1fr 60px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+}
+
+article {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+#headerLogo:hover {
+    cursor: pointer;
+}
+
+header {
+    width: 100%;
+    background-color: #EFDFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+footer {
+    height: 60px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
 .topbar {
     width: 100%;
-    height: 80px;
+    height: 60px;
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
-    margin-bottom: 15px;
+    margin-bottom: 11px;
     border-radius: 10px;
     border: 1px solid #8b5fbf;
 
-    background: #ead8fa;
+    background: #EFDFFF;
 
     overflow: hidden;
     cursor: pointer;
@@ -28,9 +80,10 @@
 
 .topbar>div {
     font-weight: bold;
-    font-size: 30px;
-    line-height: 80px;
+    font-size: 25px;
+    line-height: 60px;
 
+    font-size: 1.2rem;
     text-align: center;
     white-space: nowrap;
 
@@ -39,7 +92,7 @@
 
 .active {
     width: 100%;
-    height: 80px;
+    height: 60px;
     line-height: 80px;
 
     padding: 0;
@@ -52,7 +105,7 @@
 /* Timetable1 (myTimetable) */
 .professorTimetable1 {
     width: 100%;
-    height: 755px;
+    height: 529px;
 
     display: grid;
     grid-template-columns: 130px repeat(5, minmax(150px, 1fr));
@@ -109,7 +162,7 @@
 /* Timetable2 (learningList) */
 .professorTimetable2 {
     width: 100%;
-    height: 755px;
+    height: 529px;
 
     display: grid;
     grid-template-columns: 130px repeat(5, minmax(150px, 1fr));
@@ -137,7 +190,7 @@
 
 .professorTimetable2 th,
 .professorTimetable2 td {
-    height: 80px;
+    height: 45px;
 
     border: 1px solid black;
     border-top: none;
@@ -151,28 +204,28 @@
     border-right: none;
 }
 
-.professorTimeTable2 th:nth-child(1),
-.professorTimeTable2 td:nth-child(1) {
+.professorTimetable2 th:nth-child(1),
+.professorTimetable2 td:nth-child(1) {
     width: 10%;
 }
 
-.professorTimeTable2 th:nth-child(2),
-.professorTimeTable2 td:nth-child(2) {
+.professorTimetable2 th:nth-child(2),
+.professorTimetable2 td:nth-child(2) {
     width: 15%;
 }
 
-.professorTimeTable2 th:nth-child(3),
-.professorTimeTable2 td:nth-child(3) {
+.professorTimetable2 th:nth-child(3),
+.professorTimetable2 td:nth-child(3) {
     width: 45%;
 }
 
-.professorTimeTable2 th:nth-child(4),
-.professorTimeTable2 td:nth-child(4) {
+.professorTimetable2 th:nth-child(4),
+.professorTimetable2 td:nth-child(4) {
     width: 20%;
 }
 
-.professorTimeTable2 th:nth-child(5),
-.professorTimeTable2 td:nth-child(5) {
+.professorTimetable2 th:nth-child(5),
+.professorTimetable2 td:nth-child(5) {
     width: 20%;
 }
 
@@ -274,7 +327,6 @@
 }
 
 .textarea-item {
-    width: 93.2%;
     flex-direction: column;
     height: auto;
     margin-top: 10px;
@@ -341,4 +393,56 @@
 #id-num::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.syllabus-container {
+    width: 625px;
+    margin-top: 15px;
+    border: 1px solid #ababab;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+}
+
+.syllabus-container .label {
+    background-color: #f5f5f5;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 1px solid #ababab;
+    text-align: center;
+}
+
+.week-grid {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.week-item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.week-item:last-child {
+    border-bottom: none;
+}
+
+.week-item span {
+    min-width: 60px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #444;
+}
+
+.week-item input {
+    flex: 1;
+    border: 1px solid #ababab;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    outline: none;
 }

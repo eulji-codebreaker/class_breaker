@@ -1,20 +1,58 @@
-/* 1. 기본 레이아웃 (관리자 페이지 메인) */
-article {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'normalFont';
+}
+
+@font-face {
+    font-family: 'normalFont';
+    src: url('../../../font/SCDream4.otf') format('opentype');
+}
+
+body {
+    display: grid;
+    grid-template-rows: 90px 1fr 60px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+main {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+}
+
+article {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+header {
+    width: 100%;
+    background-color: #EFDFFF;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    flex: 1;
+    border-bottom: 1px solid black;
+}
+
+footer {
+    height: 60px;
+    width: 100%;
 }
 
 .openingList {
     width: 100%;
-    height: 850px;
+    height: 600px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    border: 1px solid #000000;
+    border: 1px solid #000;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #fff;
+    overflow: hidden;
 }
 
 .title {
@@ -23,28 +61,12 @@ article {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px;
-    background-color: #ffffff;
-    white-space: nowrap;
-}
-
-.text {
-    font-weight: bold;
-    font-size: 30px;
-    white-space: nowrap;
-    flex: 1;
-}
-
-.option {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+    padding: 20px;
 }
 
 .option select {
     width: 500px;
     padding: 10px;
-    background-color: #ffffff;
     border-radius: 10px;
     border: 1px solid #ababab;
 }
@@ -53,16 +75,10 @@ article {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    overflow-x: hidden;
-    width: 100%;
 }
 
-/* 2. 강의 리스트 스타일 */
 .lecture-list {
-    width: 100%;
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .lecture-list li {
@@ -71,39 +87,11 @@ article {
     align-items: center;
     padding: 15px 10px;
     border-bottom: 1px solid #ababab;
-    transition: background-color 0.2s;
 }
 
-.lecture-list li:hover {
-    background-color: #f9f0ff;
-    /* 마우스 올리면 보라색 강조 */
-}
-
-.subjectInfo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.dot {
-    color: black;
-}
-
-.button-group {
-    padding: 10px;
-}
-
-/* 3. 사이드바 제어 (관리자 전용) */
-/* 사이드바에서 수강신청/개설과목 섹션을 보이지 않게 처리 */
-.sidebar-container .course-section,
-.sidebar-container .course-list {
-    display: none !important;
-}
-
-/* 4. 모달(Modal) 공통 스타일 */
+/* modal */
 .modal {
     display: none;
-    /* JS에서 flex로 변경 */
     position: fixed;
     left: 0;
     top: 0;
@@ -112,39 +100,31 @@ article {
     background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
-    z-index: 1000;
 }
 
 .modalContent {
     background-color: white;
     width: 750px;
     padding: 35px;
-    border-radius: 15px;
-    border: 1px solid #8b5fbf;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 1px solid #ababab;
 }
 
 .modal-layout {
     display: none;
-    /* JS에서 block/flex로 변경 */
     flex-direction: column;
-    align-items: center;
-    width: 100%;
 }
 
 .modal-title {
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 30px;
     margin-bottom: 25px;
     text-align: center;
 }
 
-/* 5. 폼 입력창 (교수 페이지 스타일 계승) */
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    width: 100%;
 }
 
 .info-item {
@@ -192,59 +172,51 @@ article {
 .id-combo input {
     border: 1px solid #ababab;
     height: 32px;
-    border-radius: 6px;
+    border-radius: 10px;
     flex: none;
 }
 
-#id-num {
+.id-combo #modal-num {
     width: 60px;
 }
 
-#id-num::-webkit-outer-spin-button,
-#id-num::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.sidebar-container .course-section,
-.sidebar-container .course-list,
-.sidebar-container #info-major {
-    display: none !important;
+.helper-text {
+    font-size: 12px;
+    color: #ababab;
+    margin-left: 5px;
 }
 
 .textarea-item {
-    grid-column: span 2;
     flex-direction: column;
     height: auto;
     margin-top: 10px;
-    width: 100%;
 }
 
 .textarea-item .label {
     width: 100%;
-    height: 35px;
     border-right: none;
     border-bottom: 1px solid #ababab;
+    height: 35px;
     justify-content: flex-start;
     padding-left: 15px;
 }
 
 #lessonContent {
     width: 100%;
-    box-sizing: border-box;
     height: 100px;
     padding: 12px;
     border: none;
     resize: none;
     outline: none;
+    font-size: 15px;
 }
+
 
 .modal-btn-group {
     display: flex;
     justify-content: center;
     gap: 12px;
     margin-top: 25px;
-    width: 100%;
 }
 
 .modalbtn {
@@ -253,45 +225,88 @@ article {
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 16px;
-    border: 1px solid #ababab;
     background-color: #f5f5f5;
-    transition: 0.2s;
-}
-
-.modalbtn.primary {
-    background-color: #8b5fbf;
-    color: white;
-    border: none;
-}
-
-.modalbtn.danger {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
+    border: 1px solid #ababab;
+    font-size: 16px;
 }
 
 .modalbtn:hover {
-    filter: brightness(90%);
+    background-color: #ababab;
 }
 
-.regbtn {
-    padding: 6px 12px;
-    border-radius: 5px;
-    border: 1px solid #8b5fbf;
-    background-color: white;
-    color: #8b5fbf;
-    cursor: pointer;
+#delete-target-info {
+    margin: 20px 0;
     font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
-.regbtn:hover {
-    background-color: #8b5fbf;
-    color: white;
+.modal-layout {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 #id-num::-webkit-outer-spin-button,
 #id-num::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.syllabus-container {
+    width: 625px;
+    margin-top: 15px;
+    border: 1px solid #ababab;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+}
+
+.syllabus-container .label {
+    background-color: #f5f5f5;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 1px solid #ababab;
+    text-align: center;
+}
+
+.week-grid {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.week-item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.week-item:last-child {
+    border-bottom: none;
+}
+
+.week-item span {
+    min-width: 60px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #444;
+}
+
+.week-item input {
+    flex: 1;
+    border: 1px solid #ababab;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    outline: none;
+}
+
+.course-section {
+    display: none !important;
 }
