@@ -1,0 +1,142 @@
+.btn {
+    background-color: #EAD8FA;
+    border: 1px solid #8B5FBF;
+    border-radius: 15px;
+    padding: 5px 15px;
+}
+
+.groupRadio span {
+    margin-right: 200px;
+    margin-left: 30px;
+}
+
+form {
+    border: 1px solid black;
+    width: 600px;
+}
+
+.lecturePlan {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+}
+.modal {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.modalContent {
+    background-color: white;
+    width: 40%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.boxGroup {
+    width: 230px;
+    height: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 25px;
+    margin-left: 30px;
+}
+
+
+.box {
+    width: 120px;
+    height: 25px;
+    background: #F5F5F5;
+
+}
+
+.boxLine {
+    margin-top: 20px;
+    background: #F5F5F5;
+    width: 550px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+
+}
+
+.closebtn {
+    width: 45px;
+    height: 29px;
+    font-size: 12px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+    border: 1px solid #000000;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+
+}
+
+
+
+.delete {
+    font-weight: 400;
+    font-size: 48px;
+}
+
+
+
+.checkbtn {
+    width: 130px;
+    height: 50px;
+    font-size: 24px;
+}
+
+.canclebtn {
+    width: 130px;
+    height: 50px;
+    font-size: 24px;
+}
+
+.btnGroup {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.regbtn-delete {
+  background-color: #e3c6ff;
+}
+
+.regbtn-delete {
+  background-color: #cfa9f4;
+}
+
+.regbtn-delete:hover {
+  cursor: pointer;
+  background-color: #cc97ff;
+}
+
+.checkbtn {
+    width: 130px;
+    height: 50px;
+    font-size: 24px;
+}
+
+.canclebtn {
+    width: 130px;
+    height: 50px;
+    font-size: 24px;
+}

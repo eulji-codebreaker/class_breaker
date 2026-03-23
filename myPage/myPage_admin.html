@@ -186,10 +186,132 @@
         </article>
     </main>
 
+    <!-- modeal -->
+    <div class="modal" id="admin-modal">
+        <div class="modalContent">
+            <form id="add-form" class="modal-layout">
+                <h1 class="modal-title">강의 개설 신청</h1>
+                <div class="info-grid">
+                    <div class="info-item full-width">
+                        <div class="label">과목 ID 생성</div>
+                        <div class="id-combo">
+                            <select id="id-major" required>
+                                <option value="" disabled selected hidden>학과 선택</option>
+                                <option value="162">162(의료it학과)</option>
+                                <option value="158">158(빅데이터의료융합학과)</option>
+                                <option value="160">160(첨단학부)</option>
+                                <option value="123">123(간호학과)</option>
+                                <option value="119">119(응급구조학과)</option>
+                                <option value="238">238(임상병리학과)</option>
+                                <option value="130">130(방사선학과)</option>
+                                <option value="234">234(물리치료학과)</option>
+                                <option value="228">228(치위생학과)</option>
+                                <option value="888">888(안경광학과)</option>
+                                <option value="999">999(관리자)</option>
+                            </select>
+                            <select id="id-req">
+                                <option value="m">m (전공필수)</option>
+                                <option value="s">s (전공선택)</option>
+                            </select>
+                            <input type="number" id="id-num" placeholder="00" min="0" max="99" required>
+                            <span class="helper-text">* 학과번호</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="label">과목명</div>
+                        <input type="text" id="lessonName" required>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="label">대상학년</div>
+                        <select id="lessonGrade">
+                            <option value="1">1학년</option>
+                            <option value="2">2학년</option>
+                            <option value="3">3학년</option>
+                            <option value="4">4학년</option>
+                            <option value="0">교양(0)</option>
+                        </select>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="label">최대인원</div>
+                        <input type="number" id="lessonMax" min="1" required value="40">
+                    </div>
+
+                    <div class="info-item">
+                        <div class="label">강의실</div>
+                        <input type="text" id="lessonRoom" required placeholder="예: 본관 301호">
+                    </div>
+
+                    <div class="info-item">
+                        <div class="label">요일</div>
+                        <select id="lessonDay">
+                            <option value="1">월요일</option>
+                            <option value="2">화요일</option>
+                            <option value="3">수요일</option>
+                            <option value="4">목요일</option>
+                            <option value="5">금요일</option>
+                        </select>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="label">시작시간</div>
+                        <select id="lessonBegin">
+                        </select>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="label">종료시간</div>
+                        <select id="lessonEnd">
+                        </select>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="label">학점</div>
+                        <input type="number" id="lessonPoint" min="1" max="5" value="3">
+                    </div>
+                </div>
+
+                <div class="info-item textarea-item">
+                    <div class="label">강의설명</div>
+                    <textarea id="lessonContent" placeholder="강의 상세 내용을 입력하세요."></textarea>
+                </div>
+
+                <div class="modal-btn-group">
+                    <button type="submit" class="modalbtn primary">저장하기</button>
+                    <button type="button" class="modalbtn" onclick="closeModal()">취소</button>
+                </div>
+            </form>
+
+            <div id="delete-confirm" class="modal-layout">
+                <h2 class="modal-title">정말 삭제하시겠습니까?</h2>
+                <p id="delete-target-info"></p>
+
+                <div class="modal-btn-group">
+                    <button type="button" id="execute-delete-btn" class="modalbtn danger">삭제확인</button>
+                    <button type="button" class="modalbtn" onclick="closeModal()">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </html>
 <script>
-    
+    // sidebar
+    fetch("../layout/mypage_sidebar.html").then(res => res.text()).then(html => {
+        const main = document.querySelector('main');
+        if (!document.querySelector('.sidebar-container')) main.insertAdjacentHTML("afterbegin", html);
+
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            document.getElementById('info-name').innerText = `이름: ${user.userName} (관리자)`;
+            document.getElementById('info-id').innerText = `번호: ${user.userId}`;
+            document.getElementById('info-grade').innerText = `직책: 관리자`;
+        }
+    });
+
+    /* header, footer */
     fetch("../layout/header.html")
         .then((response) => response.text())
         .then((responseText) => {
@@ -200,17 +322,6 @@
         .then((responseText) => {
             document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
         })
-
-    fetch("../layout/mypage_sidebar.html")
-        .then((response) => response.text())
-        .then((responseText) => {
-            document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
-            const courseSection = document.querySelector('.course-section');
-            if (courseSection) {
-                courseSection.style.display = 'none';
-            }
-        })
-
 
 </script>
 </body>

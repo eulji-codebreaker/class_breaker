@@ -58,10 +58,8 @@ aside {
 }
 
 .course-card:hover {
-  background-color: #d6adff;
-} 
-
-
+    background-color: #d6adff;
+}
 
 .course-name {
     font-size: 0.85rem;
@@ -71,5 +69,5 @@ aside {
 
 .professor {
     font-size: 0.8rem;
-    color: #000000;
+    color: black;
 }

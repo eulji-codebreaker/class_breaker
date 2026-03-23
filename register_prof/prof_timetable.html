@@ -7,15 +7,17 @@
     <title>Document</title>
     <link rel="stylesheet" href="/register/timetable.css">
     <link rel="stylesheet" href="/register/topbar.css">
+    <link rel="stylesheet" href="/register_prof/all.css">
+
 </head>
 
 <body>
     <main>
         <article>
             <div class="topbar">
-                <div>조회</div>
-                <div>수강바구니</div>
-                <div>수강신청</div>
+                <div>개설과목 추가</div>
+                <div>개설과목 수정</div>
+                <div>개설과목 삭제</div>
                 <div class="active">신청한 시간표</div>
             </div>
             <div class="studentTimeTable1">
@@ -126,8 +128,14 @@
 
         </article>
     </main>
-    <script src="/js/register.js"></script>
-    
+    <script src="/js/register_prof.js"></script>
+    <script>
+        var role = JSON.parse(localStorage.getItem('user')).userPosition;
+
+        if (role !== 'student') {
+            querryselector('button').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
