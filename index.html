@@ -26,8 +26,10 @@
                                 placeholder="비밀번호를 입력하세요">
                         </div>
                     </div>
-                    <button class="loginbtn">로그인</button>
-                    <p class="loginUserBtn">회원가입</p>
+                    <div class="buttonZip">
+                        <button class="loginbtn">로그인</button>
+                        <button class="loginUserBtn loginbtn">회원가입</button>
+                    </div>
                 </form>
             </div>
         </article>
@@ -143,7 +145,9 @@
         const userGrade = document.getElementById("userGrade");
         const userGenderList = document.querySelectorAll('input[name="userGender"]');
         var userInfoGroup = [{ userId: 111111111, userPwd: 1111, userPosition: 'prof', userName: '김교수', userMajorId: 160, userMajor: '첨단학부', userGrade: 9, userLessonList: [] },
-        { userId: 22222222, userPwd: 2222, userPosition: 'admin', userName: '관리자', userMajorId: 999, userMajor: '관리자', userGrade: 0, userLessonList: [] }]
+        { userId: 22222222, userPwd: 2222, userPosition: 'admin', userName: '관리자', userMajorId: 999, userMajor: '관리자', userGrade: 0, userLessonList: [] },
+        { userId: 201016001, userPwd: 1111, userPosition: 'prof', userName: '강교수', userMajorId: 160, userMajor: '첨단학부', userGrade: 9, userLessonList: [] },
+        { userId: 2026515, userPwd: 1111, userPosition: 'admin', userName: '김관리', userMajorId: 999, userMajor: '관리자', userGrade: 0, userLessonList: [] }]
 
         localStorage.setItem('pageNow', 'login');
 
@@ -324,7 +328,7 @@
             localStorage.setItem('userInfoGroup', JSON.stringify(userInfoGroup));
             idRegRealForm.reset();
 
-            
+
         });
 
         // completeBtn.addEventListener("click", function () {
