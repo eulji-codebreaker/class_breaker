@@ -19,7 +19,7 @@
                 <div class="empty-slot"></div>
             </div>
 
-            <!-- timetable1 -->
+            <!-- student timetable1 -->
             <div class="studentTimetable1">
                 <div class="timetableCol nothing">
                     <div class="fixedTime">요일,교시</div>
@@ -107,7 +107,7 @@
                 </div>
             </div>
 
-            <!-- timetable2 -->
+            <!-- student timetable2 -->
             <div class="studentTimetable2">
                 <table>
                     <thead>
@@ -193,64 +193,52 @@
     </main>
 
     <script>
-        // 시간 옵션 렌더링 함수
-        const renderTimeOptions = () => {
-            const beginSel = document.getElementById('lessonBegin');
-            const endSel = document.getElementById('lessonEnd');
-            if (!beginSel || !endSel) return;
-            let bOptions = '', eOptions = '';
-            for (let i = 8; i <= 18; i++) {
-                bOptions += `<option value="${i}">${i}:00</option>`;
-                eOptions += `<option value="${i}">${i}:50</option>`;
-            }
-            beginSel.innerHTML = bOptions;
-            endSel.innerHTML = eOptions;
-        };
-
+        // 요일 변환
         function getDayClass(n) {
             return { 1: 'mon', 2: 'tue', 3: 'wed', 4: 'thr', 5: 'fri' }[n] || '';
         }
 
-        // 학생 UI 렌더링 (시간표 및 사이드바 목록)
         window.renderStudentUI = () => {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) return;
 
-            // const myLessons = userData.userLessonList || [];
-            var myLessons=localStorage.getItem('myLessons'); //const로 바꾸셈
-            myLessons=[
-                {lessonId: '121aaa',
-                lessonName: 'fffff',
-                lessonProfId: 222222222,
-                lessonProf: '강민수',
-                lessonMajorId: 160,
-                lessonGrade: 4,
-                lessonNow: 0,
-                lessonMax: 40,
-                lessonRoom: '박123',
-                lessonDay: 3,
-                lessonBegin: '08:00',
-                lessonEnd: '11:50',
-                lessonPoint: 3,
-                lessonSyllabus: 'ㅁㄴㅇ'},
+            // 더미 데이터
+            let myLessons = [
+                {
+                    lessonId: '121aaa',
+                    lessonName: 'fffff',
+                    lessonProfId: 222222222,
+                    lessonProf: '강민수',
+                    lessonMajorId: 160,
+                    lessonGrade: 4,
+                    lessonNow: 0,
+                    lessonMax: 40,
+                    lessonRoom: '박123',
+                    lessonDay: 3,
+                    lessonBegin: '08:00',
+                    lessonEnd: '11:50',
+                    lessonPoint: 3,
+                    lessonSyllabus: 'ㅁㄴㅇ'
+                },
+                {
+                    lessonId: 'pasd01',
+                    lessonName: 'fucktlqkf',
+                    lessonProfId: 333333333,
+                    lessonProf: '정명애',
+                    lessonMajorId: 160,
+                    lessonGrade: 4,
+                    lessonNow: 3,
+                    lessonMax: 40,
+                    lessonRoom: '박444',
+                    lessonDay: 5,
+                    lessonBegin: '13:00',
+                    lessonEnd: '15:50',
+                    lessonPoint: 5,
+                    lessonSyllabus: '강의계획서'
+                }
+            ];
 
-                {lessonId: 'pasd01',
-                lessonName: 'fucktlqkf',
-                lessonProfId: 333333333,
-                lessonProf: '정명애',
-                lessonMajorId: 160,
-                lessonGrade: 4,
-                lessonNow: 3,
-                lessonMax: 40,
-                lessonRoom: '박444',
-                lessonDay: 5,
-                lessonBegin: '13:00',
-                lessonEnd: '15:50',
-                lessonPoint: 5,
-                lessonSyllabus: '강의계획서'}
-            ]
-
-            // 시간표(Table1) 업데이트
+            // 시간표 업데이트
             document.querySelectorAll('.studentTimetable1 .timetableCol div:not(.fixedTime)').forEach(el => {
                 el.innerText = '';
                 el.style.backgroundColor = '';
@@ -259,115 +247,123 @@
             myLessons.forEach(l => {
                 const dayClass = getDayClass(Number(l.lessonDay));
                 if (!dayClass) return;
-                const startIdx = Number(l.lessonBegin) - 8;
-                const endIdx = Number(l.lessonEnd) - 8;
+
+                const startHour = parseInt(l.lessonBegin.split(':')[0]);
+                const endHour = parseInt(l.lessonEnd.split(':')[0]);
+                const startIdx = startHour - 8;
+                const endIdx = endHour - 8;
 
                 for (let i = startIdx; i <= endIdx; i++) {
                     const cell = document.querySelector(`.studentTimetable1 .${dayClass}.time${i}`);
                     if (cell) {
                         cell.innerText = l.lessonName;
                         cell.style.backgroundColor = '#F8F3FD';
-                        cell.style.fontSize = '12px';
-                        cell.style.fontWeight = 'bold';
                         cell.style.display = 'flex';
                         cell.style.alignItems = 'center';
                         cell.style.justifyContent = 'center';
+                        cell.style.fontWeight = 'bold';
+                        cell.style.fontSize = '12px';
                     }
                 }
             });
 
-            // 이수현황(Table2) 업데이트
+            // 테이블 목록 업데이트
             const tbody = document.querySelector('.studentTimetable2 tbody');
             if (tbody) {
-                if (myLessons.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4">신청된 강의가 없습니다.</td></tr>';
-                } else {
-                    tbody.innerHTML = myLessons.map(l => `
-                    <tr>
-                        <td>${l.lessonId.includes('m') ? '전필' : '전선'}</td>
-                        <td>${l.lessonName}</td>
-                        <td>수강중</td>
-                        <td>신청완료</td>
-                    </tr>
-                `).join('');
-                }
+                tbody.innerHTML = myLessons.map(l => `
+            <tr>
+                <td>${l.lessonId.includes('m') ? '전필' : '전선'}</td>
+                <td>${l.lessonName}</td>
+                <td>수강중</td>
+                <td>신청완료</td>
+            </tr>
+        `).join('');
             }
 
-            // 3. 사이드바 강의 목록 업데이트
+            // 사이드바 목록 업데이트
             const sidebarCourseList = document.querySelector('.course-list');
             if (sidebarCourseList) {
                 sidebarCourseList.innerHTML = myLessons.map(l => `
-                <button type="button" class="course-card" onclick="goToLecture()">
-                    <p class="course-name">${l.lessonName}</p>
-                    <p class="professor">${l.lessonProf} 교수님</p>
-                </button>
-            `).join('');
+            <button type="button" class="course-card" onclick="goToLecture()">
+                <p class="course-name">${l.lessonName}</p>
+                <p class="professor">${l.lessonProf} 교수님</p>
+            </button>
+        `).join('');
             }
         };
 
-        // 모든 리소스 로드 후 실행
         window.onload = () => {
-            renderTimeOptions();
-
-            // 헤더 로드
-            fetch("../layout/header.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("afterbegin", h));
-            // 푸터 로드
-            fetch("../layout/footer.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("beforeend", h));
-
-            // 사이드바 로드 및 데이터 바인딩
-            fetch("../layout/mypage_sidebar.html")
-                .then(res => res.text())
-                .then(html => {
-                    const main = document.querySelector('main');
-                    if (!document.querySelector('.sidebar-container')) {
-                        main.insertAdjacentHTML("afterbegin", html);
-                    }
-
-                    const userLocal = localStorage.getItem('user');
-                    if (userLocal) {
-                        const user = JSON.parse(userLocal);
-
-                        // 내 정보 채우기
-                        const setVal = (id, txt) => {
-                            const el = document.querySelector(id);
-                            if (el) el.innerText = txt;
-                        };
-
-                        setVal('#val1', user.userName);
-                        setVal('#val2', user.userId);
-                        setVal('#val3', user.userMajor || '미지정');
-                        setVal('#val4', user.userGrade + '학년');
-
-                        // 학생이므로 제목은 "수강신청 과목" 유지 (필요시 변경)
-                    }
-
-                    // 데이터 채우기 실행
-                    renderStudentUI();
-                })
-                .catch(err => console.error("사이드바 로드 실패:", err));
-
-            // 탭 이벤트 설정
             const tabTimetable = document.querySelector('.myTimetable');
             const tabLearningList = document.querySelector('.learningList');
             const table1 = document.querySelector('.studentTimetable1');
             const table2 = document.querySelector('.studentTimetable2');
 
-            if (tabTimetable && tabLearningList) {
-                tabTimetable.addEventListener('click', () => {
-                    tabTimetable.classList.add('active');
-                    tabLearningList.classList.remove('active');
-                    table1.style.display = 'grid';
-                    table2.style.display = 'none';
-                });
 
-                tabLearningList.addEventListener('click', () => {
-                    tabLearningList.classList.add('active');
-                    tabTimetable.classList.remove('active');
-                    table1.style.display = 'none';
-                    table2.style.display = 'block';
-                });
-            }
-        };
+            // 탭 전환
+            tabTimetable.addEventListener('click', () => {
+                tabTimetable.classList.add('active');
+                tabLearningList.classList.remove('active');
+                table1.style.display = 'grid';
+                table2.style.display = 'none';
+                btnContainer.style.display = 'none';
+            });
+
+            tabLearningList.addEventListener('click', () => {
+                tabLearningList.classList.add('active');
+                tabTimetable.classList.remove('active');
+                table1.style.display = 'none';
+                table2.style.display = 'block';
+                btnContainer.style.display = 'flex';
+            });
+        }
+
+        // 헤더, 푸터, 사이드바 불러오기
+        fetch("../layout/header.html")
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
+                document.querySelector('#headerLogo').onclick = () => location.href = '/mainPage/index.html';
+
+                const day = document.querySelector('#dday');
+                function diffDay() {
+                    const getDay = new Date(2026, 3, 21);
+                    const today = new Date();
+                    const diff = getDay - today;
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    if (day) day.innerText = `중간고사 D-${days}`;
+                }
+                diffDay();
+                setInterval(diffDay, 1000 * 60 * 60);
+            });
+
+        fetch("../layout/footer.html")
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
+            });
+
+        fetch("../layout/mypage_sidebar.html")
+            .then(res => res.text())
+            .then(html => {
+                const main = document.querySelector('main');
+                if (!document.querySelector('.sidebar-container')) {
+                    main.insertAdjacentHTML("afterbegin", html);
+                }
+
+                const userLocal = localStorage.getItem('user');
+                if (userLocal) {
+                    const user = JSON.parse(userLocal);
+                    const setVal = (id, txt) => {
+                        const el = document.querySelector(id);
+                        if (el) el.innerText = txt;
+                    };
+                    setVal('#val1', user.userName);
+                    setVal('#val2', user.userId);
+                    setVal('#val3', user.userMajor || '미지정');
+                    setVal('#val4', user.userGrade + '학년');
+                }
+                renderStudentUI();
+            });
 
         window.goToLecture = function () {
             location.href = "../lectureRoom/index.html";

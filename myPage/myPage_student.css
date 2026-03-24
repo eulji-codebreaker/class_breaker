@@ -194,22 +194,18 @@ footer {
     border-right: none;
 }
 
-.studentTimetable2 th:nth-child(1),
-.studentTimetable2 td:nth-child(1) {
+.studentTimetable2 th:nth-child(1){
     width: 15%;
 }
 
-.studentTimetable2 th:nth-child(2),
-.studentTimetable2 td:nth-child(2) {
+.studentTimetable2 th:nth-child(2) {
     width: 45%;
 }
 
-.studentTimetable2 th:nth-child(3),
-.studentTimetable2 td:nth-child(3) {
+.studentTimetable2 th:nth-child(3) {
     width: 20%;
 }
 
-.studentTimetable2 th:nth-child(4),
-.studentTimetable2 td:nth-child(4) {
+.studentTimetable2 th:nth-child(4){
     width: 20%;
 }

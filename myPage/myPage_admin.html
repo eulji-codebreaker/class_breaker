@@ -40,6 +40,7 @@
         </article>
     </main>
 
+    <!-- modeal -->
     <div class="modal" id="admin-modal">
         <div class="modalContent">
             <form id="add-form" class="modal-layout">
@@ -65,9 +66,10 @@
                             <select id="modal-req">
                                 <option value="m">m (전공필수)</option>
                                 <option value="s">s (전공선택)</option>
+                                <option value="o">o (교양)</option>
                             </select>
-                            <input type="number" id="modal-num" placeholder="000" readonly>
-                            <span class="helper-text">* 자동입력</span>
+                            <input type="number" id="modal-num" placeholder="번호 입력" required>
+                            <span class="helper-text">* 과목번호</span>
                         </div>
                     </div>
                     <div class="info-item">
@@ -81,7 +83,6 @@
                             <option value="2">2학년</option>
                             <option value="3">3학년</option>
                             <option value="4">4학년</option>
-                            <option value="0">교양(0)</option>
                         </select>
                     </div>
                     <div class="info-item">
@@ -149,14 +150,16 @@
     </div>
 
     <script>
-        /* 전역 변수 선언 */
+        // 선언
         const mainModal = document.getElementById('admin-modal');
         const resModal = document.getElementById('result-modal');
         const addForm = document.getElementById('add-form');
+        const num = document.getElementById('modal-num').value;
+
         let isEditMode = false;
         let editTargetId = null;
 
-        // 15주차 강의계획서 입력 필드 생성
+        // 15주차 강의계획서 작성란 생성
         const renderSyllabusFields = () => {
             const container = document.getElementById('syllabus-weeks');
             if (!container) return;
@@ -171,7 +174,7 @@
             container.innerHTML = html;
         };
 
-        // 시작/종료 시간 선택 옵션 생성 (08:00 ~ 18:00)
+        // 시간 선택 (8시~18시)
         const renderTimeOptions = () => {
             const beginSel = document.getElementById('lessonBegin');
             const endSel = document.getElementById('lessonEnd');
@@ -183,7 +186,7 @@
             if (endSel) endSel.innerHTML = opt;
         };
 
-        // 결과 알림 모달 출력
+        // 결과 알림
         function showResultModal(title, message) {
             document.getElementById('result-title').innerText = title;
             document.getElementById('result-message').innerText = message;
@@ -192,7 +195,7 @@
 
         window.closeResultModal = () => { resModal.style.display = 'none'; };
 
-        /* 모달창 */
+        // 모달창
         const openLayout = (layoutId) => {
             mainModal.style.display = 'flex';
             document.querySelectorAll('.modal-layout').forEach(l => l.style.display = 'none');
@@ -206,7 +209,6 @@
             document.getElementById('modal-num').value = '';
         };
 
-        /* 데이터 렌더링 함수 (강의 목록) */
         function renderAdminLessonList() {
             const allLessons = JSON.parse(localStorage.getItem('openedLessons') || '[]');
             const listContainer = document.querySelector('.lecture-list');
@@ -242,7 +244,7 @@
         </li>`).join('');
         }
 
-        // 강의계획서 버튼 클릭
+        // 수정 모달창
         window.openLectureDetail = (id) => {
             const allLessons = JSON.parse(localStorage.getItem('openedLessons') || '[]');
             const target = allLessons.find(l => String(l.lessonId) === String(id));
@@ -256,7 +258,7 @@
             document.getElementById('modal-major-select').value = String(target.lessonId).substring(0, 3);
             document.getElementById('modal-num').value = String(target.lessonId).substring(0, 3);
             document.getElementById('modal-req').value = String(target.lessonId).substring(3, 4);
-            document.getElementById('lessonName').value = target.lessonName;
+            document.getElementById('modal-num').value = String(target.lessonId).substring(4, 7); document.getElementById('lessonName').value = target.lessonName;
             document.getElementById('lessonMax').value = target.lessonMax;
             document.getElementById('lessonRoom').value = target.lessonRoom || "";
             document.getElementById('lessonGrade').value = String(target.lessonGrade);
@@ -271,7 +273,6 @@
                 });
             }
 
-            // 버튼 변경
             document.getElementById('admin-modal-btns').innerHTML = `
         <button type="submit" class="modalbtn primary">정보 수정</button>
         <button type="button" class="modalbtn danger" id="admin-delete-trigger">강의 삭제</button>
@@ -297,10 +298,13 @@
             localStorage.setItem('userInfoGroup', JSON.stringify(allUsers));
 
             closeModal();
-            setTimeout(() => { showResultModal("삭제 완료", "강의가 삭제되었습니다."); renderAdminLessonList(); }, 200);
+            setTimeout(() => {
+                showResultModal("삭제 완료", "강의가 삭제되었습니다.");
+                renderAdminLessonList();
+            }, 200);
         };
 
-        // 폼 저장, 추가, 수정
+        // 저장/수정 폼 제출
         addForm.onsubmit = (e) => {
             e.preventDefault();
             const bTime = Number(document.getElementById('lessonBegin').value);
@@ -309,14 +313,17 @@
 
             const major = document.getElementById('modal-major-select').value;
             const req = document.getElementById('modal-req').value;
+            const num = document.getElementById('modal-num').value; // 직접 입력한 번호 가져오기
             const syllabusData = {};
             document.querySelectorAll('.syllabus-input').forEach(input => syllabusData[input.dataset.week] = input.value);
 
             let allOpened = JSON.parse(localStorage.getItem('openedLessons') || '[]');
             const prev = allOpened.find(l => String(l.lessonId) === String(editTargetId));
 
+            const fullId = `${major}${req}${num}01`;
+
             const newLesson = {
-                lessonId: isEditMode ? editTargetId : `${major}${req}${Math.floor(Math.random() * 90) + 10}`,
+                lessonId: isEditMode ? editTargetId : fullId,
                 lessonName: document.getElementById('lessonName').value,
                 lessonProf: isEditMode ? (prev?.lessonProf || "관리자") : "관리자",
                 lessonProfId: isEditMode ? prev?.lessonProfId : 999,
@@ -341,7 +348,10 @@
 
             localStorage.setItem('openedLessons', JSON.stringify(allOpened));
             closeModal();
-            setTimeout(() => { showResultModal("성공", "강의 정보가 반영되었습니다."); renderAdminLessonList(); }, 200);
+            setTimeout(() => {
+                showResultModal("성공", "강의 정보가 반영되었습니다.");
+                renderAdminLessonList();
+            }, 200);
         };
 
         window.onload = () => {
@@ -349,42 +359,63 @@
             renderAdminLessonList();
             document.getElementById('id-major').addEventListener('change', renderAdminLessonList);
 
-            // 헤더/푸터 로드
-            fetch("../layout/header.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("afterbegin", h));
-            fetch("../layout/footer.html").then(res => res.text()).then(h => document.body.insertAdjacentHTML("beforeend", h));
+            /* header */
+            fetch("../layout/header.html")
+                .then((response) => response.text())
+                .then((responseText) => {
+                    document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
+                    document.querySelector('#headerLogo').onclick = () => location.href = '/mainPage/index.html';
+                    const day = document.querySelector('#dday');
+                    function diffDay() {
+                        const getDay = new Date(2026, 3, 21);
+                        const today = new Date();
+                        const diff = getDay - today;
+                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        if (day) day.innerText = `중간고사 D-${days}`;
+                    }
+                    diffDay();
+                    setInterval(diffDay, 1000 * 60 * 60);
+                });
 
-            // 사이드바 로드 및 관리자 모드 처리
+            /* footer */
+            fetch("../layout/footer.html")
+                .then((response) => response.text())
+                .then((responseText) => {
+                    document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
+                });
+
+            /* sidebar */
             fetch("../layout/mypage_sidebar.html").then(res => res.text()).then(html => {
-
                 const main = document.querySelector('main');
                 if (!document.querySelector('.sidebar-container')) {
                     main.insertAdjacentHTML("afterbegin", html);
                 }
 
                 const userLocal = localStorage.getItem('user');
-
                 if (userLocal) {
                     const user = JSON.parse(userLocal);
                     const namePlace = document.querySelector('.namePlace');
                     if (namePlace) namePlace.innerText = `${user.userName} 관리자님`;
+
                     const label2 = document.querySelector('#label2');
                     if (label2) label2.innerText = "사번: ";
+
                     const setVal = (id, txt) => { const el = document.querySelector(id); if (el) el.innerText = txt; };
                     setVal('#val1', user.userName);
                     setVal('#val2', user.userId);
+
                     const hideTargets = ['#label3', '#val3', '#label4', '#val4'];
                     hideTargets.forEach(selector => {
                         const el = document.querySelector(selector);
                         if (el && el.closest('li')) el.closest('li').style.display = 'none';
                     });
-
                 }
-
             });
 
-            // 메인 추가 버튼 클릭 시
+            // 메인 추가 버튼 클릭
             document.getElementById('btn-add-main').onclick = () => {
-                isEditMode = false; editTargetId = null;
+                isEditMode = false;
+                editTargetId = null;
                 openLayout('add-form');
                 document.querySelector('.modal-title').innerText = "새 강의 직접 개설";
                 document.getElementById('modal-major-select').value = "";
