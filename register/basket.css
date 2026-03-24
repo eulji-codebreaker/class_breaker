@@ -24,6 +24,9 @@
 
 
 }
+.basketHeader > span{
+    padding: 20px;
+}
 
 .majorSelect {
     display: flex;
