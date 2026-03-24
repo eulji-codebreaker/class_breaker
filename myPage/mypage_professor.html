@@ -332,11 +332,11 @@
         // 데이터 불러오기
         const storageLessons = JSON.parse(localStorage.getItem('myLessons')) || [];
         const user = JSON.parse(localStorage.getItem('user')) || {};
-        const filtered = storageLessons.filter(lesson => {
-            return String(lesson.lessonProf).trim() === String(user.userName).trim();
-        });
+        // const filtered = storageLessons.filter(lesson => {
+        //     return String(lesson.lessonProf).trim() === String(user.userName).trim();
+        // });
 
-        user.userLessonList = filtered;
+        user.userLessonList = storageLessons;
         localStorage.setItem('user', JSON.stringify(user));
 
         if (typeof renderLessonTable === 'function') {
