@@ -89,6 +89,8 @@ footer {
   background-color: #e0c1ff;
   font-size: 30px;
   box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
   width: 230px;
   height: 45px;
   display: flex;
@@ -107,6 +109,8 @@ footer {
   justify-content: center;
 
   box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
   width: 100px;
   height: 35px;
 
