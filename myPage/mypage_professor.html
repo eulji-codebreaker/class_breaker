@@ -114,11 +114,13 @@
             <div class="professorTimetable2">
                 <table>
                     <thead>
-                        <td>□</td>
-                        <td>구분</td>
-                        <td>과목명</td>
-                        <td>강의시간</td>
-                        <td>현재/최대</td>
+                        <tr>
+                            <th>□</th>
+                            <th>구분</th>
+                            <th>과목명</th>
+                            <th>강의시간</th>
+                            <th>현재/최대</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -316,7 +318,6 @@
     </div>
 
     <script>
-        // 선언
         const tabTimetable = document.querySelector('.myTimetable');
         const tabLearningList = document.querySelector('.learningList');
         const table1 = document.querySelector('.professorTimetable1');
@@ -328,17 +329,28 @@
         let isEditMode = false;
         let editTargetId = null;
 
-        // 로컬스토리지 함수화
+        // 데이터 불러오기
+        const storageLessons = JSON.parse(localStorage.getItem('myLessons')) || [];
+        const user = JSON.parse(localStorage.getItem('user')) || {};
+        const filtered = storageLessons.filter(lesson => {
+            return String(lesson.lessonProf).trim() === String(user.userName).trim();
+        });
+
+        user.userLessonList = filtered;
+        localStorage.setItem('user', JSON.stringify(user));
+
+        if (typeof renderLessonTable === 'function') {
+            renderLessonTable();
+        }
+
         const getStorageData = (key) => JSON.parse(localStorage.getItem(key)) || [];
         const setStorageData = (key, data) => localStorage.setItem(key, JSON.stringify(data));
 
-        // 모달 닫기
         window.closeModal = () => {
             modal.style.display = 'none';
             document.querySelectorAll('.syllabus-input').forEach(input => input.value = '');
         };
 
-        // 모달 열기
         const openModalLayout = (layoutId) => {
             modal.style.display = 'flex';
             document.querySelectorAll('.modal-layout').forEach(l => l.style.display = 'none');
@@ -347,14 +359,14 @@
             if (layoutId === 'add-form') renderSyllabusFields();
         };
 
-        // 알림창
+
         const showAlert = (message, title = "알림") => {
             openModalLayout('alert-layout');
             document.getElementById('alert-title').innerText = title;
             document.getElementById('alert-message').innerText = message;
         };
 
-        // 15주차 강의계획서 작성란 생성
+        // 강의계획서
         const renderSyllabusFields = () => {
             const container = document.getElementById('syllabus-weeks');
             if (!container) return;
@@ -370,7 +382,7 @@
             container.innerHTML = html;
         };
 
-        // 시간 선택 (8시~18시)
+        // 시간 선택
         const renderTimeOptions = () => {
             const beginSel = document.getElementById('lessonBegin');
             const endSel = document.getElementById('lessonEnd');
@@ -418,7 +430,7 @@
                 }
             });
 
-            // 테이블 목록 업데이트
+            // 목록 업데이트
             const tbody = document.querySelector('.professorTimetable2 tbody');
             if (tbody) {
                 tbody.innerHTML = lessons.map(l => `
@@ -432,7 +444,7 @@
         `).join('');
             }
 
-            // 사이드바 목록 업데이트
+            // 사이드바 업데이트
             const sidebarCourseList = document.querySelector('.course-list');
             if (sidebarCourseList) {
                 sidebarCourseList.innerHTML = lessons.map(l => `
@@ -444,7 +456,7 @@
             }
         };
 
-        // 탭 전환
+        // topbar
         tabTimetable.addEventListener('click', () => {
             tabTimetable.classList.add('active');
             tabLearningList.classList.remove('active');
@@ -502,7 +514,6 @@
                 lessonSyllabus: syllabus
             };
 
-            // 데이터 업데이트
             let updatedOpened = allOpened.filter(l => String(l.lessonId) !== String(editTargetId));
             updatedOpened.push(newLesson);
             setStorageData('openedLessons', updatedOpened);
@@ -511,7 +522,6 @@
             user.userLessonList.push(newLesson);
             setStorageData('user', user);
 
-            // 전체 유저 정보 동기화
             const allUsers = getStorageData('userInfoGroup');
             setStorageData('userInfoGroup', allUsers.map(u => String(u.userId) === String(user.userId) ? user : u));
 
@@ -644,6 +654,11 @@
                         setVal('#val1', user.userName);
                         setVal('#val2', user.userId);
                         setVal('#val3', user.userMajor);
+
+                        const courseTitle = document.querySelector('#course-section-title');
+                        if (courseTitle) {
+                            courseTitle.innerText = "개설 과목";
+                        }
                         const l4 = document.querySelector('#label4');
                         if (l4 && l4.closest('li')) l4.closest('li').style.display = "none";
                     }
