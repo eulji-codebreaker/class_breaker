@@ -136,6 +136,36 @@
         </article>
     </main>
     <script src="/js/register.js"></script>
+    <script>
+        // 시간표 업데이트
+        document.querySelectorAll('.studentTimetable1 .timetableCol div:not(.fixedTime)').forEach(el => {
+            el.innerText = '';
+            el.style.backgroundColor = '';
+        });
+
+        myLessons.forEach(l => {
+            const dayClass = getDayClass(Number(l.lessonDay));
+            if (!dayClass) return;
+
+            const startHour = parseInt(l.lessonBegin.split(':')[0]);
+            const endHour = parseInt(l.lessonEnd.split(':')[0]);
+            const startIdx = startHour - 8;
+            const endIdx = endHour - 8;
+
+            for (let i = startIdx; i <= endIdx; i++) {
+                const cell = document.querySelector(`.studentTimetable1 .${dayClass}.time${i}`);
+                if (cell) {
+                    cell.innerText = l.lessonName;
+                    cell.style.backgroundColor = '#F8F3FD';
+                    cell.style.display = 'flex';
+                    cell.style.alignItems = 'center';
+                    cell.style.justifyContent = 'center';
+                    cell.style.fontWeight = 'bold';
+                    cell.style.fontSize = '12px';
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

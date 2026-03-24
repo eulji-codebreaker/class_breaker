@@ -107,152 +107,164 @@
 
     <script>
 
-        // 1. 초기 데이터 로드 및 변수 설정
-        let registered = JSON.parse(localStorage.getItem('myLessons')) || []; // 수강신청 완료 내역
-        const openedLessons = JSON.parse(localStorage.getItem('openedLessons')) || []; // 전체 강의 DB
+        // 수강신청 목록 변수 (로컬스토리지에서 가져옴)
+        let registered = JSON.parse(localStorage.getItem('myLessons')) || [];
+        let targetLi = null;
 
         // 요소 선택
         const resModal = document.getElementById('clickresbtn');
         const delModal = document.getElementById('clickbtn');
         const alertModal = document.getElementById('alertModal');
         const alertMessage = document.getElementById('alertMessage');
-
-        const basketListUl = document.querySelector('.content > .lectureList'); // 상단: 수강바구니 영역
-        const registeredListUl = document.querySelector('.subjectBasket .lectureList'); // 하단: 수강신청 내역 영역
+        const alertCloseBtn = document.getElementById('alertCloseBtn');
+        const basketList = document.querySelector('.content > .lectureList'); // 강의 조회 리스트
+        const basketListUl = document.querySelector('.subjectBasket .lectureList'); // 수강신청 리스트
         const majorSelect = document.getElementById('userMajorId');
         const radioButtons = document.querySelectorAll('input[name="subject"]');
 
-        let targetLessonId = null;
-
-        // 알림창 함수
         function showAlert(message) {
             alertMessage.innerText = message;
             alertModal.style.display = 'flex';
         }
 
-        // 구별 함수 (999로 시작하면 교양)
         const majorCheck = (lessonId) => {
-            const prefix = String(lessonId).slice(0, 3);
-            return prefix === '999' ? 'culture' : 'major';
+            const prefix = lessonId.slice(0, 3); // 앞 3글자
+
+            if (prefix === '999') return 'culture';
+            else return 'major';
         };
+        // 1. 수강바구니(상단) 렌더링 함수 수정
+        const basketRender = () => {
+            const selectedMajor = majorSelect.value;
+            // 라디오 버튼 값 가져오기 (전공/교양)
+            const selectedType = document.querySelector('input[name="subject"]:checked')?.id === 'major' ? '전공' : '교양';
 
-        // 2. 수강신청 내역(하단) 렌더링 및 저장
-        function renderRegistered() {
-            registeredListUl.innerHTML = '';
-            registered.forEach(lecture => {
-                const typeText = majorCheck(lecture.lessonId) === 'major' ? '전공' : '교양';
-                const li = document.createElement('li');
-                li.className = "lecture-item";
-                li.innerHTML = `
-            [${typeText}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonPoint}학점
-            <button type="button" class="regbtn-delete" data-id="${lecture.lessonId}">취소하기</button>
-        `;
-                registeredListUl.appendChild(li);
+            // 로컬스토리지에서 바구니 데이터 가져옴
+            const basketTextList = JSON.parse(localStorage.getItem('basket')) || [];
+
+            // 필터링 조건 추가: 학과와 타입이 일치하는 것만
+            const filteredBasket = basketTextList.filter(lecture => {
+                return lecture.majorId === selectedMajor && lecture.type === selectedType;
             });
-            // 수강신청 내역을 myLessons에 저장
-            localStorage.setItem('myLessons', JSON.stringify(registered));
-        }
 
-        // 3. 수강바구니(상단) 렌더링 함수 (필터 제거 버전)
-        function basketRender() {
-            // 1. 로컬스토리지에서 최신 바구니 데이터 가져오기
-            const basketData = JSON.parse(localStorage.getItem('basket')) || [];
+            basketList.innerHTML = ''; // 기존 리스트 초기화
 
-            // 2. 상단 바구니 리스트 영역 초기화
-            basketListUl.innerHTML = '';
-
-            // 3. 바구니가 비어있을 경우 처리
-            if (basketData.length === 0) {
-                basketListUl.innerHTML = '<li style="padding:20px; color:#888; text-align:center;">수강바구니가 비어 있습니다.</li>';
+            if (filteredBasket.length === 0) {
+                basketList.innerHTML = '<li>해당 조건의 바구니 내역이 없습니다.</li>';
                 return;
             }
 
-            // 4. 필터 없이 모든 내역 렌더링
-            basketData.forEach(lecture => {
-                // 전공/교양 표시를 위한 타입 판별
-                const typeLabel = majorCheck(lecture.lessonId) === 'major' ? '전공' : '교양';
-
+            filteredBasket.forEach(lecture => {
                 const li = document.createElement('li');
-                li.className = "lecture-item";
                 li.innerHTML = `
-            <div class="lecture-info">
-                [${typeLabel}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonPoint}학점
-            </div>
+            [${majorCheck(lecture.lessonId)}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonPoint}학점
             <button type="button" class="regbtn" data-id="${lecture.lessonId}">신청하기</button>
         `;
-                basketListUl.appendChild(li);
+                basketList.appendChild(li);
             });
         }
 
-        // --- 아래는 기존 이벤트 리스너 수정 ---
-
-        // 학과나 라디오 버튼 변경 시 '조회 리스트'는 바뀌어도 '바구니 리스트'는 그대로 두거나, 
-        // 혹은 그냥 전체를 다시 그려도 상관없으므로 호출만 유지합니다.
+        // 2. 필터 변경 시 리렌더링 이벤트 연결
         majorSelect.addEventListener('change', () => {
-            // renderLectures(); // (만약 왼쪽 조회 리스트 함수가 있다면 실행)
-            basketRender();    // 상단 바구니는 항상 전체 출력
+            basketRender();
         });
 
+        // 라디오 버튼(전공/교양)이 바뀌면 실행
         radioButtons.forEach(radio => {
             radio.addEventListener('change', () => {
                 basketRender();
             });
         });
 
-        // 초기 실행
         basketRender();
+
+        // 2.5.1 수강신청 목록(하단) 렌더링 함수
+        function renderRegistered() {
+            basketListUl.innerHTML = '';
+            registered.forEach(lecture => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+            [${lecture.type}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonPoint}학점
+            <button type="button" class="regbtn-delete" data-id="${lecture.id}">취소하기</button>
+        `;
+                basketListUl.appendChild(li);
+            });
+            localStorage.setItem('registered', JSON.stringify(registered));
+        }
         renderRegistered();
 
-        // 4. 신청 클릭 이벤트 (상단 리스트)
-        basketListUl.addEventListener('click', (e) => {
-            if (e.target.classList.contains('regbtn')) {
-                targetLessonId = e.target.dataset.id;
-                resModal.style.display = 'flex';
-            }
+        // 3. 강의 목록 렌더링 함수
+        function renderLectures() {
+            const selectedMajor = majorSelect.value;
+            const selectedType = document.querySelector('input[name="subject"]:checked')?.id === 'major' ? '전공' : '교양';
+            const filtered = lectureData.filter(l => l.majorId === selectedMajor && l.type === selectedType);
+
+            lectureListUl.innerHTML = '';
+            filtered.forEach(lecture => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                [${lecture.type}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonpoint}학점
+                <button type="button" class="regbtn" data-id="${lecture.id}">신청하기</button>
+            `;
+                lectureListUl.appendChild(li);
+            });
+        }
+
+
+        // 5. 신청 버튼 클릭 (강의 목록 & 상단 바구니 공통)
+        [basketList, document.querySelector('.lectureList')].forEach(list => {
+            list.addEventListener('click', (e) => {
+                if (e.target.classList.contains('regbtn')) {
+                    targetLi = e.target.closest('li');
+                    resModal.style.display = 'flex';
+                }
+            });
         });
 
-        // 신청 모달 확인 버튼
-        resModal.querySelector('.checkbtn').onclick = () => {
-            if (!targetLessonId) return;
+        // 6. 신청 확인 버튼
+        resModal.querySelector('.checkbtn').addEventListener('click', () => {
+            if (targetLi) {
+                const id = targetLi.querySelector('button').dataset.id;
 
-            // 중복 체크 (이미 신청했는지)
-            if (registered.some(l => l.lessonId === targetLessonId)) {
-                resModal.style.display = 'none';
-                showAlert("이미 신청된 과목입니다.");
-                return;
-            }
+                // 중복 체크
+                if (registered.some(l => l.id == id)) {
+                    resModal.style.display = 'none';
+                    showAlert("이미 신청된 과목입니다.");
+                    return;
+                }
 
-            // 신청 처리 (전체 데이터에서 해당 과목 찾기)
-            const lecture = openedLessons.find(l => l.lessonId === targetLessonId);
-            if (lecture) {
-                registered.push(lecture);
-                renderRegistered();
+                const lecture = lectureData.find(l => l.id == id);
+                registered.push(lecture); // 데이터 추가
+                renderRegistered(); // 화면 갱신 및 저장
+
                 resModal.style.display = 'none';
                 showAlert("신청이 완료되었습니다.");
             }
-        };
+        });
 
-        // 5. 취소 클릭 이벤트 (하단 리스트)
-        registeredListUl.addEventListener('click', (e) => {
+        // 7. 취소 버튼 클릭
+        basketListUl.addEventListener('click', (e) => {
             if (e.target.classList.contains('regbtn-delete')) {
-                targetLessonId = e.target.dataset.id;
+                targetLi = e.target.closest('li');
                 delModal.style.display = 'flex';
             }
         });
 
-        // 취소 모달 확인 버튼
-        delModal.querySelector('.checkbtn').onclick = () => {
-            registered = registered.filter(l => l.lessonId !== targetLessonId);
-            renderRegistered();
-            delModal.style.display = 'none';
-            showAlert("취소가 완료되었습니다.");
-        };
+        // 8. 취소 확인 버튼
+        delModal.querySelector('.checkbtn').addEventListener('click', () => {
+            if (targetLi) {
+                const id = targetLi.querySelector('button').dataset.id;
 
-        // 6. 이벤트 리스너 및 초기화
-        majorSelect.addEventListener('change', basketRender);
-        radioButtons.forEach(radio => radio.addEventListener('change', basketRender));
+                // 데이터 삭제
+                registered = registered.filter(l => l.id != id);
+                renderRegistered(); // 화면 갱신 및 저장
 
-        // 닫기 버튼 공통 처리
+                delModal.style.display = 'none';
+                showAlert("취소가 완료되었습니다.");
+            }
+        });
+
+        // 9. 모든 '취소' 및 알림 '확인' 버튼 닫기 처리
         document.querySelectorAll('.canclebtn, #alertCloseBtn').forEach(btn => {
             btn.addEventListener('click', () => {
                 resModal.style.display = 'none';
@@ -261,9 +273,6 @@
             });
         });
 
-        // 실행
-        basketRender();
-        renderRegistered();
     </script>
 
     <script src="/js/register.js"></script>

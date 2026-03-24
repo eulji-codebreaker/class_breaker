@@ -105,173 +105,146 @@
         </div>
     </div>
     <script>
-        var basket = [];
-        if (!localStorage.getItem('basket')) {
-            localStorage.setItem('basket', JSON.stringify([]));
-        } else {
-            basket = JSON.parse(localStorage.getItem('basket'));
-        }
+        // 1. 초기 데이터 로드
+        let basket = JSON.parse(localStorage.getItem('basket')) || [];
+        const openedLessons = JSON.parse(localStorage.getItem('openedLessons')) || [];
 
-        const lectureData = [
-            { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", lessonProf: "정동근", type: "전공", lessonpoint: 3 },
-            { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", lessonProf: "김규동", type: "전공", lessonpoint: 3 },
-            { id: 3, majorId: "162", lessonName: "건강정보의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
-            { id: 4, majorId: "158", lessonName: "빅데이터 분석", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 5, majorId: "162", lessonName: "프로그램 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 6, majorId: "162", lessonName: "통계기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 7, majorId: "162", lessonName: "창의적사고와 코딩", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
-            { id: 8, majorId: "162", lessonName: "운영체제", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 9, majorId: "158", lessonName: "데이터 분석실무", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 10, majorId: "162", lessonName: "의료영상처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 11, majorId: "162", lessonName: "데이터베이스 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 12, majorId: "162", lessonName: "조사방법론", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 13, majorId: "162", lessonName: "객체모델링", lessonProf: "ooo", type: "전공", lessonpoint: 2 },
-            { id: 14, majorId: "162", lessonName: "파이썬프로그래밍", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 15, majorId: "162", lessonName: "범죄와 사회", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
-            { id: 16, majorId: "162", lessonName: "디자인의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
-            { id: 17, majorId: "162", lessonName: "서양철학의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
-            { id: 18, majorId: "162", lessonName: "경영학개론", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
-            { id: 19, majorId: "158", lessonName: "딥러닝", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 20, majorId: "158", lessonName: "인공지능프로그램", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 21, majorId: "158", lessonName: "딥러닝", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-            { id: 22, majorId: "158", lessonName: "빅데이터처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
-        ];
+        // 2. 유틸리티 함수
         const basketReload = () => localStorage.setItem('basket', JSON.stringify(basket));
-        let targetLi = null;
-        const saved = localStorage.getItem('basket');
-        if (saved) {
-            basket = JSON.parse(saved);
-        }
+
+        const majorCheck = (lessonId) => {
+            const prefix = String(lessonId).slice(0, 3);
+            return prefix === '999' ? 'culture' : 'major';
+        };
 
         // 요소 선택
         const resModal = document.getElementById('clickresbtn');
         const delModal = document.getElementById('clickbtn');
         const alertModal = document.getElementById('alertModal');
         const alertMessage = document.getElementById('alertMessage');
-        const alertCloseBtn = document.getElementById('alertCloseBtn');
 
         const lectureListUl = document.querySelector('.lectureList');
         const basketListUl = document.querySelector('.subjectBasket .lectureList');
         const majorSelect = document.getElementById('userMajorId');
         const radioButtons = document.querySelectorAll('input[name="subject"]');
 
-        // 2. 알림 모달 출력 함수
+        let targetLessonId = null; // 대상을 lessonId로 추적
+
+        // 알림창 함수
         function showAlert(message) {
             alertMessage.innerText = message;
             alertModal.style.display = 'flex';
         }
 
-        //localStorage에 있는 데이터를 화면에 그리는 함수
+        // 3. 수강바구니 렌더링 (화면 아래쪽 담긴 목록)
         function renderBasket() {
-            basketListUl.innerHTML = ''; // 기존 목록 초기화
+            basketListUl.innerHTML = '';
             basket.forEach(lecture => {
+                const typeText = majorCheck(lecture.lessonId) === 'major' ? '전공' : '교양';
                 const li = document.createElement('li');
+                li.className = "lecture-item";
                 li.innerHTML = `
-            [${lecture.type}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonpoint}학점
-            <button type="button" class="regbtn-delete" data-id="${lecture.id}">취소하기</button>
+            [${typeText}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonPoint}학점
+            <button type="button" class="regbtn-delete" data-id="${lecture.lessonId}">취소하기</button>
         `;
                 basketListUl.appendChild(li);
             });
         }
 
-        renderBasket();
-        const majorCheck = (lessonId) => {
-            var prefix = lessonId.slice(0, 3); // 앞 3글자
-            if (prefix === '999') return 'culture';
-            else return 'major';
-        }
-
-        // 3. 강의 목록 렌더링 함수
+        // 4. 강의 목록 렌더링 (조회 결과)
         function renderLectures() {
             const selectedMajor = majorSelect.value;
-            const selectedType = document.querySelector('input[name="subject"]:checked')?.id === 'major' ? '전공' : '교양';
-            const filtered = lectureData.filter(l => l.majorId === selectedMajor && l.type === selectedType);
+            const selectedRadio = document.querySelector('input[name="subject"]:checked');
+            if (!selectedRadio) return;
+
+            const selectedType = selectedRadio.id; // 'major' 또는 'culture'
+
+            const filtered = openedLessons.filter(l => {
+                const type = majorCheck(l.lessonId);
+                const prefix = String(l.lessonId).slice(0, 3);
+
+                if (selectedType === 'culture') return type === 'culture';
+                return type === 'major' && prefix === selectedMajor;
+            });
 
             lectureListUl.innerHTML = '';
+            if (filtered.length === 0) {
+                lectureListUl.innerHTML = '<li style="padding:10px;">조회된 강의가 없습니다.</li>';
+                return;
+            }
+
             filtered.forEach(lecture => {
+                const typeText = majorCheck(lecture.lessonId) === 'major' ? '전공' : '교양';
                 const li = document.createElement('li');
+                li.className = "lecture-item";
                 li.innerHTML = `
-                [${majorCheck(lecture.lessonId)}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonpoint}학점
-                <button type="button" class="regbtn" data-id="${lecture.lessonId}">신청하기</button>
-            `;
+            [${typeText}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonPoint}학점
+            <button type="button" class="regbtn" data-id="${lecture.lessonId}">신청하기</button>
+        `;
                 lectureListUl.appendChild(li);
             });
         }
 
-        // 4. 이벤트 리스너 등록 (학과/구분 변경 시)
-        majorSelect.addEventListener('change', renderLectures);
-        radioButtons.forEach(radio => radio.addEventListener('change', renderLectures));
-
-        // 5. 신청 버튼 클릭 (강의 목록)
+        // 5. 신청 로직
         lectureListUl.addEventListener('click', (e) => {
             if (e.target.classList.contains('regbtn')) {
-                targetLi = e.target.closest('li');
+                targetLessonId = e.target.dataset.id;
                 resModal.style.display = 'flex';
             }
         });
 
-        // 6. 신청 확인 모달 '확인' 버튼 (중복 체크 포함 하나로 통합)
-        resModal.querySelector('.checkbtn').onclick = () => { // addEventListener 대신 onclick을 사용하여 중복 등록 방지
-            if (targetLi) {
-                const id = targetLi.querySelector('button').dataset.id;
+        // 신청 확인 버튼
+        resModal.querySelector('.checkbtn').onclick = () => {
+            if (!targetLessonId) return;
 
-                // 중복 체크 로직 (forEach 활용 버전)
-                let isDuplicate = false;
-                basket.forEach(lecture => {
-                    if (lecture.id == id) {
-                        isDuplicate = true;
-                    }
-                });
+            // 중복 체크
+            if (basket.some(l => l.lessonId === targetLessonId)) {
+                resModal.style.display = 'none';
+                showAlert("이미 수강바구니에 담긴 강의입니다.");
+                return;
+            }
 
-                if (isDuplicate) {
-                    resModal.style.display = 'none';
-                    showAlert("이미 수강바구니에 담긴 강의입니다.");
-                    return; // 중복이면 여기서 함수 종료
-                }
-
-                // 중복이 아닐 경우 실행되는 코드
-                const lecture = lectureData.find(l => l.id == id);
-                if (lecture) {
-                    basket.push(lecture);
-                    basketReload(); // localStorage 저장
-                    renderBasket(); // 화면 갱신
-
-                    resModal.style.display = 'none';
-                    showAlert("신청이 완료되었습니다.");
-                }
+            // 데이터 찾기 및 추가
+            const lecture = openedLessons.find(l => l.lessonId === targetLessonId);
+            if (lecture) {
+                basket.push(lecture);
+                basketReload();
+                renderBasket();
+                resModal.style.display = 'none';
+                showAlert("수강바구니에 담겼습니다.");
             }
         };
 
-        // 7. 취소 버튼 클릭 (수강신청 목록)
+        // 6. 취소 로직
         basketListUl.addEventListener('click', (e) => {
             if (e.target.classList.contains('regbtn-delete')) {
-                targetLi = e.target.closest('li');
+                targetLessonId = e.target.dataset.id;
                 delModal.style.display = 'flex';
             }
         });
 
-        // 8. 취소 확인 모달 '확인' 버튼
-        delModal.querySelector('.checkbtn').addEventListener('click', () => {
-            if (targetLi) {
-                const id = targetLi.querySelector('button').dataset.id;
+        // 취소 확인 버튼
+        delModal.querySelector('.checkbtn').onclick = () => {
+            basket = basket.filter(l => l.lessonId !== targetLessonId);
+            basketReload();
+            renderBasket();
+            delModal.style.display = 'none';
+            showAlert("취소가 완료되었습니다.");
+        };
 
-                basket = basket.filter(l => l.id != id);
-                basketReload();
-
-                targetLi.remove();
-                delModal.style.display = 'none';
-                showAlert("취소가 완료되었습니다.");
-            }
-        });
-
-        // 9. 모든 '취소' 및 알림 '확인' 버튼 닫기 처리
+        // 7. 공통 닫기 이벤트
         document.querySelectorAll('.canclebtn, #alertCloseBtn').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.onclick = () => {
                 resModal.style.display = 'none';
                 delModal.style.display = 'none';
                 alertModal.style.display = 'none';
-            });
+            };
         });
+
+        // 초기 실행
+        majorSelect.addEventListener('change', renderLectures);
+        radioButtons.forEach(radio => radio.addEventListener('change', renderLectures));
+        renderBasket(); // 페이지 로드 시 바구니 목록 먼저 표시
 
     </script>
     <script src="/js/register.js"></script>
