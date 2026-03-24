@@ -16,10 +16,6 @@
             <div class="menu menu1">
                 <select>
                     <option value='none' disabled selected hidden>강의실 선택</option>
-                    <option value="os">운영체제</option>
-                    <option value="social">사회와 마케팅</option>
-                    <option value="web">웹프로그래밍</option>
-                    <option value="ai">인공지능캡스톤</option>
                 </select>
             </div>
             <div class="menu menu2 hover">마이페이지</div>
@@ -135,15 +131,15 @@
     </main>
     <!--footer-->
     <script>
+        //현재 페이지 정보를 lectureroom으로 지정
         localStorage.setItem('pageNow', 'lectureroom');
-        const mLessons = [ //전체 강의목록 불러오기(서민지님 마이페이지 완성되면 받아오기)
-            { lessonId: 1, lessonName: "기모띠" },
-            { lessonId: 123, lessonName: "하이" }
-        ];
-        localStorage.setItem('myLessons', JSON.stringify(mLessons)); //
+        // const mLessons=JSON.parse(localStorage.getItem('myLessons')) || [];
+        // localStorage.setItem('myLessons', JSON.stringify(mLessons)); //
         // const allLessons = JSON.parse(localStorage.getItem('openedLessons')) || [];
+
+        /*🔽🔽🔽🔽이 아래에 로컬스토리지 key값 확인해서 바꾸기🔽🔽🔽🔽*/
         const myLessons = JSON.parse(localStorage.getItem('myLessons')) || [];
-        const addLecture = (value, text) => { //사이드바 드롭다운에 강의추가하기
+        const addLecture = (value, text) => { //강의ID와 강의명을 받아와 드롭다운에 추가
             const select = document.querySelector('.menu1 select');
 
             const option = document.createElement('option');
@@ -153,18 +149,27 @@
             select.appendChild(option);
         };
 
-        const getMyLesson = () => {
+        const getMyLesson = () => { //내 강의 목록을 순회하여 강의ID,강의명 얻어와서 addLecture()에 대입
             myLessons.forEach(e => {
                 addLecture(e.lessonId, e.lessonName);
             })
         }
-        getMyLesson();
-        // fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
-        //     .then((response) => response.text())
-        //     .then((responseText) => {
-        //         document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+        getMyLesson(); //1회 초기화 진행
 
-        //     });
+        const atys = 'attendanceYes';
+        const atyt = 'attendanceYet';
+        const atnw = 'attendanceNow';
+        const attendanceChange = (index, status) => {
+            document.querySelectorAll('.attendanceStatus li')[index].classList.add(status);
+        }
+
+        /*fetch("../layout/sidebar.html") //사이드바 있는경우만!!! sidebar불러오기
+            .then((response) => response.text())
+            .then((responseText) => {
+                document.querySelector('main').insertAdjacentHTML("afterbegin", responseText);
+
+            });*/
+
         fetch("../layout/header.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
@@ -172,7 +177,21 @@
                 document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
                 document.querySelector('#headerLogo')
                     .onclick = () => location.href = '/mainPage/index.html';
+                const day = document.querySelector('#dday');
+
+                function diffDay() {
+                    const getDay = new Date(2026, 3, 21); //설정하고자 하는 달에서 -1로 설정해야 함
+                    const today = new Date();
+                    const diff = getDay - today;
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                    day.innerText = `중간고사 D-${days}`;
+                }
+
+                diffDay();
+                setInterval(diffDay, 1000 * 60 * 60);
             });
+
         fetch("../layout/footer.html") //웹문서 요청
             .then((response) => response.text()) //응답을 받고 text로 변환
             .then((responseText) => {
@@ -182,11 +201,10 @@
 
 
         var role = JSON.parse(localStorage.getItem('user')).userPosition; //현재 접속중인 사람의 정체
-        var roleView = null;
-        if (role == 'student') {
-            roleView = '학생';
-            numberView='학번';
-        } else if (role == 'admin') { roleView = '교직원'; numberView='사번'; } else { roleView = '교수';numberView='사번'; };
+        var roleView = null; //사이드바에 학생ㅁㅁㅁ님 등으로 표시하기 위함
+        if (role == 'student') { roleView = '학생'; numberView = '학번'; }
+        else if (role == 'admin') { roleView = '교직원'; numberView = '사번'; }
+        else { roleView = '교수'; numberView = '사번'; };
 
 
 
@@ -196,7 +214,7 @@
             document.querySelectorAll('.firstAttendanceTopRight p')[0].innerText = '출석 완료';
             document.querySelectorAll('.firstAttendanceTopRight p')[1].innerText = '진행 중';
             document.querySelectorAll('.firstAttendanceTopRight p')[2].innerText = '미진행';
-            document.querySelectorAll('#task').forEach((e) => e.innerText = '');
+            document.querySelectorAll('#task').forEach((e) => e.innerText = '이번주 과제는 없습니다.');
         }
 
 
@@ -230,28 +248,36 @@
                 el.classList.remove('attendanceNow');
                 el.classList.remove('attendanceYet');
             });
-            if (selected.value == 'os') {
-                document.querySelectorAll('.attendanceStatus li')[0].classList.add('attendanceYes');
-                document.querySelectorAll('.attendanceStatus li')[1].classList.add('attendanceYet');
-                document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceYet');
-                document.querySelectorAll('.attendanceStatus li')[3].classList.add('attendanceNow');
-                document.querySelectorAll('.attendanceStatus li')[4].classList.add('attendanceNow');
+            if (selected.value == '160m11') {
+                attendanceChange(0, atyt);
+                attendanceChange(1, atys);
+                attendanceChange(2, atnw);
+                attendanceChange(3, atnw);
+                attendanceChange(4, atys);
+                attendanceChange(5, atys);
+                attendanceChange(6, atys);
+                attendanceChange(7, atys);
+                if(role=='student'){document.querySelectorAll('#task').forEach((e) => e.innerText = '보고서 제출');}
             }
-            else if (selected.value == 'social') {
-                document.querySelectorAll('.attendanceStatus li')[0].classList.add('attendanceYes');
-                document.querySelectorAll('.attendanceStatus li')[10].classList.add('attendanceYes');
-                document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceYes');
-                document.querySelectorAll('.attendanceStatus li')[3].classList.add('attendanceYes');
-                document.querySelectorAll('.attendanceStatus li')[4].classList.add('attendanceYes');
-                document.querySelectorAll('.attendanceStatus li')[5].classList.add('attendanceYes');
+            else if (selected.value == '160m15') {
+                attendanceChange(0, atyt);
+                attendanceChange(1, atys);
+                attendanceChange(2, atyt);
+                attendanceChange(3, atyt);
+                attendanceChange(4, atnw);
+                attendanceChange(5, atnw);
+                attendanceChange(6, atnw);
+                attendanceChange(7, atyt);
             }
-            else if (selected.value == 'ai') {
-                document.querySelectorAll('.attendanceStatus li')[0].classList.add('attendanceNow');
-                document.querySelectorAll('.attendanceStatus li')[1].classList.add('attendanceNow');
-                document.querySelectorAll('.attendanceStatus li')[2].classList.add('attendanceNow');
-                document.querySelectorAll('.attendanceStatus li')[3].classList.add('attendanceNow');
-                document.querySelectorAll('.attendanceStatus li')[4].classList.add('attendanceNow');
-                document.querySelectorAll('.attendanceStatus li')[5].classList.add('attendanceNow');
+            else if (selected.value == '162m11') {
+                attendanceChange(0, atys);
+                attendanceChange(1, atnw);
+                attendanceChange(2, atyt);
+                attendanceChange(3, atyt);
+                attendanceChange(4, atnw);
+                attendanceChange(5, atys);
+                attendanceChange(6, atyt);
+                attendanceChange(7, atnw);
             }
         }
 
