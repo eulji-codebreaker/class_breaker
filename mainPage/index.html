@@ -14,7 +14,7 @@
             <div class="artLeft">
                 <div class="main notice">
                     <p class="titleText">공지사항</p>
-                    <p class="plus">더보기 ></p>
+                    <p class="plus">더보기 ></p>    <!--추후 버튼으로 수정-->
                     <ul>
                         <li>2026-1학기 등록금 납부 및 분할 납부 신청 안내</li>
                         <li>2026학년도 신한카드 학생증 신청 안내</li>
@@ -67,93 +67,7 @@
         </article>
     </main>
 
-    <script src="../mainpage/mainlecturelist.js"></script>
-    <script>
-        // 헤더 불러오기 및 로그아웃 모달 제어
-        fetch("../layout/nosideheader.html")
-            .then((response) => response.text())
-            .then((responseText) => {
-                document.querySelector('body').insertAdjacentHTML("afterbegin", responseText);
-
-                var logoutBtn = document.getElementById('logoutBtn'); // 헤더의 로그아웃 글자
-                var logoutModal = document.getElementById('logout-confirm-modal');
-                var realLogoutBtn = document.getElementById('real-logout-btn');
-
-                if (logoutBtn) {
-                    // 로그아웃 클릭 시 모달 열기
-                    logoutBtn.onclick = function () {
-                        logoutModal.style.display = "flex";
-                    };
-                }
-
-                if (realLogoutBtn) {
-                    // 로그아웃
-                    realLogoutBtn.onclick = function () {
-                        localStorage.removeItem('user');
-                        localStorage.removeItem('currentLecture');
-                        location.assign("../index.html");
-                    };
-                }
-            });
-
-        // 취소 버튼
-        function closeLogoutModal() {
-            document.getElementById('logout-confirm-modal').style.display = "none";
-        }
-
-        fetch("../layout/footer.html") //footer불러오기
-            .then((response) => response.text()) //응답을 받고 text로 변환
-            .then((responseText) => {
-                document.querySelector('body').insertAdjacentHTML("beforeend", responseText);
-            })
-
-        function toregister() {
-            location.assign("../register/index.html");
-        }
-
-        function tomypage() {
-            location.assign("../mypage/mypage_student.html");
-        }
-
-        function tolectureroom() {
-            location.assign("../lectureRoom/index.html");
-        }
-
-        var userLocal = localStorage.getItem('user');
-
-        if (userLocal !== null) {
-            var user = JSON.parse(userLocal);
-            var role = user.userPosition;
-            var name = user.userName;
-            var id = user.userId;
-            var major = user.userMajor;
-            var grade = user.userGrade;
-
-            if (role === 'student') {
-                document.querySelector('#val1').innerText = name;
-                document.querySelector('#val2').innerText = id;
-                document.querySelector('#val3').innerText = major;
-                document.querySelector('#val4').innerText = grade;
-            }
-            else if (role === 'prof') {
-                document.querySelector('#label2').innerText = '사번: ';
-                document.querySelector('#val1').innerText = name;
-                document.querySelector('#val2').innerText = id;
-                document.querySelector('#val3').innerText = major;
-                document.querySelector('#label4').style.display = "none";
-                document.querySelector('#val4').style.display = "none";
-            }
-            else if (role === 'admin') {
-                document.querySelector('#label2').innerText = '사번: ';
-                document.querySelector('#val1').innerText = name;
-                document.querySelector('#val2').innerText = id;
-                document.querySelector('#label3').style.display = "none";
-                document.querySelector('#val3').style.display = "none";
-                document.querySelector('#label4').style.display = "none";
-                document.querySelector('#val4').style.display = "none";
-            }
-        }
-    </script>
+    <script src="../mainpage/mainpage.js"></script>
 </body>
 
 </html>
