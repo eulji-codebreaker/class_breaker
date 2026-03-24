@@ -19,6 +19,7 @@
             <div class="menu menu5 hover">수강신청</div>
             <div class="menu menu6 hover">공지사항</div>
         </aside>
+
         <article>
             <div class="topbar">
                 <div>조회</div>
@@ -103,7 +104,6 @@
             </div>
         </div>
     </div>
-    <script src="/js/register.js"></script>
     <script>
         var basket = [];
         if (!localStorage.getItem('basket')) {
@@ -111,6 +111,7 @@
         } else {
             basket = JSON.parse(localStorage.getItem('basket'));
         }
+
         const lectureData = [
             { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", lessonProf: "정동근", type: "전공", lessonpoint: 3 },
             { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", lessonProf: "김규동", type: "전공", lessonpoint: 3 },
@@ -125,7 +126,15 @@
             { id: 11, majorId: "162", lessonName: "데이터베이스 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
             { id: 12, majorId: "162", lessonName: "조사방법론", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
             { id: 13, majorId: "162", lessonName: "객체모델링", lessonProf: "ooo", type: "전공", lessonpoint: 2 },
-            { id: 14, majorId: "162", lessonName: "파이썬프로그래밍", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
+            { id: 14, majorId: "162", lessonName: "파이썬프로그래밍", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 15, majorId: "162", lessonName: "범죄와 사회", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
+            { id: 16, majorId: "162", lessonName: "디자인의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
+            { id: 17, majorId: "162", lessonName: "서양철학의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
+            { id: 18, majorId: "162", lessonName: "경영학개론", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
+            { id: 19, majorId: "158", lessonName: "딥러닝", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 20, majorId: "158", lessonName: "인공지능프로그램", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 21, majorId: "158", lessonName: "딥러닝", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
+            { id: 22, majorId: "158", lessonName: "빅데이터처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
         ];
         const basketReload = () => localStorage.setItem('basket', JSON.stringify(basket));
         let targetLi = null;
@@ -152,7 +161,7 @@
             alertModal.style.display = 'flex';
         }
 
-        // ✅ 추가: 페이지 로드 시 localStorage에 있는 데이터를 화면에 그리는 함수
+        //localStorage에 있는 데이터를 화면에 그리는 함수
         function renderBasket() {
             basketListUl.innerHTML = ''; // 기존 목록 초기화
             basket.forEach(lecture => {
@@ -165,8 +174,12 @@
             });
         }
 
-        // ✅ 스크립트 마지막 부분에서 한 번 호출해줍니다.
         renderBasket();
+        const majorCheck = (lessonId) => {
+            var prefix = lessonId.slice(0, 3); // 앞 3글자
+            if (prefix === '999') return 'culture';
+            else return 'major';
+        }
 
         // 3. 강의 목록 렌더링 함수
         function renderLectures() {
@@ -178,8 +191,8 @@
             filtered.forEach(lecture => {
                 const li = document.createElement('li');
                 li.innerHTML = `
-                [${lecture.type}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonpoint}학점
-                <button type="button" class="regbtn" data-id="${lecture.id}">신청하기</button>
+                [${majorCheck(lecture.lessonId)}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonpoint}학점
+                <button type="button" class="regbtn" data-id="${lecture.lessonId}">신청하기</button>
             `;
                 lectureListUl.appendChild(li);
             });
@@ -242,10 +255,7 @@
             if (targetLi) {
                 const id = targetLi.querySelector('button').dataset.id;
 
-                // ✅ 배열에서도 제거
                 basket = basket.filter(l => l.id != id);
-
-                // ✅ 저장 갱신
                 basketReload();
 
                 targetLi.remove();
@@ -264,34 +274,7 @@
         });
 
     </script>
-
-    <script>
-        
-        //메뉴 요소들을 선택합니다.
-        const menuMyPage = document.querySelector('.menu3');   // 마이페이지
-        const menuClass = document.querySelector('.menu4');    // 강의실
-        const menuRegister = document.querySelector('.menu5'); // 수강신청
-        const menuNotice = document.querySelector('.menu6');   // 공지사항
-
-        // 1. 마이페이지 클릭 시
-        menuMyPage.addEventListener('click', () => {
-            location.href = "/myPage/myPage_student.html"; // 마이페이지 경로
-        });
-
-        // 2. 강의실 클릭 시
-        menuClass.addEventListener('click', () => {
-            location.href = "/lectureRoom/index.html"; // 강의실 경로
-        });
-
-        // 3. 수강신청 클릭 시
-        menuRegister.addEventListener('click', () => {
-            location.href = "../register/index.html"; // 수강신청 경로
-        });
-
-        // // 4. 공지사항 클릭 시
-        // menuNotice.addEventListener('click', () => {
-        //     location.href = "../
-    </script>
+    <script src="/js/register.js"></script>
 </body>
 
 </html>

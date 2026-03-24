@@ -3,7 +3,8 @@ aside {
   height: 100%;
   background: #EAD8FA;
   border: 1px solid #8B5FBf;
-  border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   text-align: center;
   display: flex;
   flex-direction: column;
