@@ -11,6 +11,7 @@ footer {
     align-items: center;
     justify-content: end;
     margin-top: 10px;
+    background-color: white;
 }
 #contact{
     font-size: 24px;
