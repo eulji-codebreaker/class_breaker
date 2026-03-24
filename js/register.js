@@ -17,6 +17,7 @@ fetch("../layout/header.html") //웹문서 요청
             diffDay();
             setInterval(diffDay, 1000 * 60 * 60);
     })
+    
 fetch("../layout/footer.html") //웹문서 요청
     .then((response) => response.text()) //응답을 받고 text로 변환
     .then((responseText) => {

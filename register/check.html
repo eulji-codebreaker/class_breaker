@@ -162,97 +162,96 @@
         </div>
 
         <script>
-            // 모달 닫기 함수는 전역으로 유지 (HTML의 onclick="closeModal()" 대응)
+            // 모달 닫기 함수
             function closeModal() {
                 document.getElementById('professor-modal').style.display = 'none';
+            }
+
+            // 1. 데이터 가져오기 (데이터가 없을 경우 빈 배열 처리)
+            const openedLessons = JSON.parse(localStorage.getItem('openedLessons')) || [];
+
+            // 2. 전공/교양 판별 함수 (999로 시작하면 교양)
+            const majorCheck = (lessonId) => {
+                if (!lessonId) return 'major';
+                const prefix = String(lessonId).slice(0, 3);
+                return prefix === '999' ? 'culture' : 'major';
             };
-            const openedLessons = JSON.parse(localStorage.getItem('openedLessons'));
 
-            document.addEventListener('DOMContentLoaded', () => {
-                const dummyLectures = [
-                    { id: 1, majorId: "162", lessonName: "창의적 의료 IT기기", lessonProf: "정동근", type: "전공", lessonpoint: 3 },
-                    { id: 2, majorId: "162", lessonName: "데이터베이스 이론과 실습", lessonProf: "김규동", type: "전공", lessonpoint: 3 },
-                    { id: 3, majorId: "162", lessonName: "건강정보의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
-                    { id: 4, majorId: "158", lessonName: "빅데이터 분석", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 5, majorId: "162", lessonName: "프로그램 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 6, majorId: "162", lessonName: "통계기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 7, majorId: "162", lessonName: "창의적사고와 코딩", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
-                    { id: 8, majorId: "162", lessonName: "운영체제", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 9, majorId: "158", lessonName: "데이터 분석실무", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 10, majorId: "162", lessonName: "의료영상처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 11, majorId: "162", lessonName: "데이터베이스 기초", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 12, majorId: "162", lessonName: "조사방법론", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 13, majorId: "162", lessonName: "객체모델링", lessonProf: "ooo", type: "전공", lessonpoint: 2 },
-                    { id: 14, majorId: "162", lessonName: "파이썬프로그래밍", lessonProf: "ooo", type: "전공", lessonpoint: 3 }, { id: 15, majorId: "162", lessonName: "범죄와 사회", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
-                    { id: 16, majorId: "162", lessonName: "디자인의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 2 },
-                    { id: 17, majorId: "162", lessonName: "서양철학의 이해", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
-                    { id: 18, majorId: "162", lessonName: "경영학개론", lessonProf: "ooo", type: "교양", lessonpoint: 3 },
-                    { id: 19, majorId: "158", lessonName: "딥러닝", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 20, majorId: "158", lessonName: "인공지능프로그램", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 21, majorId: "158", lessonName: "딥러닝", lessonProf: "ooo", type: "전공", lessonpoint: 3 },
-                    { id: 22, majorId: "158", lessonName: "빅데이터처리", lessonProf: "ooo", type: "전공", lessonpoint: 3 }
-                ];
+            const majorSelect = document.getElementById('userMajorId');
+            const typeRadios = document.querySelectorAll('input[name="subject"]');
+            const lectureList = document.querySelector('.lecture-list');
+            const modal = document.getElementById('professor-modal');
+            const addForm = document.getElementById('add-form');
 
-                const majorSelect = document.getElementById('userMajorId');
-                const typeRadios = document.querySelectorAll('input[name="subject"]');
-                const lectureList = document.querySelector('.lecture-list');
-                const modal = document.getElementById('professor-modal');
-                const addForm = document.getElementById('add-form');
+            // 3. 강의 목록 렌더링 함수
+            function renderLectures() {
+                const selectedMajorId = majorSelect.value; // 예: "162"
+                const selectedRadio = document.querySelector('input[name="subject"]:checked');
 
-                // 강의 목록 렌더링 함수
-                function renderLectures() {
-                    const selectedMajor = majorSelect.value;
-                    const selectedRadio = document.querySelector('input[name="subject"]:checked');
+                if (!selectedRadio) return;
 
-                    if (!selectedMajor || !selectedRadio) return; // 학과와 구분이 모두 선택되어야 실행
+                const selectedType = selectedRadio.id; // 'major' 또는 'culture'
 
-                    const selectedType = selectedRadio.id === 'major' ? '전공' : '교양';
+                // 필터링 로직
+                const filtered = openedLessons.filter(lecture => {
+                    const lectureType = majorCheck(lecture.lessonId);
+                    const lecturePrefix = String(lecture.lessonId).slice(0, 3);
 
-                    const filtered = dummyLectures.filter(lecture =>
-                        lecture.majorId === selectedMajor && lecture.type === selectedType
-                    );
+                    if (selectedType === 'culture') {
+                        // 교양 선택 시: lessonId 앞 3자리가 999인 것만 반환
+                        return lectureType === 'culture';
+                    } else {
+                        // 전공 선택 시: 학과가 선택되어야 하며, lessonId 앞 3자리와 학과 코드가 일치해야 함
+                        return selectedMajorId !== "" && lectureType === 'major' && lecturePrefix === selectedMajorId;
+                    }
+                });
 
+                // 화면 출력
+                if (filtered.length === 0) {
+                    lectureList.innerHTML = '<li class="lecture-item">조회된 강의가 없습니다.</li>';
+                } else {
                     lectureList.innerHTML = filtered.map(lecture => `
             <li class="lecture-item">
                 <div class="lecture-info">
-                    [${lecture.type}] | ${lecture.lessonName}  |  ${lecture.lessonProf}  |  ${lecture.lessonpoint}학점
+                    [${majorCheck(lecture.lessonId) === 'major' ? '전공' : '교양'}] | ${lecture.lessonName} | ${lecture.lessonProf} | ${lecture.lessonPoint || 0}학점
                 </div>
-                <button type="button" class="regbtn" data-id="${lecture.id}">계획서 보기</button>
+                <button type="button" class="regbtn" data-id="${lecture.lessonId}">계획서 보기</button>
             </li>
         `).join('');
-
-                    attachModalEvents();
                 }
 
-                // 모달에 데이터 채우고 열기
-                function attachModalEvents() {
-                    const btns = document.querySelectorAll('.regbtn');
-                    const checkTexts = modal.querySelectorAll('.checktext'); // [구분, 과목명, 인원, 학점] 순서
+                attachModalEvents(filtered);
+            }
 
-                    btns.forEach(btn => {
-                        btn.onclick = () => {
-                            const id = btn.getAttribute('data-id');
-                            const data = dummyLectures.find(l => l.id == id);
+            // 4. 모달 이벤트 연결 함수
+            function attachModalEvents(currentFilteredData) {
+                const btns = document.querySelectorAll('.regbtn');
+                const checkTexts = modal.querySelectorAll('.checktext');
 
-                            if (data) {
-                                // 모달 내부 텍스트 변경
-                                checkTexts[0].innerText = data.type;
-                                checkTexts[1].innerText = data.lessonName;
-                                checkTexts[2].innerText = "40명"; // 임시 데이터
-                                checkTexts[3].innerText = data.lessonpoint + "학점";
+                btns.forEach(btn => {
+                    btn.onclick = () => {
+                        const id = btn.getAttribute('data-id');
+                        const data = currentFilteredData.find(l => l.lessonId === id);
 
-                                modal.style.display = 'flex';
-                                addForm.style.display = 'flex';
-                            }
-                        };
-                    });
-                }
+                        if (data) {
+                            checkTexts[0].innerText = majorCheck(data.lessonId) === 'major' ? '전공' : '교양';
+                            checkTexts[1].innerText = data.lessonName;
+                            checkTexts[2].innerText = "40명"; // 고정값 혹은 data.limit
+                            checkTexts[3].innerText = (data.lessonPoint || 0) + "학점";
 
-                // 이벤트 리스너
-                majorSelect.addEventListener('change', renderLectures);
-                typeRadios.forEach(radio => radio.addEventListener('change', renderLectures));
-            });
+                            modal.style.display = 'flex';
+                            addForm.style.display = 'flex';
+                        }
+                    };
+                });
+            }
 
+            // 5. 이벤트 리스너 등록
+            majorSelect.addEventListener('change', renderLectures);
+            typeRadios.forEach(radio => radio.addEventListener('change', renderLectures));
+
+            // 초기 실행
+            renderLectures();
         </script>
 
         <script src="/js/register.js"></script>
