@@ -3,6 +3,8 @@
     top: 283px;
     border: 1px solid #000000;
     border-radius: 10px;
+    text-align: justify;
+    padding:10px;
 }
 /* .content {
     flex: 1;
