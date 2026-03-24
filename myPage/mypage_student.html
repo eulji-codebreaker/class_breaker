@@ -203,40 +203,8 @@
             if (!userData) return;
 
             // 더미 데이터
-            let myLessons = [
-                {
-                    lessonId: '121aaa',
-                    lessonName: 'fffff',
-                    lessonProfId: 222222222,
-                    lessonProf: '강민수',
-                    lessonMajorId: 160,
-                    lessonGrade: 4,
-                    lessonNow: 0,
-                    lessonMax: 40,
-                    lessonRoom: '박123',
-                    lessonDay: 3,
-                    lessonBegin: '08:00',
-                    lessonEnd: '11:50',
-                    lessonPoint: 3,
-                    lessonSyllabus: 'ㅁㄴㅇ'
-                },
-                {
-                    lessonId: 'pasd01',
-                    lessonName: 'fucktlqkf',
-                    lessonProfId: 333333333,
-                    lessonProf: '정명애',
-                    lessonMajorId: 160,
-                    lessonGrade: 4,
-                    lessonNow: 3,
-                    lessonMax: 40,
-                    lessonRoom: '박444',
-                    lessonDay: 5,
-                    lessonBegin: '13:00',
-                    lessonEnd: '15:50',
-                    lessonPoint: 5,
-                    lessonSyllabus: '강의계획서'
-                }
-            ];
+            let myLessons = [];
+            myLessons = JSON.parse(localStorage.getItem('myLessons'));
 
             // 시간표 업데이트
             document.querySelectorAll('.studentTimetable1 .timetableCol div:not(.fixedTime)').forEach(el => {
@@ -248,8 +216,8 @@
                 const dayClass = getDayClass(Number(l.lessonDay));
                 if (!dayClass) return;
 
-                const startHour = parseInt(l.lessonBegin.split(':')[0]);
-                const endHour = parseInt(l.lessonEnd.split(':')[0]);
+                const startHour = l.lessonBegin;
+                const endHour = l.lessonEnd;
                 const startIdx = startHour - 8;
                 const endIdx = endHour - 8;
 
@@ -272,9 +240,9 @@
             if (tbody) {
                 tbody.innerHTML = myLessons.map(l => `
             <tr>
-                <td>${l.lessonId.includes('m') ? '전필' : '전선'}</td>
+                <td>${l.lessonId.includes('m') ? '전필' : (l.lessonId.includes('s') ? '전선' : '교양')}</td>
                 <td>${l.lessonName}</td>
-                <td>수강중</td>
+                <td>Y</td>
                 <td>신청완료</td>
             </tr>
         `).join('');
