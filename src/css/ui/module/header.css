@@ -100,9 +100,10 @@ button{
 
 /*관리자버튼(수정,작성,삭제)*/
 .adminbtn {
-  background-color: #e0c1ff;
-  
+  background-color: #ffffff;
   font-size: 20px;
+  width: 80px;
+  height: 40px;
 }
 
 .adminbtn:hover {
@@ -125,11 +126,14 @@ button{
 
 /*수강신청페이지*/
 .regbtn {
-  background-color: #e3c6ff;
+  background-color: #e6e5e5;
+  font-size: 13px;
+  width: 80px;
+  height: 30px;
 }
 
-.regbtn {
-  background-color: #cfa9f4;
+.regbtn:hover {
+  background-color: #cbcbcb;
 }
 
 button:hover {

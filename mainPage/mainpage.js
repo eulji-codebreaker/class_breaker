@@ -60,12 +60,18 @@ function toregister() {
 function tomypage() {
     var user = JSON.parse(userLocal);
     var role = user.userPosition;
-    location.assign(`../mypage/mypage_${role}.html`);
+
+    if(role === 'prof'){
+        location.assign(`../mypage/mypage_professor.html`);
+    }
+    else {
+        location.assign(`../mypage/mypage_${role}.html`);
+    }
 }
 
 // 강의실로 이동
 function tolectureroom() {
-    location.assign("../lectureRoom/index.html");
+    location.assign("../lectureroom/index.html");
 }
 
 // 내 정보-로그인 불러오기
@@ -105,17 +111,8 @@ if (userLocal !== null) {
 }
 
 // 내 강의실-강의 정보 불러오기
-const lectureList = [ //전체 강의목록 불러오기(서민지님 마이페이지 완성되면 받아오기)
-    { lessonId: 1, lessonName: "기모띠" },
-    { lessonId: 123, lessonName: "하이" },
-    { lessonId: 1234, lessonName: "fffffffffffffffff" },
-    { lessonId: 12345, lessonName: "eeeeeeeeeeeeeeee" },
-    { lessonId: 123456, lessonName: "ssssssss" },
-    { lessonId: 1234567, lessonName: "gggggggg" },
-    { lessonId: 12345678, lessonName: "qqqqqqqqq" },
-    { lessonId: 123456789, lessonName: "reeeeeeee" },
-];
-// const lectureList=JSON.parse(localStorage.getItem('mylesson'));
+
+const lectureList=JSON.parse(localStorage.getItem('myLessons'));     
 const $lectureList = document.querySelector('#lecture-list');
 const addLecture = (name) => {
     const li = document.createElement('li');
